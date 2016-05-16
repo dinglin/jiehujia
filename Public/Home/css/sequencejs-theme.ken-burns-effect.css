@@ -1,0 +1,452 @@
+/*
+Theme created for use with Sequence.js (http://www.sequencejs.com/)
+
+Theme: Ken Burns Effect
+Version: 1.3
+Theme Author: Ian Lunn @IanLunn
+Author URL: http://www.ianlunn.co.uk/
+Theme URL: http://www.sequencejs.com/themes/ken-burns-effect/
+
+This is a PREMIUM theme and is available under the following license:
+http://sequencejs.com/developers/license-information/#premium
+
+Sequence.js and its dependencies are (c) Ian Lunn Design 2013 unless otherwise stated.
+*/
+/* container for next/previous buttons */
+/* CSS RESET - http://meyerweb.com/eric/tools/css/reset/ v2.0 | 20110126 */
+/* line 14, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/partials/reset.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+/* line 24, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/partials/reset.scss */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+/* line 27, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/partials/reset.scss */
+body {
+  line-height: 1; }
+
+/* line 30, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/partials/reset.scss */
+ol, ul {
+  list-style: none; }
+
+/* line 33, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/partials/reset.scss */
+blockquote, q {
+  quotes: none; }
+
+/* line 37, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/partials/reset.scss */
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+/* line 41, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/partials/reset.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+/* !CSS RESET */
+/* prefix declarations */
+@-webkit-keyframes scaleAndFade {
+  /* line 34, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+  0% {
+    opacity: 1;
+    -webkit-transform: scale(1); }
+
+  /* line 38, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+  75% {
+    -webkit-transform: scale(1.3);
+    opacity: 1; }
+
+  /* line 43, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+  100% {
+    -webkit-transform: scale(1.3);
+    opacity: 0;
+    z-index: 3; } }
+
+@-moz-keyframes scaleAndFade {
+  /* line 51, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+  0% {
+    opacity: 1;
+    -moz-transform: scale(1); }
+
+  /* line 55, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+  75% {
+    -moz-transform: scale(1.3);
+    opacity: 1; }
+
+  /* line 60, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+  100% {
+    -moz-transform: scale(1.3);
+    opacity: 0;
+    z-index: 3; } }
+
+@-ms-keyframes scaleAndFade {
+  /* line 68, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+  0% {
+    opacity: 1;
+    -ms-transform: scale(1); }
+
+  /* line 72, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+  75% {
+    -ms-transform: scale(1.3);
+    opacity: 1; }
+
+  /* line 77, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+  100% {
+    -ms-transform: scale(1.3);
+    opacity: 0;
+    z-index: 3; } }
+
+@-o-keyframes scaleAndFade {
+  /* line 85, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+  0% {
+    opacity: 1;
+    -o-transform: scale(1); }
+
+  /* line 89, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+  75% {
+    -o-transform: scale(1.3);
+    opacity: 1; }
+
+  /* line 94, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+  100% {
+    -o-transform: scale(1.3);
+    opacity: 0;
+    z-index: 3; } }
+
+@keyframes scaleAndFade {
+  /* line 102, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+  0% {
+    opacity: 1;
+    transform: scale(1); }
+
+  /* line 106, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+  75% {
+    transform: scale(1.3);
+    opacity: 1; }
+
+  /* line 111, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+  100% {
+    transform: scale(1.3);
+    opacity: 0;
+    z-index: 3; } }
+
+/* line 118, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+#sequence.sequence-fallback > .sequence-canvas li {
+  opacity: 1 !important;
+  /* in fallback mode, frames should always have an opacity of 1 */ }
+
+/* THEME STYLES */
+/* line 123, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+#sequence {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  margin: 0 auto;
+  height: 280px;
+  max-width: 576px; }
+  /* line 131, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+  #sequence > .sequence-canvas {
+    height: 100%;
+    width: 100%; }
+    /* line 135, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+    #sequence > .sequence-canvas > li {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      overflow: hidden; }
+    /* line 143, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+    #sequence > .sequence-canvas li > * {
+      position: absolute; }
+  /* line 149, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+  #sequence .sequence-pagination,
+  #sequence .controls {
+    position: absolute;
+    bottom: 30px;
+    z-index: 10;
+    color: white;
+    text-align: center;
+    width: 100%; }
+  /* line 158, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+  #sequence .controls {
+    bottom: 23px;
+    width: auto;
+    right: 30px; }
+  /* line 165, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+  #sequence .sequence-pagination li,
+  #sequence .controls li {
+    background-image: url("../images/buttons.png");
+    background-repeat: no-repeat;
+    cursor: pointer;
+    display: inline-block;
+    *display: inline;
+    text-indent: -99999px;
+    opacity: 0.8; }
+  /* line 176, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+  #sequence .sequence-pagination li:hover,
+  #sequence .controls li:hover {
+    opacity: 1; }
+  /* line 180, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+  #sequence .sequence-pagination li {
+    background-position: 0 -8px;
+    padding-right: 4px;
+    height: 19px;
+    width: 16px;
+    -webkit-transform: scale(0.9);
+    -moz-transform: scale(0.9);
+    -ms-transform: scale(0.9);
+    -o-transform: scale(0.9);
+    transform: scale(0.9); }
+  /* line 188, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+  #sequence .sequence-pagination li.current {
+    background-image: url("../images/buttons.png");
+    background-repeat: no-repeat;
+    background-position: -22px -8px;
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1); }
+  /* line 195, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+  #sequence .controls li {
+    height: 34px;
+    width: 34px;
+    padding-left: 5px; }
+  /* line 201, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+  #sequence .controls .sequence-prev {
+    background-position: -47px 0; }
+  /* line 205, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+  #sequence .controls .sequence-next {
+    background-position: -87px 0; }
+  /* line 209, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+  #sequence li img {
+    opacity: 0;
+    left: 50%;
+    /* move the left of the image to the horizontal center */
+    margin-left: -288px;
+    /* ...then pull it back by half its width to center it */
+    top: 50%;
+    /* move the top of the image to the vertica center */
+    margin-top: -140px;
+    /* ...then pull it back by half its height to center it */ }
+  /* line 217, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+  #sequence li.animate-in img {
+    opacity: 1;
+    -webkit-transition-duration: 1s;
+    -moz-transition-duration: 1s;
+    -ms-transition-duration: 1s;
+    -o-transition-duration: 1s;
+    transition-duration: 1s;
+    -webkit-transition-delay: 1s;
+    -moz-transition-delay: 1s;
+    -ms-transition-delay: 1s;
+    -o-transition-delay: 1s;
+    transition-delay: 1s; }
+  /* line 223, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+  #sequence li.animate-out img {
+    opacity: 0;
+    /* fade out */
+    -webkit-transform: scale(1.3);
+    -moz-transform: scale(1.3);
+    -ms-transform: scale(1.3);
+    -o-transform: scale(1.3);
+    transform: scale(1.3);
+    /* zoom in */
+    -webkit-transition-property: opacity, -webkit-transform;
+    -webkit-transition-duration: 0s, 2s;
+    -webkit-transition-delay: 2s, 0s;
+    -moz-transition-property: opacity, -moz-transform;
+    -moz-transition-duration: 0s, 2s;
+    -moz-transition-delay: 2s, 0s;
+    -ms-transition-property: opacity, -ms-transform;
+    -ms-transition-duration: 0s, 2s;
+    -ms-transition-delay: 2s, 0s;
+    -o-transition-property: opacity, -o-transform;
+    -o-transition-duration: 0s, 2s;
+    -o-transition-delay: 2s, 0s;
+    transition-property: opacity, transform;
+    /* animate opacity and the scale transform */
+    transition-duration: 0s, 2s;
+    /* opacity will snap to 0 immediately, scale transform will animate over 2 seconds */
+    transition-delay: 2s, 0s;
+    /* delay the opacity snap by 3 seconds (to let the scale finish animating first). no delay on the scale transform */ }
+  /* line 248, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+  #sequence li:nth-child(1) img {
+    -webkit-transform-origin: 30% 40%;
+    -moz-transform-origin: 30% 40%;
+    -ms-transform-origin: 30% 40%;
+    -o-transform-origin: 30% 40%;
+    transform-origin: 30% 40%;
+    /* the origin of the scale for the first frame's image (which point in the picture Sequence should zoom in to) */ }
+  /* line 252, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+  #sequence li:nth-child(2) img {
+    -webkit-transform-origin: 60% 50%;
+    -moz-transform-origin: 60% 50%;
+    -ms-transform-origin: 60% 50%;
+    -o-transform-origin: 60% 50%;
+    transform-origin: 60% 50%;
+    /* the origin of the scale for the second frame's image (which point in the picture Sequence should zoom in to) */ }
+  /* line 256, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+  #sequence li:nth-child(3) img {
+    -webkit-transform-origin: 50% 50%;
+    -moz-transform-origin: 50% 50%;
+    -ms-transform-origin: 50% 50%;
+    -o-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    /* the origin of the scale for the third frame's image (which point in the picture Sequence should zoom in to) */ }
+  /* line 260, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+  #sequence h2 {
+    color: white;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 2.1em;
+    font-weight: 300;
+    left: 10%;
+    line-height: 120%;
+    top: 7.5%;
+    z-index: 4;
+    opacity: 0;
+    text-align: center;
+    width: 80%;
+    -webkit-transform: scale(0.9);
+    -moz-transform: scale(0.9);
+    -ms-transform: scale(0.9);
+    -o-transform: scale(0.9);
+    transform: scale(0.9);
+    /* start the h2 title at 90% size */
+    text-shadow: 1px 1px 2px #333333; }
+  /* line 276, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+  #sequence .animate-in h2 {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+    /* animate to 100% size */
+    -webkit-transition-duration: 1s;
+    -moz-transition-duration: 1s;
+    -ms-transition-duration: 1s;
+    -o-transition-duration: 1s;
+    transition-duration: 1s;
+    -webkit-transition-delay: 1s;
+    -moz-transition-delay: 1s;
+    -ms-transition-delay: 1s;
+    -o-transition-delay: 1s;
+    transition-delay: 1s;
+    /* delay the animation by one second whilst the zoom is animating */ }
+  /* line 283, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+  #sequence .animate-out h2 {
+    opacity: 0;
+    /* fade when animating out */
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+    /* stay at the same size of 100% */
+    -webkit-transition-duration: 2s;
+    -moz-transition-duration: 2s;
+    -ms-transition-duration: 2s;
+    -o-transition-duration: 2s;
+    transition-duration: 2s; }
+
+@media only screen and (max-width: 600px) {
+  /* reduce the height of Sequence when the viewport begins to get narrow */
+  /* line 291, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+  #sequence {
+    height: 550px; } }
+@media only screen and (max-width: 550px) {
+  /* reduce the height of Sequence when the viewport begins to get narrow */
+  /* line 297, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+  #sequence {
+    height: 500px; } }
+@media only screen and (max-width: 500px) {
+  /* reduce the height of Sequence when the viewport begins to get narrow */
+  /* line 303, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+  #sequence {
+    height: 450px; } }
+@media only screen and (max-width: 450px) {
+  /* reduce the height of Sequence when the viewport begins to get narrow */
+  /* line 309, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+  #sequence {
+    height: 400px; }
+    /* line 312, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+    #sequence .sequence-pagination {
+      left: 20px;
+      /* align the pagination to the left */
+      width: auto; }
+    /* line 317, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+    #sequence .controls {
+      /* align the controls to the right */
+      right: 20px; } }
+/* //shrink Sequence to fit when in landscape orientation and the viewport is less than 640px
+@media only screen and (max-height: 600px) and (orientation: landscape) {
+	#sequence {
+		height: 550px;
+	}
+}
+
+@media only screen and (max-height: 550px) and (orientation: landscape) {
+	#sequence {
+		height: 500px;
+	}
+}
+
+@media only screen and (max-height: 500px) and (orientation: landscape) {
+	#sequence {
+		height: 450px;
+	}
+}
+
+@media only screen and (max-height: 450px) and (orientation: landscape) {
+	#sequence {
+		height: 400px;
+	}
+}
+
+@media only screen and (max-height: 400px) and (orientation: landscape) {
+	#sequence {
+		height: 350px;
+	}
+}
+
+@media only screen and (max-height: 350px) and (orientation: landscape) {
+	#sequence {
+		height: 300px;
+	}
+}
+
+@media only screen and (max-height: 300px) and (orientation: landscape) {
+	#sequence {
+		height: 250px;
+	}
+}
+*/
+@media (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3 / 2), (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5), (min-resolution: 144dpi), (min-resolution: 1.5dppx) {
+  /* retina devices */
+  /* line 376, /Users/Ian/Sites/sequence-themes/themes/ken-burns-effect/scss/sequencejs-theme.ken-burns-effect.scss */
+  #sequence .sequence-pagination li,
+  #sequence .controls li,
+  #sequence .sequence-pagination li.current {
+    background-image: url("../images/buttons@2x.png");
+    /* use a larger image for retina devices and shrink it down to fit in the same space for better quality */
+    background-size: 123px 34px; } }

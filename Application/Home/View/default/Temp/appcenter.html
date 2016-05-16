@@ -1,0 +1,1016 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>智慧养老云平台</title>
+    <link rel="stylesheet" href="__CSS__/index/bootstrap.css">
+    <link rel="stylesheet" href="__CSS__/index/index.css">
+    <link rel="stylesheet" href="__CSS__/index/welcome.css">
+    <style>
+        .list_item:hover{
+            border:solid 1px #e6e6e6;
+            background: none;
+        }
+    </style>
+    <title></title>
+<style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style></head>
+<body>
+
+<!-- 弹框开始  -->
+<div class="zhy_zhezhao_pop" style="display: none;"></div>
+<!--未实名-->
+<div class="zhy_popa wsm_pop " style="width: 450px;margin-left: -225px;">
+    <p class="color66">提示<span class="pull-right close_icon" onclick="hidePop()"></span></p>
+    <div class="pop_content">
+        <p class="red_tip"><font style="line-height:37px">您是未实名企业，请先进行实名认证！</font> <br></p>
+        <div class="operate_btn pull-right">
+            <button type="button" class="btn cancle_yes" onclick="window.open(&#39;/cloud-portal/auth/auditProcess&#39;)">立即认证</button>
+            <button type="button" class="btn cancel" onclick="hidePop()">继续试用</button>
+        </div>
+    </div>
+</div>
+<!--清空模块-->
+<div class="zhy_popa clear_pop " style="width: 450px;margin-left: -225px;">
+    <p class="color66">确定清空已选模块？<span class="pull-right close_icon" onclick="hidePop()"></span></p>
+    <div class="pop_content">
+        <p>清空模块后若有需要则需重新添加！</p>
+        <div class="operate_btn pull-right">
+            <button type="button" class="btn cancle_yes" onclick="clearChosenModule()">确定</button>
+            <button type="button" class="btn cancel" onclick="hidePop()">关闭</button>
+        </div>
+    </div>
+</div>
+<!-- 弹框结束  -->
+<div class="main_content">
+  <div class="col-xs-12 col-sm-12 div_bordered" style="padding-bottom: 70px;"> 
+    
+    <div class="panel panel-default choose_block ">
+       <div class="panel-heading color333 ">
+            我的应用<!-- <font class="font12 color333">（选择应用加入购物车）</font> -->
+            <a class="btn btn_blueg2 font14 pull-right" href="cloud-portal/order/myAppList">应用管理</a>
+       </div>
+       <div class="divider"> </div>
+      <!--  <div class="bgf2f2f2 app_pline">我的应用</div> -->
+       <div class="panel-body relative" style="padding-top: 0px;">
+           <ul class="list_group ">
+            
+            
+            
+              <li class="list_item default">
+                  <!-- <em class="choose_btn"></em> -->
+                  <i><img src="__IMG__/index/weclome07.png" width="40px" height="40px"></i>
+                  <p class="p1 color66">应用中心</p>
+                  
+                  
+                  
+                  
+                  <div class="tooltip">
+                      <div class="tooltip-arrow"></div>
+                      <div class="tooltip-inner">
+                          <div class="panel-heading color333">应用中心</div><!-- <span class="pull-right font12" style="line-height: 24px;">上线日期：</span> -->
+                           <div class="divider"> </div>
+                           <div class="panel-body"><!--模块说明和模块操作  -->
+                            <p class="mb0">可在应用市场内自助购买模块。</p>
+                            
+                            
+                              
+                            
+                              
+                            
+                           
+                           </div>
+                      </div>
+                  </div>
+                  
+              </li>
+              
+            
+            
+              <li class="list_item default">
+                  <!-- <em class="choose_btn"></em> -->
+                  <i><img src="__IMG__/index/weclome01.png" width="40px" height="40px"></i>
+                  <p class="p1 color66">账户总览</p>
+                  
+                  
+                  
+                  
+                  <div class="tooltip">
+                      <div class="tooltip-arrow"></div>
+                      <div class="tooltip-inner">
+                          <div class="panel-heading color333">账户总览</div><!-- <span class="pull-right font12" style="line-height: 24px;">上线日期：</span> -->
+                           <div class="divider"> </div>
+                           <div class="panel-body"><!--模块说明和模块操作  -->
+                            <p class="mb0">总览运营商账户详情，运营商站点和会员数据。</p>
+                            
+                            
+                              
+                            
+                              
+                            
+                           
+                           </div>
+                      </div>
+                  </div>
+                  
+              </li>
+              
+            
+            
+              <li class="list_item list_add">
+                  <!-- <em class="choose_btn"></em> -->
+                  <i><img src="__IMG__/index/weclome06.png" width="40px" height="40px"></i>
+                  <p class="p1 color66">服务站管理</p>
+                  
+                  
+                        <p class="p2">1/1</p>
+                      <div class="text-center">
+                        <button class="btn btn-linkr" type="button" onclick="filterLink(this,&#39;/cloud-portal/order/add_licence_max?moduleCode=multisite&#39;)">新增</button>
+                      </div>
+                  
+                  
+                  
+                  <div class="tooltip">
+                      <div class="tooltip-arrow"></div>
+                      <div class="tooltip-inner">
+                          <div class="panel-heading color333">服务站管理</div><!-- <span class="pull-right font12" style="line-height: 24px;">上线日期：</span> -->
+                           <div class="divider"> </div>
+                           <div class="panel-body"><!--模块说明和模块操作  -->
+                            <p class="mb0">总览运营商下属会员地区分布、会员数据趋势以及会员总数。支持开设2个以上服务站，每个服务站同步获得所有已选功能模块。总览服务站总数、地区分布、趋势。</p>
+                            
+                            
+                              
+                                  <p class="colorblue mb0">总计可创建1个服务站，当前还剩余0个</p>
+                              
+                            
+                              
+                            
+                           
+                           </div>
+                      </div>
+                  </div>
+                  
+              </li>
+              
+            
+            
+              <li class="list_item list_add">
+                  <!-- <em class="choose_btn"></em> -->
+                  <i><img src="__IMG__/index/weclome03.png" width="40px" height="40px"></i>
+                  <p class="p1 color66">账号管理</p>
+                  
+                      <p class="p2">1/1</p>
+                      <div class="text-center">
+                        <button class="btn btn-linkr" type="button" onclick="filterLink(this,&#39;/cloud-portal/order/add_licence_max?moduleCode=num&#39;)">新增</button>
+                      </div>
+                  
+                  
+                  
+                  
+                  <div class="tooltip">
+                      <div class="tooltip-arrow"></div>
+                      <div class="tooltip-inner">
+                          <div class="panel-heading color333">账号管理</div><!-- <span class="pull-right font12" style="line-height: 24px;">上线日期：</span> -->
+                           <div class="divider"> </div>
+                           <div class="panel-body"><!--模块说明和模块操作  -->
+                            <p class="mb0">创建并管理机构员工账号，并给账号分配权限。</p>
+                            
+                            
+                                  <p class="colorblue mb0">总计可创建1个账号，当前还剩余0个</p>
+                              
+                              
+                            
+                              
+                            
+                           
+                           </div>
+                      </div>
+                  </div>
+                  
+              </li>
+              
+            
+            
+              <li class="list_item default">
+                  <!-- <em class="choose_btn"></em> -->
+                  <i><img src="__IMG__/index/weclome04.png" width="40px" height="40px"></i>
+                  <p class="p1 color66">会员管理</p>
+                  
+                  
+                  
+                  
+                  <div class="tooltip">
+                      <div class="tooltip-arrow"></div>
+                      <div class="tooltip-inner">
+                          <div class="panel-heading color333">会员管理</div><!-- <span class="pull-right font12" style="line-height: 24px;">上线日期：</span> -->
+                           <div class="divider"> </div>
+                           <div class="panel-body"><!--模块说明和模块操作  -->
+                            <p class="mb0">老人及其亲友基础信息和身份信息维护。</p>
+                            
+                            
+                              
+                            
+                              
+                            
+                           
+                           </div>
+                      </div>
+                  </div>
+                  
+              </li>
+              
+            
+            
+              <li class="list_item default">
+                  <!-- <em class="choose_btn"></em> -->
+                  <i><img src="__IMG__/index/weclome21.png" width="40px" height="40px"></i>
+                  <p class="p1 color66">员工管理</p>
+                  
+                  
+                  
+                  
+                  <div class="tooltip">
+                      <div class="tooltip-arrow"></div>
+                      <div class="tooltip-inner">
+                          <div class="panel-heading color333">员工管理</div><!-- <span class="pull-right font12" style="line-height: 24px;">上线日期：</span> -->
+                           <div class="divider"> </div>
+                           <div class="panel-body"><!--模块说明和模块操作  -->
+                            <p class="mb0">对企业员工信息进行管理，包括员工的类型，员工入职、离职等信息管理。</p>
+                            
+                            
+                              
+                            
+                              
+                            
+                           
+                           </div>
+                      </div>
+                  </div>
+                  
+              </li>
+              
+            
+            
+              <li class="list_item default">
+                  <!-- <em class="choose_btn"></em> -->
+                  <i><img src="__IMG__/index/weclome10.png" width="40px" height="40px"></i>
+                  <p class="p1 color66">能力评估</p>
+                  
+                  
+                  
+                  
+                  <div class="tooltip">
+                      <div class="tooltip-arrow"></div>
+                      <div class="tooltip-inner">
+                          <div class="panel-heading color333">能力评估</div><!-- <span class="pull-right font12" style="line-height: 24px;">上线日期：</span> -->
+                           <div class="divider"> </div>
+                           <div class="panel-body"><!--模块说明和模块操作  -->
+                            <p class="mb0">采用国际顶尖的能力评估系统，针对老人的各项身体指标，得出老人的当前身体能力水平。</p>
+                            
+                            
+                              
+                            
+                              
+                            
+                           
+                           </div>
+                      </div>
+                  </div>
+                  
+              </li>
+              
+            
+            
+              <li class="list_item default">
+                  <!-- <em class="choose_btn"></em> -->
+                  <i><img src="__IMG__/index/weclome05.png" width="40px" height="40px"></i>
+                  <p class="p1 color66">健康档案</p>
+                  
+                  
+                  
+                  
+                  <div class="tooltip">
+                      <div class="tooltip-arrow"></div>
+                      <div class="tooltip-inner">
+                          <div class="panel-heading color333">健康档案</div><!-- <span class="pull-right font12" style="line-height: 24px;">上线日期：</span> -->
+                           <div class="divider"> </div>
+                           <div class="panel-body"><!--模块说明和模块操作  -->
+                            <p class="mb0">管理会员的所有过往健康信息，包含病史，当前健康状态，身体指标。</p>
+                            
+                            
+                              
+                            
+                              
+                            
+                           
+                           </div>
+                      </div>
+                  </div>
+                  
+              </li>
+              
+            
+            
+              <li class="list_item default">
+                  <!-- <em class="choose_btn"></em> -->
+                  <i><img src="__IMG__/index/weclome24.png" width="40px" height="40px"></i>
+                  <p class="p1 color66">呼叫报警</p>
+                  
+                  
+                  
+                  
+                  <div class="tooltip">
+                      <div class="tooltip-arrow"></div>
+                      <div class="tooltip-inner">
+                          <div class="panel-heading color333">呼叫报警</div><!-- <span class="pull-right font12" style="line-height: 24px;">上线日期：</span> -->
+                           <div class="divider"> </div>
+                           <div class="panel-body"><!--模块说明和模块操作  -->
+                            <p class="mb0">呼叫报警</p>
+                            
+                            
+                              
+                            
+                              
+                            
+                           
+                           </div>
+                      </div>
+                  </div>
+                  
+              </li>
+              
+             
+           </ul>
+       </div>
+       <div class="panel-heading color333 isshowgwc" style="margin-top: 20px;">
+            其他应用
+            
+            
+            
+       </div>
+       <div class="divider"> </div>
+       <!-- <div class="bgf2f2f2 app_pline" id="appLine"><span class="font12 color66 zhy_cloud_text"></span></div> -->
+       <div class="panel-body relative isshowgwc" style="overflow: hidden;">
+            
+            
+             <div class="relative">
+                 <p class="p0">运营商管理</p>
+                 
+                 <ul class="list_group ">
+                    
+                        
+                        <li class="list_item default">
+                          <!-- <em class="choose_btn"></em> -->
+                          <i><img src="__IMG__/index/weclome08.png" width="40px" height="40px"></i>
+                          <p class="p1 color66">企业主页</p>
+                          
+                          <div class="list_item_mask">
+                            <a target="_blank" href="cloud-portal/auth/auditProcess">
+                                <p>去实名认证</p>
+                            </a>
+                          </div>
+                          
+                          
+                          
+                          <div class="tooltip">
+                              <div class="tooltip-arrow"></div>
+                              <div class="tooltip-inner">
+                              <div class="panel-heading color333">企业主页
+                              
+                              </div>
+                               <div class="divider"> </div>
+                               <div class="panel-body"><!--模块说明和模块操作  -->
+                               <p>在康老汇平台上创建您的对外独立主页，让您的潜在用户能在互联网上轻松找到您的机构服务信息。</p>
+                               
+                               </div>
+                            </div>
+                          </div>
+                          
+                          <em class="icon_mem_free"></em><!--会员免费-->
+                          
+                      </li>
+                  
+                        
+                        <li class="list_item ">
+                          <!-- <em class="choose_btn"></em> -->
+                          <i><img src="__IMG__/index/weclome26.png" width="40px" height="40px"></i>
+                          <p class="p1 color66">独立域名</p>
+                          
+                          
+                              <div class="text-center">
+                                <p class="inline colorred" style="padding-top: 4px;">1000元/年</p>
+                                <button class="btn btn_save2" type="button" onclick="addCart(event,&#39;/st/zhcloud_v1/img/weclome26.png&#39;,&#39;domain&#39;,this)">添加</button>
+                              </div>
+                          
+                          
+                          <div class="tooltip">
+                              <div class="tooltip-arrow"></div>
+                              <div class="tooltip-inner">
+                              <div class="panel-heading color333">独立域名
+                              
+                              </div>
+                               <div class="divider"> </div>
+                               <div class="panel-body"><!--模块说明和模块操作  -->
+                               <p>支持使用自有的个性化域名登录云平台，使用该模块需要您事先自行申请一个域名。</p>
+                               
+                               </div>
+                            </div>
+                          </div>
+                          
+                          
+                          
+                      </li>
+                  
+                  
+                 </ul>
+             </div>
+             
+            
+            
+             <div class="relative">
+                 <p class="p0">会员与服务</p>
+                 
+                 <ul class="list_group ">
+                    
+                        
+                        <li class="list_item default">
+                          <!-- <em class="choose_btn"></em> -->
+                          <i><img src="__IMG__/index/weclome28.png" width="40px" height="40px"></i>
+                          <p class="p1 color66">工单管理</p>
+                          
+                          <div class="list_item_mask">
+                            <a target="_blank" href="cloud-portal/auth/auditProcess">
+                                <p>去实名认证</p>
+                            </a>
+                          </div>
+                          
+                          
+                          
+                          <div class="tooltip">
+                              <div class="tooltip-arrow"></div>
+                              <div class="tooltip-inner">
+                              <div class="panel-heading color333">工单管理
+                              
+                              </div>
+                               <div class="divider"> </div>
+                               <div class="panel-body"><!--模块说明和模块操作  -->
+                               <p>涵盖呼叫中心和独立工单管理的工单系统，包含工单的接收、处理、派发、跟踪服务、回访等。</p>
+                               
+                               </div>
+                            </div>
+                          </div>
+                          
+                          <em class="icon_mem_free"></em><!--会员免费-->
+                          
+                      </li>
+                  
+                        
+                        <li class="list_item default">
+                          <!-- <em class="choose_btn"></em> -->
+                          <i><img src="__IMG__/index/weclome09.png" width="40px" height="40px"></i>
+                          <p class="p1 color66">入住管理</p>
+                          
+                          <div class="list_item_mask">
+                            <a target="_blank" href="cloud-portal/auth/auditProcess">
+                                <p>去实名认证</p>
+                            </a>
+                          </div>
+                          
+                          
+                          
+                          <div class="tooltip">
+                              <div class="tooltip-arrow"></div>
+                              <div class="tooltip-inner">
+                              <div class="panel-heading color333">入住管理
+                              
+                              </div>
+                               <div class="divider"> </div>
+                               <div class="panel-body"><!--模块说明和模块操作  -->
+                               <p>提供从入住前的评估到退住的居住管理，用户直接选择收费标准和空床办理居住，且入住和退住资料分开记录，亦可实现提前预定房间及收取押金等的操作。</p>
+                               
+                               </div>
+                            </div>
+                          </div>
+                          
+                          <em class="icon_mem_free"></em><!--会员免费-->
+                          
+                      </li>
+                  
+                        
+                        <li class="list_item default">
+                          <!-- <em class="choose_btn"></em> -->
+                          <i><img src="__IMG__/index/weclome13.png" width="40px" height="40px"></i>
+                          <p class="p1 color66">设备管理</p>
+                          
+                          <div class="list_item_mask">
+                            <a target="_blank" href="cloud-portal/auth/auditProcess">
+                                <p>去实名认证</p>
+                            </a>
+                          </div>
+                          
+                          
+                          
+                          <div class="tooltip">
+                              <div class="tooltip-arrow"></div>
+                              <div class="tooltip-inner">
+                              <div class="panel-heading color333">设备管理
+                              
+                              </div>
+                               <div class="divider"> </div>
+                               <div class="panel-body"><!--模块说明和模块操作  -->
+                               <p>相对完整、清晰、简单的设备管理操作，大大减少工作量并更好的实现了运营商的设备安全管理。</p>
+                               
+                               </div>
+                            </div>
+                          </div>
+                          
+                          <em class="icon_mem_free"></em><!--会员免费-->
+                          
+                      </li>
+                  
+                  
+                 </ul>
+             </div>
+             
+            
+            
+            
+            
+             <div class="relative">
+                 <p class="p0">健康管理</p>
+                 
+                 <ul class="list_group ">
+                    
+                        
+                        <li class="list_item default">
+                          <!-- <em class="choose_btn"></em> -->
+                          <i><img src="__IMG__/index/weclome11.png" width="40px" height="40px"></i>
+                          <p class="p1 color66">健康检测</p>
+                          
+                          <div class="list_item_mask">
+                            <a target="_blank" href="cloud-portal/auth/auditProcess">
+                                <p>去实名认证</p>
+                            </a>
+                          </div>
+                          
+                          
+                          
+                          <div class="tooltip">
+                              <div class="tooltip-arrow"></div>
+                              <div class="tooltip-inner">
+                              <div class="panel-heading color333">健康检测
+                              
+                              </div>
+                               <div class="divider"> </div>
+                               <div class="panel-body"><!--模块说明和模块操作  -->
+                               <p>通过智能健康设备检测老年人脉搏、血压、血糖、体重、血氧、脂肪、心电等健康数据，并支持实时动态查看。</p>
+                               
+                               </div>
+                            </div>
+                          </div>
+                          
+                          <em class="icon_mem_free"></em><!--会员免费-->
+                          
+                      </li>
+                  
+                  
+                 </ul>
+             </div>
+             
+            
+            
+             <div class="relative">
+                 <p class="p0">安全管理</p>
+                 
+                 <ul class="list_group ">
+                    
+                        
+                        <li class="list_item default">
+                          <!-- <em class="choose_btn"></em> -->
+                          <i><img src="__IMG__/index/weclome23.png" width="40px" height="40px"></i>
+                          <p class="p1 color66">室外定位</p>
+                          
+                          <div class="list_item_mask">
+                            <a target="_blank" href="cloud-portal/auth/auditProcess">
+                                <p>去实名认证</p>
+                            </a>
+                          </div>
+                          
+                          
+                          
+                          <div class="tooltip">
+                              <div class="tooltip-arrow"></div>
+                              <div class="tooltip-inner">
+                              <div class="panel-heading color333">室外定位
+                              
+                              </div>
+                               <div class="divider"> </div>
+                               <div class="panel-body"><!--模块说明和模块操作  -->
+                               <p>通过老人佩戴的GPS/LBS定位设备，实时获取老人位置数据，支持电子地图显示老人当前所在位置。 </p>
+                               
+                               </div>
+                            </div>
+                          </div>
+                          
+                          <em class="icon_mem_free"></em><!--会员免费-->
+                          
+                      </li>
+                  
+                        
+                        <li class="list_item default">
+                          <!-- <em class="choose_btn"></em> -->
+                          <i><img src="__IMG__/index/weclome15.png" width="40px" height="40px"></i>
+                          <p class="p1 color66">电子围栏</p>
+                          
+                          <div class="list_item_mask">
+                            <a target="_blank" href="cloud-portal/auth/auditProcess">
+                                <p>去实名认证</p>
+                            </a>
+                          </div>
+                          
+                          
+                          
+                          <div class="tooltip">
+                              <div class="tooltip-arrow"></div>
+                              <div class="tooltip-inner">
+                              <div class="panel-heading color333">电子围栏
+                              
+                              </div>
+                               <div class="divider"> </div>
+                               <div class="panel-body"><!--模块说明和模块操作  -->
+                               <p>由平台给老人划定安全活动区域，并通过老人佩戴的GPS/LBS定位设备进行跟踪定位，当老人走出该活动区域时，平台将给予提示和报警。</p>
+                               
+                               </div>
+                            </div>
+                          </div>
+                          
+                          <em class="icon_mem_free"></em><!--会员免费-->
+                          
+                      </li>
+                  
+                  
+                 </ul>
+             </div>
+             
+            
+            
+            
+            
+             <div class="relative">
+                 <p class="p0">呼叫中心</p>
+                 
+                 <ul class="list_group ">
+                    
+                        
+                        <li class="list_item default">
+                          <!-- <em class="choose_btn"></em> -->
+                          <i><img src="__IMG__/index/weclome30.png" width="40px" height="40px"></i>
+                          <p class="p1 color66">短信推送</p>
+                          
+                          <div class="list_item_mask">
+                            <a target="_blank" href="cloud-portal/auth/auditProcess">
+                                <p>去实名认证</p>
+                            </a>
+                          </div>
+                          
+                          
+                          
+                          <div class="tooltip">
+                              <div class="tooltip-arrow"></div>
+                              <div class="tooltip-inner">
+                              <div class="panel-heading color333">短信推送
+                              
+                              </div>
+                               <div class="divider"> </div>
+                               <div class="panel-body"><!--模块说明和模块操作  -->
+                               <p>机构对于会员的短信下发服务，可自定义短信模板，并进行短信批量发送。</p>
+                               
+                               </div>
+                            </div>
+                          </div>
+                          
+                          <em class="icon_mem_free"></em><!--会员免费-->
+                          
+                      </li>
+                  
+                        
+                        <li class="list_item default">
+                          <!-- <em class="choose_btn"></em> -->
+                          <i><img src="__IMG__/index/weclome20.png" width="40px" height="40px"></i>
+                          <p class="p1 color66">呼叫中心</p>
+                          
+                          <div class="list_item_mask">
+                            <a target="_blank" href="cloud-portal/auth/auditProcess">
+                                <p>去实名认证</p>
+                            </a>
+                          </div>
+                          
+                          
+                          
+                          <div class="tooltip">
+                              <div class="tooltip-arrow"></div>
+                              <div class="tooltip-inner">
+                              <div class="panel-heading color333">呼叫中心
+                              
+                              </div>
+                               <div class="divider"> </div>
+                               <div class="panel-body"><!--模块说明和模块操作  -->
+                               <p>对接通话系统，支持智能坐席分配管理，根据来电智能分析显示客户资料。</p>
+                               
+                               </div>
+                            </div>
+                          </div>
+                          
+                          <em class="icon_mem_free"></em><!--会员免费-->
+                          
+                      </li>
+                  
+                  
+                 </ul>
+             </div>
+             
+            
+            
+            
+            
+            
+            
+             <div class="relative">
+                 <p class="p0">财务管理</p>
+                 
+                 <ul class="list_group ">
+                    
+                        
+                        <li class="list_item default">
+                          <!-- <em class="choose_btn"></em> -->
+                          <i><img src="__IMG__/index/weclome12.png" width="40px" height="40px"></i>
+                          <p class="p1 color66">会员费用管理</p>
+                          
+                          <div class="list_item_mask">
+                            <a target="_blank" href="cloud-portal/auth/auditProcess">
+                                <p>去实名认证</p>
+                            </a>
+                          </div>
+                          
+                          
+                          
+                          <div class="tooltip" style="display: block;">
+                              <div class="tooltip-arrow"></div>
+                              <div class="tooltip-inner">
+                              <div class="panel-heading color333">会员费用管理
+                              
+                              </div>
+                               <div class="divider"> </div>
+                               <div class="panel-body"><!--模块说明和模块操作  -->
+                               <p>系统提供费用配置，费用标准设置，到收费计算和打印单据一体化的系统性方案。只要依本院情况配置好收费标准和参数，每月费用自动计算，自动出账。高效地实现对会员的费用管理，最大限度的保证了资产的帐实相符，进而避免了资产的流失。</p>
+                               
+                               </div>
+                            </div>
+                          </div>
+                          
+                          <em class="icon_mem_free"></em><!--会员免费-->
+                          
+                      </li>
+                  
+                  
+                 </ul>
+             </div>
+             
+            
+            
+             <div class="relative">
+                 <p class="p0">官方应用</p>
+                 
+                 <ul class="list_group ">
+                    
+                        
+                        <li class="list_item default">
+                          <!-- <em class="choose_btn"></em> -->
+                          <i><img src="__IMG__/index/weclome14.png" width="40px" height="40px"></i>
+                          <p class="p1 color66">发票管理</p>
+                          
+                          <div class="list_item_mask">
+                            <a target="_blank" href="cloud-portal/auth/auditProcess">
+                                <p>去实名认证</p>
+                            </a>
+                          </div>
+                          
+                          
+                          
+                          <div class="tooltip">
+                              <div class="tooltip-arrow"></div>
+                              <div class="tooltip-inner">
+                              <div class="panel-heading color333">发票管理
+                              
+                              </div>
+                               <div class="divider"> </div>
+                               <div class="panel-body"><!--模块说明和模块操作  -->
+                               <p>机构的发票信息维护，发票寄送信息维护。</p>
+                               
+                               </div>
+                            </div>
+                          </div>
+                          
+                          <em class="icon_mem_free"></em><!--会员免费-->
+                          
+                      </li>
+                  
+                  
+                 </ul>
+             </div>
+             
+            
+            
+            
+             
+             
+             
+             
+       </div>
+    </div>
+    
+    
+  </div>
+</div>
+<script type="text/javascript" src="__JS__/jquery/jquery-1.8.3.min.js"></script>
+<style type="text/css">
+    .u-flyer {display: block;width: 50px;height: 50px;border-radius: 50px;position: fixed;z-index: 9999;}
+</style>
+
+<script>
+
+
+function filterLink(tag,link){
+    //不在这里弹框
+    if('0'=='0'){
+        showPopC(tag,'wsm_pop');
+        return;
+    }
+    window.location.href=link;
+}
+
+$(".shop_pb").on("click",".cart_del",function(){
+    var thisTag=$(this);
+    var thisId=thisTag.attr("id");
+    var arr=thisId.split("-");
+    $.get("/cloud-portal/order/delCart",{"id":arr[1]},function(data){
+        if(data.resultCode=="SUCC"){
+            thisTag.parents("li").remove();
+            showTotalPrice();
+            var count=$("#cartCount").text();
+            $("#cartCount").text(count-0-1);
+            if(count==1){
+                $(".shop_pb").hide();
+                $(".shop_pa").stop().show().siblings().css({borderBottom:"1px solid #fff",backgroundColor:"#fff"});
+            }
+        }else{
+            zhyAlert(data.failureMessage);
+        }
+    },"json");
+    
+});
+//加入购物车
+function addCart(event,src,codes,tag) {
+    if('0'=='0'){
+        showPopC(tag,'wsm_pop');
+        return;
+    }
+     
+    $.get("/cloud-portal/order/saveCart",{"codes":codes},function(data){
+        if(data.resultCode=="SUCC"){
+            if(data.data==1){
+                var count=$("#cartCount").text();
+                $("#cartCount").text(count-0+1);
+                $(".shop_pb").empty();
+                moduleFly(event,src)
+            }else if(data.data==0){
+                zhyAlert("此应用已添加到购物车，请勿重复购买");
+            }
+        }else{
+            zhyAlert(data.failureMessage);
+        }
+    },"json");
+    return false;
+}
+
+function moduleFly(event,src){
+    var offset = $('.shop_gwc_box').offset(), 
+    flyer = $('<img class="u-flyer" src="'+src+'"/>');
+    var scrolltop=0;
+    //判断为了获取浏览器差异的body卷入的高度
+    if(document.documentElement.scrollTop){
+        scrolltop=document.documentElement.scrollTop;
+    }
+    if(!scrolltop){
+        scrolltop=document.body.scrollTop;
+    }
+    if(!scrolltop){
+        scrolltop=window.pageYOffset;
+    }
+    flyer.fly({ 
+        start: { 
+            left: event.pageX, //开始位置（必填）#fly元素会被设置成position: fixed 
+            top: event.pageY-scrolltop-50
+        }, 
+        end: { 
+            left: offset.left,
+            top: offset.top-scrolltop, //结束位置（必填） 
+            width: 20, //结束时宽度 
+            height: 20 //结束时高度 
+        },onEnd:function(){
+            $(".u-flyer").remove();
+        }
+    });
+}
+
+ $(".shop_gwc").mouseover(function(){
+      if($(".shop_gwc i").text()=='0'){
+        $(".shop_pb").hide();
+        $(".shop_pa").stop().show().siblings().css({borderBottom:"1px solid #fff",backgroundColor:"#fff"});
+      }else{
+          if($(".shop_pb").text().trim()==""){
+              $(".shop_pb").load("/cloud-portal/order/cart_list?sim=1");
+          }
+          $(".shop_pb").stop().show().siblings().css({borderBottom:"1px solid #fff",backgroundColor:"#fff"});
+      }
+  });
+  $(".shop_pb").mouseover(function(){$(".shop_pb").stop().show().siblings().css({borderBottom:"1px solid #fff",backgroundColor:"#fff"});});
+  $(".shop_pa").mouseover(function(){$(".shop_pa").stop().show().siblings().css({borderBottom:"1px solid #fff",backgroundColor:"#fff"});});
+  $(".shop_gwc,.shop_pa,.shop_pb").mouseout(function(){
+    $(".shop_pa,.shop_pb").hide(10).siblings();
+  });
+
+
+ /*
+ **应用市场里面的应用简介
+ * */
+$(".list_item").each(function(){
+        /* $(this).not(".default,.list_item_not_on,.list_pay").click(function(){
+            if($(this).hasClass("on")){
+                $(this).removeClass("on");
+            }else{
+                $(this).addClass("on");
+            }
+            return false;
+        }); */
+        $(this).find(".tooltip").mouseleave(function(){
+            $(this).css("display","none");
+            return false;
+        });
+        $(this).hover(function(){
+            $(this).find(".tooltip").css("display","block");
+        },function(){
+            $(this).find(".tooltip").css("display","none");
+        });
+    })
+    
+//在子页面显示弹框
+function showPopC(obj,className,id){
+    $(".zhy_zhezhao_pop").show();
+    var top = document.body.scrollTop||document.documentElement.scrollTop;
+    var this_h = $("." + className).height();
+    var win_h = ($('html',parent.document).height()-this_h-100)/2
+    $(".zhy_zhezhao_pop").height($("html").height());
+    var this_h = $("." + className).height();
+    top= top +win_h;
+    $("." + className).css("top", top).show().siblings(".zhy_popa").hide();
+}
+// 隐藏修改弹框
+function hidePop() {
+    $(".zhy_zhezhao_pop").hide();
+    $(".zhy_popa").hide();
+}
+//提示生成函数
+function zhyCloudTip(){
+    $(".zhy_cloud_tip").animate({"top":"160px"},1000);
+    setTimeout(function(){
+        $(".zhy_cloud_tip").stop().animate({"top":"30px","left":"346px","width":'0px',"height":"0px","display":"none"},1000,function(){
+            $(".zhy_cloud_text").text("（除了下述已经规划好的模块之外，还有更多的模块正在规划中···）");
+        });
+    },2000);
+}
+$(window).scroll(function(){
+    var top= $("#appLine").offset().top-200;
+    var s_top=$(window).scrollTop();
+    var h=$(window).height();
+    if(s_top>=(h-top)){
+        if ($(".zhy_cloud_text").text().length==0) {
+            zhyCloudTip();
+        }
+    }
+})
+</script>
+
+
+</body></html>

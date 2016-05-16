@@ -1,0 +1,56 @@
+<div class="lv-search-bar">
+     <div class="lv-search">
+         <div class="lv-search-submit">
+             <span class="icon-search"></span>
+         </div>
+         <div id="clear_password" class="clear-icon">
+         </div>
+         <div class="lv-search-input">
+             <input type="text" value="{$search_s}" placeholder="输入目的地" autocomplete="off" id="keyword">
+         </div>
+     </div>
+ </div>
+<div style="display:none;transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);" class="search_extend" id="search_extend">
+    <div class="lv-search-bar search_select">
+    <span class="search_bar_title">我想出去游玩的时间在？</span>
+        <select id="s_month" class="w_280">
+                   <option value="0">不限</option>
+                   <option value="w">本周末</option>
+                   <option value="1">1月</option>
+                   <option value="2">2月</option>
+                   <option value="3">3月</option>
+                   <option value="4">4月</option>
+                   <option value="5">5月</option>
+                   <option value="6">6月</option>
+                   <option value="7">7月</option>
+                   <option value="8">8月</option>
+                   <option value="9">9月</option>
+                   <option value="10">10月</option>
+                   <option value="11">11月</option>
+                   <option value="12">12月</option>
+               </select>
+               <a class="search_close"><img src="__IMG__/clear.png"></a>
+    </div>
+    <div class="lv-search-bar search_select">
+    <span class="search_bar_title">我出去游玩的天数有？</span>
+        <select id="s_day" class="w_280">
+                    <option value="0">不限</option>
+                    <option value="1|3">1~3天</option>
+                    <option value="4|7">4~7天</option>
+                    <option value="8|5">8~15天</option>
+                    <option value="15|0">15天以上</option>
+                </select>
+    </div>
+    <div class="lv-search-bar ">
+        <input id="to_search"  type="button" value="搜 索" class="search_btn">
+    </div>
+</div>
+<script type="text/javascript">
+    var base_url = '{$base_search}';
+   $('#to_search').click(function(){
+       var day = $("#s_day").val();
+       var month = $("#s_month").val();
+       var text = $("#keyword").val();
+       location.href=base_url+"m"+month+"-d"+day+"-s"+text+".html";//m2-d0-s
+   });
+</script>

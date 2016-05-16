@@ -1,0 +1,105 @@
+<extend name="Base/common"/>
+<block name="content">
+<div id="content_index" class="clearfix" style="padding-top: 100px;">
+<style>
+#logo {
+height: 55px;
+padding-top: 17px;
+	text-align: center;
+}
+#logo img{
+	width:auto;
+}
+#index-form {
+margin: 15px 10px 10px;
+border: 1px solid #8d9394;
+border-radius: 1px;
+height: 42px;
+-webkit-box-shadow: 0 1px 1px 0 #dfdfdf;
+background: #fff;
+}
+#index-form .con-wrap {
+display: -webkit-box;
+}
+input, button, textarea {
+border: 0;
+border-radius: 0;
+background: transparent;
+-webkit-appearance: none;
+-webkit-box-sizing: border-box;
+box-sizing: border-box;
+}
+.con-wrap .se-input {
+display: block;
+-webkit-box-flex: 1;
+margin: 2px 0;
+padding: 6px 35px 6px 6px;
+font-size: 18px;
+line-height: 24px;
+-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+.con-wrap .se-input {
+-webkit-border-radius: 0;
+border-radius: 0;
+margin: 0;
+padding: 7px 42px 7px 6px;
+height: 42px;
+line-height: 28px;
+resize: none;
+overflow: hidden;
+font-family: Arial,Helvetica,sans-serif;
+}
+.con-wrap .se-inner {
+width: 79px;
+position: relative;
+}
+#index-bn {
+position: absolute;
+top: 0;
+right: 0;
+width: 79px;
+height: 42px;
+background: #ececec;
+background: -webkit-linear-gradient(top,#f9f9f9,#e7e9eb);
+color: #46484b;
+-webkit-box-shadow: 0 0 0 1px #fff inset;
+box-shadow: 0 0 0 1px #fff inset;
+-webkit-text-shadow: 0 1px 0 #fafafa;
+text-shadow: 0 1px 0 #fafafa;
+white-space: nowrap;
+line-height: 42px;
+border-left: 1px solid #8d9394;
+letter-spacing: -1px;
+font-weight: 700;
+font-size: 16px;
+}
+</style>
+    <div id="logo">
+        <img src="__IMG__/logo.png" height="55" alt="溯源一下,你就知道">
+    </div>
+    <form data-formposition="i" class="se-form focus" id="index-form" action="{:U('Beef/detail?code=_code_')}" method="get" autocomplete="off" style="height: 42px;">
+        <div class="con-wrap">
+            <textarea autocomplete="off" autocorrect="off" maxlength="64" id="index-kw" name="word" class="se-input" data-sug="1" style="height: 42px;"></textarea>
+            <div class="se-inner">
+                <button id="index-bn" class="se-bn" style="height: 42px;">溯源一下</button>
+            </div>
+        </div>
+    </form>
+</div>
+<!--end content-->
+</block>
+
+<block name="script">
+    <script type="text/javascript">
+    $("#index-bn").click(function(){
+        var code = $("#index-kw").val();
+        if($.trim(code)!=""){
+            var action = $("#index-form").attr("action");
+            action = action.replace("_code_",code)
+            window.open(action);
+        }else{
+            $("#index-kw").focus();
+        }
+    });
+    </script>
+</block> 

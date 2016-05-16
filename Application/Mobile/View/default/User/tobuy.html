@@ -1,0 +1,232 @@
+<extend name="Base/common"/>
+<block name="style">
+<link href="__CSS__/global.css" rel="stylesheet" />
+<link rel="stylesheet" href="__CSS__/detail.css">
+<style>
+.buy-btn{
+    text-align: center;
+	margin-bottom:100px;
+}
+.buy-btn a{
+   padding: 5px 10px;
+    width: 50%;
+    display: inline-block;
+    border-radius: 10px;
+    background-color: #fff0ce;
+    border: 1px solid #ffda95;
+    color: #e58a00;
+    text-decoration: none;
+    font-weight: bold;
+}
+.mui-number {
+	display: inline-block;
+	vertical-align: middle;
+	border: 1px solid #b3b3b3;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	letter-spacing: 0;
+	height: 2.36rem;
+	line-height: .36rem;
+	overflow: hidden;
+}
+.mui-number .increase, .mui-number .decrease, .mui-number .num {
+float: left;
+text-align: center;
+}
+.mui-number .increase, .mui-number .decrease {
+font-style: normal;
+font-size: 1.5rem;
+font-weight: 700;
+border: 0;
+display: inline-block;
+width: 2.32rem;
+height: 100%;
+-webkit-user-select: none;
+-ms-user-select: none;
+background-color: #fff;
+color: #5f646e;
+}
+.mui-number .decrease {
+border-right: 1px solid #b3b3b3;
+}
+.mui-number .num {
+height: 100%;
+min-width: 3em;
+-webkit-box-sizing: border-box;
+box-sizing: border-box;
+padding: 0 .2em;
+border: 0;
+-webkit-border-radius: 0;
+border-radius: 0;
+font-weight: 700;
+color: #3d4245;
+}
+.mui-number .increase {
+border-left: 1px solid #b3b3b3;
+}
+#mobile{
+height: 100%;
+min-width: 9em;
+-webkit-box-sizing: border-box;
+box-sizing: border-box;
+padding: 0 .2em;
+-webkit-border-radius: 0;
+border-radius: 0;
+font-weight: 700;
+color: #3d4245;
+border: 1px solid #b3b3b3;
+	height: 2.36rem;
+}
+</style>
+</block>
+<block name="content">
+<div id="content" class="lv-project-detail">
+       <div class="t_base_info">
+           <div style="display: -webkit-box;"><h2 style="width: 100%;">{$info['title']}</h2></div>
+           <p class="line">
+               <span class="info_p3">活动时间：{$info.start_time|time_format}~{$info.end_time|time_format}（{$info.days}天）</span>
+           </p>
+           <p class="line">
+               <span class="info_p3">活动地点：{$info.destination}</span>
+           </p>
+           <p class="line">
+               <span class="info_p1">俱&nbsp;&nbsp;乐&nbsp;&nbsp;部：{$info.club.club_name}</span>
+               <if condition="$info['club']['mobile'] or $info['club']['telphone']">
+               <span class="info_p2 "><a class="tel" href="tel:{$info['club']['mobile']?$info['club']['mobile']:$info['club']['telphone']}">&nbsp;电话咨询：{$info['club']['mobile']?$info['club']['mobile']:$info['club']['telphone']} &nbsp;&nbsp;> </a></span>
+               </if>
+           </p>
+           <p class="line mt5">
+               <span class="pro-value">
+                   ¥{$info.price}<!-- <br><del>¥538</del> -->
+               </span>
+           </p>
+           <div class="line" style="border-bottom: 1px #ccc dashed;padding: 5px 5px 0 10px;">报名人数：
+               <div class="mui-number ">
+	               <button type="button" class="decrease" id="decrease">-</button>
+	               <input type="number" class="num" value="1" min="1" max="100" name="quantity" id="pnum"></input>
+	               <button type="button" class="increase" id="increase">+</button>
+               </div>
+               <div id="error_box" style="float: right;display: inline-block;color: red;"></div>
+           </div>
+           <p class="line">
+               <span class="info_p3">手机号码：<input id="mobile" type="number"></span>
+           </p>
+           <p class="line" id="success_box" style="display:none;"> 
+           </p>
+           
+       </div>
+        <div class="mt10 buy-btn">
+            <a href="javascript:" onclick="D.addOrder('{$info['active_id']}');">立即购买</a>
+        </div>
+        
+    </div><!-- /#content -->
+</block>
+<!--end content-->
+<block name="script">
+<script>
+$(function(){
+    /*input 框变色*/
+    $('#decrease').click(function(){
+    	var num = $('#pnum').val();
+    	num = parseInt(num);
+    	num = num -1;
+    	if(num<1){
+    		num = 1;
+    	}
+    	$('#pnum').val(num);
+    });
+    $('#increase').click(function(){
+        var num = $('#pnum').val();
+        num = parseInt(num);
+        num = num + 1;
+        if(num>100){
+            num = 100;
+        }
+        $('#pnum').val(num);
+    });
+});
+</script>
+<script>
+//详情js
+var D={
+    addOrder : function(id){
+        var number = $('#pnum').val();
+        var mobile = $('#mobile').val();
+        if(D.isEmpty(mobile)){
+            $('#error_box').show();
+            $('#error_box').html('亲，手机号码不能为空哦^_^！');
+            return;
+        }
+        if(!D.checkMobile(mobile)){
+            $('#error_box').show();
+            $('#error_box').html('亲，手机号码不正确哦^_^！');
+            return;
+        }
+        $.ajax({
+            'url':'{:U('User/addOrder')}',
+            'type':'post',
+            'datatype':'json',
+            'data':{
+                active_id : id,
+                number : number,
+                mobile : mobile
+            },
+            'success':function(data){
+                //console.dir(data);
+                $('#error_box').hide();
+                $('.buy-btn').hide();
+                
+                if(data.status==1){
+                    var content = data.content;
+                    location.href='/index.php/Mobile/Index/pay_index/?order_sn='+content.order_sn;
+                }else{
+                    $('#error_box').show();
+                    if(data.err==403){
+                        $('#error_box').html('亲，需要先登录哦^_^！');
+                    }else if(data.err==404){
+                        $('#error_box').html('亲，您已经报名了哦，还需要付款哦^_^！');
+                    }else{
+                        $('#error_box').html('亲，出错了哦^_^！');
+                    }
+                }
+            }
+        });
+    },
+    checkMobile : function(s){
+        var regu =/^[1][0-9][0-9]{9}$/;
+        var re = new RegExp(regu);
+        if (re.test(s)) {
+            return true;
+        }else{
+            return false;
+        }
+   },
+   isEmpty : function(val){
+       switch (typeof(val))
+        {
+          case 'string':
+            return D.trim(val).length == 0 ? true : false;
+            break;
+          case 'number':
+            return val == 0;
+            break;
+          case 'object':
+            return val == null;
+            break;
+          case 'array':
+            return val.length == 0;
+            break;
+          default:
+            return true;
+        }
+   },
+   trim : function(a) {
+        if (typeof(a) == "string") {
+                return a.replace(/^\s*|\s*$/g, "");
+        } else {
+                return a;
+        }
+   }
+}
+</script>
+</block> 

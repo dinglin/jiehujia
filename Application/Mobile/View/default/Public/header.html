@@ -1,0 +1,23 @@
+<!-- 导航条
+================================================== -->
+<header class="header">
+    <span class="header_title">{$PAGE_TITLE}</span>
+    <if condition="!$IS_HOME ">
+        <if condition="$BACK_URL ">
+        <span class="icon-back" onclick="location.href='{$BACK_URL}'"></span>
+        <else/>
+        <span class="icon-back" onclick="javascript:history.go(-1);"></span>
+        </if>
+    </if>
+    <if condition="$IS_FAVORITE ">
+	    <!-- <span class="header-icon-fav" onclick="javascript:" id="favoritor_in" style="display:none;"></span> -->
+	    <span class="header-icon-fav-ed" onclick="javascript:" id="favoritor_out" style="display:none;"></span>
+	    <script>
+	           $("#favoritor_out").hide();
+	           $("#favoritor_in").show();
+	    </script>
+    </if>
+    <if condition="!$IS_HOME ">
+        <a href="/"><div class="out_address"><span class="icon-svg14">首页</span></div></a>
+    </if>
+</header>

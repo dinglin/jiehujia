@@ -1,0 +1,373 @@
+<extend name="Base/common"/>
+
+<block name="cleft">
+    <style>
+    .favorite{
+        color:#46C1CF;
+    	margin-left:20px;
+    	background: url("/Public/Home/images/favorite.gif") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+        padding-left: 22px;
+    	padding-top: 4px;
+    }
+    .favorite:hover{
+        font-weight:bold;
+    }
+    .fa_dia_con{
+	    background: url("/Public/Home/images/favorite.png") no-repeat 0 0;
+    	padding-left: 40px;
+    	background-position-y: -67px;
+		height: 25px;
+		display: block;
+		padding-top: 5px;
+    	font-size: 15px;
+    }
+    #ele9{
+		width: 68px;
+		display: inline-block;
+		padding: 6px 10px;
+		background-color: #fff8e6;
+		border: 1px solid #ffe0a6;
+		border-radius: 5px;
+		color: #ffb13e;
+		font-weight: bold;
+		line-height: 1.2em;
+    	text-align: center;
+    }
+    #ele9:hover{
+		background-color: #fff0ce;
+		border: 1px solid #ffda95;
+		color: #e58a00;
+		text-decoration: none;
+    }
+    </style>
+    <div id="favorite_dialog" style="position: absolute; z-index: 2; left: 360px; opacity: 1; top: 290px;display: none;">
+        <div class="blk" style="opacity: 1;width: auto;">
+            <div class="main" style="padding:20px;">
+                <span class="fa_dia_con" id="fa_dia_con">收藏成功</span>
+            </div>
+        </div>
+    </div>
+    <div class="detail_info mg_b_35 clearfix">
+        <div class="f_l"><a><img src="{:img_size_url($info['list_pic'],272,300)}" alt="" title="" width="272"></a></div>
+        <div class="f_r w_368">
+            <h2 class="mg_b_10"><a>{$info['title']}</a></h2>
+            <p>活动时间：{$info.start_time|time_format}~{$info.end_time|time_format}（{$info.days}天）</p>
+            <p style="display: initial;">活动地点：{$info.destination}</p>
+            <p>人均价格：<span class="price">{$info.price}￥</span> <if condition="($info.price gt 0) and ($info.member_id gt 0)"><a href="javascript:" id="ele9" >在线报名</a></if></p>
+            <p style="display:none;">活动人数：45</p>
+            <p>报名截止时间：{$info.start_time|time_format='Y-m-d'}</p>
+            <p style="display:none;">活动类型：{$info.active_type}</p>
+            <p class="view_count"><span class="view">{$info.hits}人看过</span><a class="favorite" id="favorite" >收藏</a><a class="favorite" id="favorite_del" style="display:none;">取消收藏</a></p>
+            <p><i class="icons mobile_icon mg_r_5"></i><b class="inline_bk v_m mg_r_20">{$info['club']['mobile']?$info['club']['mobile']:$info['club']['telphone']}</b><br/><span class="v_m">（拨打电话时，请说是在上海户外网看到的）</span></p>
+        </div>
+    </div>
+    <if condition="$info.imgs neq ''">
+    <div class="act_photo mg_b_35">
+        <h4 class="font_14 mg_b_15">活动照片</h4>
+        <div>
+            <volist name="info.imgs" id="imgs">
+            <a><img src="{:img_size_url($imgs['img_src'],196,196)}" alt="" title="" width="196" style="margin-right:20px;"></a>
+            </volist>
+        </div>
+    </div>
+    </if>
+    <div class="act_info">
+        <h4 class="font_14 mg_b_15">活动信息</h4>
+        <div>{$info.content}</div>
+        <div>
+            <neq  name="$info.club.other" value="">
+                <p >报名须知</p>
+                <p class="mg_b_25">{$info.club.other}</p>
+            </neq>
+            <neq name="$info.club.pay_before" value="">
+                <p>付款说明</p>
+                <p class="mg_b_25">{$info.club.pay_before}</p>
+            </neq>
+            <neq name="$info.club.pay_back" value="">
+                <p>退款说明</p>
+                <p class="mg_b_25">{$info.club.pay_back}</p>
+            </neq>
+            <neq name="$info.club.disclaimer" value="">
+                <p>免责声明</p>
+                <p class="mg_b_25">{$info.club.disclaimer}</p>
+            </neq>
+        </div>
+        <div style="margin-top:5px;"> {:hook('documentDetailAfter',$info)} </div>
+     </div>
+</block>
+
+<block name="cright">
+   <div class="mg_b_35">
+      <p>
+           <div class="bdsharebuttonbox" data-tag="share_1" style="ma">
+                <span></span>
+                <a class="bds_qzone" data-cmd="qzone" href="#"></a>
+                <a class="bds_tsina" data-cmd="tsina"></a>
+                <a class="bds_tqq" data-cmd="tqq"></a>
+                <a class="bds_renren" data-cmd="renren"></a>
+                <a class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+                <a class="bds_douban" data-cmd="douban"></a>
+                <a class="bds_sqq" data-cmd="sqq"></a>
+            </div>
+      </p>
+       <div class="green_box mg_b_10">
+           <h3 class="mg_b_5"><a target="_blank" href="{:U('Club/detail?id='.$info['club_id'])}" style="color:#fff;">{$info.club.club_name}</a></h3>
+           <p><i class="icons mobile_w_icon mg_r_5"></i><span class="v_m font_24">{$info['club']['mobile']?$info['club']['mobile']:$info['club']['telphone']}</span></p>
+       </div>
+       <p>（拨打电话时，请说是在上海户外网看到的）</p>
+   </div>
+    <style>
+        .clr{clear:both;overflow:hidden;height:0;}
+a.closeBtn{position:absolute;top:10px;right:10px;display:block;width:60px;padding:4px 0;text-align:center;background:#fff;border:1px solid #85B6E2;color:#333;}
+a.closeBtn:hover{color:#fff;border:1px solid #85B6E2;background:#85B6E2;}
+
+.example{border:1px dashed #ccc;padding:40px;margin-top:10px;zoom:1;}
+.example .description{color:#85B6E2;float:left;padding:10px 20px 0 80px;font-size:20px;}
+.example .tigger{display:block;width:80px;padding:10px;text-align:center;background:#fff;border:1px solid #999;color:#333;cursor:pointer;float:left;}
+.example select{margin-top:10px;}
+.blk{width:500px;position:relative;}
+.blk .head, .blk .head-right, .blk .foot, .blk .foot-right{overflow:hidden;height:4px;}
+.blk .head{padding-left:4px;}
+.blk .head-right{background-position:right top;}
+.blk .foot{padding-left:4px;background-position:left bottom;_height:3px;}
+.blk .foot-right{background-position:right bottom;}
+.blk .main{border:2px solid #85B6E2;position:relative;background:#fff;}
+.blk .main h2{font:bold 16px "Microsoft YaHei";padding:10px 20px 2px;color:#85B6E2;}
+.blk .main ul{padding: 10px 20px;zoom:1;overflow:hidden;font-size:12px;}
+.blk .main ul li{line-height:30px; font-family: "Microsoft YaHei";}
+.blk .main ul li a{color:#333;display:block;}
+.blk .main ul li a:hover{background:#85B6E2;color:#fff;font-weight:bold;font-size:14px;}
+.btnbox{ padding-bottom: 10px; text-align: center;padding-left: 20px; overflow: hidden;}
+.btnbox a.btn{float: left;display:block;width:60px;padding:4px 0;text-align:center;background:#fff;border:1px solid #85B6E2;color:#333;}
+.btnbox a.btn:hover{color:#fff;border:1px solid #85B6E2;background:#85B6E2;}
+.inputbuy-num{ width: 50px;}
+.error{ color: #fc4343; font-size: 12px;}
+.success{ color: green; font-size: 12px;}
+.btnbox span{ float: left; line-height: 28px; margin-left: 10px; width: 300px; text-align: left;}
+a.fukuan{ text-decoration: underline;}
+
+
+
+/**/
+* html .popup_iframe{
+	width:expression(this.previousSibling.style.width);
+	height:expression(this.previousSibling.style.height);
+}
+
+    </style>
+    <div class="popupLayer" style="position: absolute; z-index: 2; width: 500px; height: 202px; left: 61px; top: 1766px; opacity: 1; display: none;"><div id="blk9" class="blk" style="opacity: 1;">
+            <div class="head"><div class="head-right"></div></div>
+            <div class="main">
+                <h2>在线报名</h2>
+                <a href="javascript:void(0)" id="close9" class="closeBtn">关闭</a>
+                <ul>
+                    <li>活动名称：{$info['title']}</li>
+                    <li>活动时间：{$info.start_time|time_format}~{$info.end_time|time_format}</li>
+                    <li>活动地点：{$info.destination}</li>
+                    <li>人均价格：{$info.price}￥</li>
+                    <li>报名人数：<input type="text" class="inputbuy-num" name="number" id="number" value="1" maxlength="8" title="请输入购买量" onblur="if(!(value>0)){value=1}" onkeyup="if(value<=0){value=1} value=value.replace(/[^\d]/g,'')" onbeforepaste="clipboardData.setData('text', clipboardData.getData('text').replace(/[^\d]/g, ''))"></li>
+                    <li>手机号码：<input type="text" class="" name="mobile" id="mobile" maxlength="11" onbeforepaste="clipboardData.setData('text', clipboardData.getData('text').replace(/[^\d]/g, ''))" /></li>
+                </ul>
+                <div class="btnbox"><a href="javascript:" class="btn" onclick="D.addOrder('{$info['active_id']}');">我要报名</a> <span id="error_box" style="display:none;" class="error status_tips"></span><span id="success_box" class="success status_tips" style="display:none;"></span></div>
+            </div>
+            <div class="foot"><div class="foot-right"></div></div>
+        </div><iframe border="0" frameborder="0" style="position: absolute; z-index: -1; left: 0px; top: 0px; opacity: 0; width: 500px; height: 202px;"></iframe></div>
+</block>
+
+<block name="script">
+<script src="__JS__/common.js" type="text/javascript"></script>
+<script src="__JS__/popup_layer.js" type="text/javascript"></script>
+<script>
+   var host = "http://"+location.host;
+   var view_base_url = host+"{:U('Actives/detail?id='.$info['active_id'])}";
+   var view_m_url = host+"{:U('Actives/detail?id='.$info['active_id'])}";
+   var bdText = "{$info['title']}";
+   var share_img_url = host+"{:img_size_url($info['list_pic'],272,300)}";
+   window._bd_share_config = {
+       "common": {
+           "bdSnsKey": {},
+           "bdText": bdText,
+           "bdMini": "2",
+           "bdMiniList": false,
+           "bdUrl" : view_base_url,
+           "bdStyle": "1",
+           "bdSize": "32",
+           "bdPic" : share_img_url,
+           "onBeforeClick":function(event){
+               (event == "tsina") && (this.bdText += "@{:C('WEB_SITE_TITLE')}");
+               (event == "weixin") && (this.bdUrl = view_m_url);
+           },
+           "onAfterClick":function(){
+                   this.bdText = bdText;
+                   this.bdUrl = view_base_url;
+           }
+       },
+       "share": {}
+   };
+   with(document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+</script>
+
+<script>
+    var active_id="{$info['active_id']}";
+    $("#favorite").click(function(){
+    	$.post("/index.php?s=/Home/UserFavorite/favorite_add.html",{active_id:active_id},function(data){
+    	    if(data.status==3||data.status==3){
+    	    	$("#favorite").hide();
+    	    	$("#favorite_del").show();
+    	    }
+    	    show_notice(data.msg);
+    	},"json");
+    });
+    $("#favorite_del").click(function(){
+    	$.post("/index.php?s=/Home/UserFavorite/favorite_del.html",{active_id:active_id},function(data){
+            if(data.status==1){
+            	$("#favorite_del").hide();
+                $("#favorite").show();
+            }
+            show_notice(data.msg);
+        },"json");
+    });
+    $(function(){
+        $.post("/index.php?s=/Home/UserFavorite/favorite_is.html",{active_id:active_id},function(data){
+            if(data.status==1){
+                $("#favorite_del").show();
+                $("#favorite").hide();
+            }else{
+            	$("#favorite_del").hide();
+            	$("#favorite").show();
+            }
+        },"json");
+    });
+    function show_notice($msg){
+    	$("#fa_dia_con").html($msg);
+    	$("#favorite_dialog").show();
+        setTimeout(function(){$("#favorite_dialog").hide('slow');},4000);
+    }
+</script>
+<script>
+var maxWidth = $(".act_info").width();
+$('.act_info img').each(function(){
+    var src = $(this).attr("src") ;
+    $(this).attr("src","");
+    $(this).load(function(){
+        var imgWidth = $(this).width(); //图片实际宽度 
+        if(imgWidth<maxWidth){ 
+            $(this).attr("style","width: auto"); 
+        }else{ 
+            $(this).attr("style","width: 100%"); 
+        }
+    });
+    $(this).attr("src",src);
+});
+
+		$(document).ready(function() {
+			//示例9，综合效果
+			var t9 = new PopupLayer({trigger:"#ele9",popupBlk:"#blk9",closeBtn:"#close9",useOverlay:true,useFx:true,
+				offsets:{
+					x:0,
+					y:-41
+				}
+			});
+			t9.doEffects = function(way){
+				if(way == "open"){
+					this.popupLayer.css({opacity:0.3}).show(400,function(){
+						this.popupLayer.animate({
+							left:($(document).width() - this.popupLayer.width())/2,
+							top:(document.documentElement.clientHeight - this.popupLayer.height())/2 + $(document).scrollTop(),
+							opacity:0.8
+						},1000,function(){this.popupLayer.css("opacity",1)}.binding(this));
+					}.binding(this));
+				}
+				else{
+					this.popupLayer.animate({
+						left:this.trigger.offset().left,
+						top:this.trigger.offset().top,
+						opacity:0.1
+					},{duration:500,complete:function(){this.popupLayer.css("opacity",1);this.popupLayer.hide()}.binding(this)});
+				}
+			}
+		});
+                
+                //详情js
+                var D={
+                    addOrder : function(id){
+                        var number = $('#number').val();
+                        var mobile = $('#mobile').val();
+                        if(D.isEmpty(mobile)){
+                            $('#error_box').show();
+                            $('#error_box').html('亲，手机号码不能为空哦^_^！');
+                            return;
+                        }
+                        if(!D.checkMobile(mobile)){
+                            $('#error_box').show();
+                            $('#error_box').html('亲，手机号码不正确哦^_^！');
+                            return;
+                        }
+                        $.ajax({
+                            'url':'{:U('User/addOrder')}',
+                            'type':'post',
+                            'datatype':'json',
+                            'data':{
+                                active_id : id,
+                                number : number,
+                                mobile : mobile
+                            },
+                            'success':function(data){
+                                //console.dir(data);
+                                $('.status_tips').hide();
+                                if(data.status==1){
+                                    var content = data.content;
+                                    $('#success_box').show();
+                                    $('#success_box').html('亲，报名成功^_^！ <a href="/index.php/Home/Index/pay_index/?order_sn='+content.order_sn+'" class="fukuan">马上付款</a>');
+                                }else{
+                                    $('#error_box').show();
+                                    if(data.err==403){
+                                        $('#error_box').html('亲，需要先登录哦^_^！');
+                                    }else if(data.err==404){
+                                        $('#error_box').html('亲，您已经报名了哦，还需要付款哦^_^！');
+                                    }else{
+                                        $('#error_box').html('亲，出错了哦^_^！');
+                                    }
+                                }
+                            }
+                        });
+                    },
+                    checkMobile : function(s){
+                        var regu =/^[1][0-9][0-9]{9}$/;
+                        var re = new RegExp(regu);
+                        if (re.test(s)) {
+                            return true;
+                        }else{
+                            return false;
+                        }
+                   },
+                   isEmpty : function(val){
+                       switch (typeof(val))
+                        {
+                          case 'string':
+                            return D.trim(val).length == 0 ? true : false;
+                            break;
+                          case 'number':
+                            return val == 0;
+                            break;
+                          case 'object':
+                            return val == null;
+                            break;
+                          case 'array':
+                            return val.length == 0;
+                            break;
+                          default:
+                            return true;
+                        }
+                   },
+                   trim : function(a) {
+                        if (typeof(a) == "string") {
+                                return a.replace(/^\s*|\s*$/g, "");
+                        } else {
+                                return a;
+                        }
+                   }
+               }
+	
+</script>
+</block>

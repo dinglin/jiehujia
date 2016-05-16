@@ -1,0 +1,362 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>智慧养老云平台</title>
+   <link rel="stylesheet" href="__CSS__/index/bootstrap.css">
+    <link rel="stylesheet" href="__CSS__/index/index.css">
+    <link rel="stylesheet" href="__CSS__/index/welcome.css">
+    <script type="text/javascript" src="./service_files/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="./service_files/common.js"></script>
+<style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style></head>
+<body>
+    <!-- 弹框开始  -->
+    <div class="zhy_zhezhao_pop" style="display: none;"></div>
+    <!--实名认证用户没有权限-->
+    <div class="zhy_popa create_site_1 " style="width: 450px;margin-left: -225px;">
+        <p class="color66">温馨提示<span class="pull-right close_icon" onclick="hidePop()"></span></p>
+        <div class="pop_content text-center">
+            <p>尊敬的好的，您的服务站创建权限已用完 </p>
+            <p>如需创建更多的服务站，请前往“官方应用”-&gt;“应用中心”中购买</p>
+            <div class="operate_btn pull-right">
+                <a class="btn cancle_yes" hrefs="cloud-portal/order/add_licence_max?moduleCode=multisite">立即购买</a>
+                <button type="button" class="btn cancel" onclick="hidePop()">关闭</button>
+            </div>
+        </div>
+    </div>
+    <!--没有实名认证用户-->
+    <div class="zhy_popa create_site_2 " style="width: 450px;margin-left: -225px;">
+        <p class="color66">温馨提示<span class="pull-right close_icon" onclick="hidePop()"></span></p>
+        <div class="pop_content text-center">
+            <p>尊敬的好的，您暂时没有创建服务站的权限 </p>
+            <p>如需创建服务站，请及时进行实名认证</p>
+            <div class="operate_btn pull-right">
+                <button type="button" class="btn cancle_yes">立即认证</button>
+                <button type="button" class="btn cancel" onclick="hidePop()">关闭</button>
+            </div>
+        </div>
+    </div>
+    <!--弹框结束-->
+
+    <div class="main_content ">
+        <div class="col-xs-12 col-sm-12 ">
+            <div class="site_toggle_title">
+                <div class="nav_head ">
+                    <ul>
+                        
+                            <li class="on">服务站总览</li>
+                        
+                        <li class="">服务站列表</li>
+                    </ul>
+                </div>
+                <div style="height: 20px; background: #edf0f2;"></div>
+            </div>
+            
+                <div class="main_content echart_page bggr">
+                    <div class="col-xs-12 col-sm-12 overview">
+                        <ul class="site_ul">
+                            <li class="on">
+                                <a hrefs="cloud-statistics/station/displaypage/main?val=1">
+                                    <div class="well">
+                                        <h1 class=" mt0 colorblue">1</h1>
+                                        <h5>服务站</h5>
+                                    </div>
+                                </a>
+                            </li>
+                            
+                                <li class="on">
+                                    <a hrefs="cloud-member/member/get_member_list">
+                                        <div class="well">
+                                        <h1 class=" mt0 colorred">
+                                            
+                                            
+                                            0
+                                            
+                                        </h1>
+                                        <h5>老人会员</h5>
+                                        </div>
+                                    </a>
+                                </li>
+                            
+                            <li class="off">
+                                <div class="well">
+                                    <h1 class=" mt0 color999">0</h1>
+                                    <h5 class="color999">工单</h5>
+                                    <p style="display:none">敬请期待</p>
+                                </div>
+                            </li>
+                            <li class="off">
+                                <div class="well">
+                                    <h1 class=" mt0 color999">0</h1>
+                                    <h5 class="color999">护理员</h5>
+                                    <p style="display:none">敬请期待</p>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="well">
+                            <ul class="site_tab_ul">
+                                <li class="on"><a class="color333" hrefs="./service_files/sub1.htm" target="mainFrame">服务站地区分布</a></li>
+                                <li><a class="color333" hrefss="cloud-statistics/account/displaypage/sub2?bizZhyCode" target="mainFrame">服务站数据</a></li>
+                                
+                                <li><a class="color333" hrefss="cloud-statistics/account/displaypage/sub3?bizZhyCode" target="mainFrame">会员地区分布</a></li>
+                                
+                                
+                                <li><a class="color333" hrefss="cloud-statistics/account/displaypage/sub4?bizZhyCode" target="mainFrame">会员数据</a></li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            
+            
+                <div class="list_page div_bordered" style="display: none;">
+                    <div class="panel panel-default">
+                       <!-- Default panel contents -->
+                        <div class="panel-heading">
+                            <form class="form-inline pl20" role="form">
+                                <div class="form-group">
+                                    <div id="jsAddress_0" class="selectbox_s">
+                                        <input type="hidden" class="province" value="-1">
+                                        <input type="hidden" class="city" value="-1">
+                                        <input type="hidden" class="area" value="-1">
+                                        <span class="" for="">省份：</span>
+                                        <div name="province" type="selectbox" class="btn-group inline  sb" style="width: 111px; height: 32px;"><button type="button" class="btn btn-default dropdown-text selected">请选择</button><button type="button" class="btn btn-default dropdown-toggle"><span class="caret"></span><span class="sr-only">切换下拉菜单</span></button><ul class="opts dropdown-menu" style="display: none;"><li><a hrefss="javascript:void(0);" val="110000">北京市</a></li><li><a hrefss="javascript:void(0);" val="120000">天津市</a></li><li><a hrefss="javascript:void(0);" val="130000">河北省</a></li><li><a hrefss="javascript:void(0);" val="140000">山西省</a></li><li><a hrefss="javascript:void(0);" val="150000">内蒙古自治区</a></li><li><a hrefss="javascript:void(0);" val="210000">辽宁省</a></li><li><a hrefss="javascript:void(0);" val="220000">吉林省</a></li><li><a hrefss="javascript:void(0);" val="230000">黑龙江省</a></li><li><a hrefss="javascript:void(0);" val="310000">上海市</a></li><li><a hrefss="javascript:void(0);" val="320000">江苏省</a></li><li><a hrefss="javascript:void(0);" val="330000">浙江省</a></li><li><a hrefss="javascript:void(0);" val="340000">安徽省</a></li><li><a hrefss="javascript:void(0);" val="350000">福建省</a></li><li><a hrefss="javascript:void(0);" val="360000">江西省</a></li><li><a hrefss="javascript:void(0);" val="370000">山东省</a></li><li><a hrefs="javascript:void(0);" val="410000">河南省</a></li><li><a hrefs="javascript:void(0);" val="420000">湖北省</a></li><li><a hrefs="javascript:void(0);" val="430000">湖南省</a></li><li><a hrefs="javascript:void(0);" val="440000">广东省</a></li><li><a hrefs="javascript:void(0);" val="450000">广西壮族自治区</a></li><li><a hrefs="javascript:void(0);" val="460000">海南省</a></li><li><a hrefs="javascript:void(0);" val="500000">重庆市</a></li><li><a hrefs="javascript:void(0);" val="510000">四川省</a></li><li><a hrefs="javascript:void(0);" val="520000">贵州省</a></li><li><a hrefs="javascript:void(0);" val="530000">云南省</a></li><li><a hrefs="javascript:void(0);" val="540000">西藏自治区</a></li><li><a hrefs="javascript:void(0);" val="610000">陕西省</a></li><li><a hrefs="javascript:void(0);" val="620000">甘肃省</a></li><li><a hrefs="javascript:void(0);" val="630000">青海省</a></li><li><a hrefs="javascript:void(0);" val="640000">宁夏回族自治区</a></li><li><a hrefs="javascript:void(0);" val="650000">新疆维吾尔自治区</a></li></ul><div class="sb_icon arrow" style="top: 16px;"></div><input type="hidden" name="province" value="-1"></div>
+                                        <span class="" for="">城市：</span>
+                                        <div name="city" type="selectbox" class="btn-group inline sb" style="width: 111px; height: 32px;"><button type="button" class="btn btn-default dropdown-text selected">请选择</button><button type="button" class="btn btn-default dropdown-toggle"><span class="caret"></span><span class="sr-only">切换下拉菜单</span></button><ul class="opts dropdown-menu" style="display: none;"></ul><div class="sb_icon arrow" style="top: 16px;"></div><input type="hidden" name="city" value="-1"></div>
+                                        <span class="" for="">区县：</span>
+                                        <div name="area" type="selectbox" class="btn-group inline sb" style="width: 111px; height: 32px;"><button type="button" class="btn btn-default dropdown-text selected">请选择</button><button type="button" class="btn btn-default dropdown-toggle"><span class="caret"></span><span class="sr-only">切换下拉菜单</span></button><ul class="opts dropdown-menu" style="display: none;"></ul><div class="sb_icon arrow" style="top: 16px;"></div><input type="hidden" name="area" value="-1"></div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn_shanxuan" id="queryButton">搜索</button>
+                                <div class="pull-right text-right mr15">
+                                    <span class="colorblue ">
+                                        
+                                            <a class="btn_blueg2" onclick="addStPreEvt()" hrefs="javascript:void(0);">+创建服务站</a>
+                                        
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- 总条数，分页使用 -->
+                        
+
+
+
+
+
+
+
+
+
+
+
+<input type="hidden" id="total" value="1">
+
+                        <table class="table table-bordered  table-hover ">
+                            <thead>
+                                <tr>
+                                    <th width="18%">服务站</th>
+                                    <th width="15%">省份</th>
+                                    <th width="15%">城市</th>
+                                    <th width="15%">区县</th>
+                                    <th width="15%">会员数</th>
+                                    <!-- <th width="13.0%">已激活会员数</th> -->
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="flushDIV">
+
+
+
+
+
+
+
+
+
+
+    
+        <tr>
+            <td><span><a hrefs="/cloud-statistics/station/displaypage/main?stationCode=160429175024029235" class="colorblue">JLL下属服务站</a></span></td>
+            <td>江苏省</td>
+            <td>无锡市</td>
+            <td>海淀区</td>
+            
+              <td>0</td>
+              
+            
+            
+            <td>
+                
+                <span>
+                    <a hrefs="cloud-portal/station/viewstation?stationCode=160429175024029235" class="colorblue">修改</a>
+                </span>
+                
+            </td>
+        </tr>
+    
+
+
+<input type="hidden" id="total" value="1">
+</tbody>
+                        </table>
+                    </div>
+                    <!--分页-->
+                    <div class="row text-center">
+                        <div id="Pagination" class="pagination"><div class="pagination"><span class="current prev">上一页</span><span class="current">1</span><span class="current next">下一页</span><span class="allentries">共1条记录</span></div></div>
+                    </div>
+                </div>
+            
+        </div>
+    </div>
+    <!-- 省市区联动 s -->
+    <script type="text/javascript" src="./service_files/jquery.ganged.js"></script>
+    <script type="text/javascript" src="./service_files/pro.js"></script><!--  省市区的json数据 -->
+    <script type="text/javascript" src="./service_files/jquery.pagination.js"></script>
+    
+    <script>
+        //创建服务站事件
+        function addStPreEvt(){
+            if(false){
+                //创建服务站--没有实名认证用户
+                showPopC(this,'create_site_2');
+                return;
+            }
+            if(1 <= 1){
+            //创建服务站--实名认证用户没有权限
+            showPopC(this,'create_site_1');
+            return;
+        }
+        window.location.hrefs = "/cloud-portal/station/addpre";
+        }
+        //在子页面显示弹框
+        function showPopC(obj,className,id){
+            $(".zhy_zhezhao_pop").show();
+            var top = document.body.scrollTop||document.documentElement.scrollTop;
+            var this_h = $("." + className).height();
+            var win_h = ($('html',parent.document).height()-this_h-100)/2
+            // console.log("top="+top+";win_h="+win_h);
+            $(".zhy_zhezhao_pop").height($("html").height());
+            var this_h = $("." + className).height();
+            top= top +win_h;
+            $("." + className).css("top", top).show().siblings(".zhy_popa").hide();
+        }
+        // 隐藏修改弹框
+        function hidePop() {
+            $(".zhy_zhezhao_pop").hide();
+            $(".zhy_popa").hide();
+        }
+        //省市区联动 调用
+        $('#jsAddress_0').ganged({'data': provinceList, 'width': 111, 'height': 32});
+        //切换页面
+        $(".nav_head li").click(function(){
+            var eq=$(this).index();
+            $(this).addClass("on").siblings().removeClass("on");
+            if(eq==0){
+                $(".echart_page").show().siblings(".list_page").hide();
+            }else{
+                $(".list_page").show().siblings(".echart_page").hide();
+                InitTable(0);
+            }
+        })
+        function showblock(val){
+            if ((navigator.userAgent.indexOf('MSIE') >= 0) && (navigator.userAgent.indexOf('Opera') < 0)){
+                showPageConsole(val);}
+            else if (navigator.userAgent.indexOf('Firefox') >= 0){
+                setTimeout(function(){
+                    showPageConsole(val);
+                },100);
+            } else{
+                showPageConsole(val);
+            }
+        }
+        function showPageConsole(val){
+            if(!val||val==0){
+                $(".nav_head li").eq(val).addClass("on").siblings().removeClass("on");
+                $(".echart_page").show().siblings(".list_page").hide();
+            }else if(val==1){
+                $(".nav_head li").eq(val).addClass("on").siblings().removeClass("on");
+                $(".list_page").show().siblings(".echart_page").hide();
+                InitTable(0);
+            }
+        }
+        //统计页面
+        var eq= $(".site_tab_ul li.on").index();
+        $(".site_tab_ul").siblings(".row").eq(eq).show().siblings(".row").hide();
+        $(".site_tab_ul li").live("click",function(){
+            var eq= $(this).index();
+            $(this).addClass("on").siblings().removeClass("on");
+            $(".site_tab_ul").siblings(".row").eq(eq).show().siblings(".row").hide();
+        });
+        
+        function initPage(pageIndex,pageSize,total){
+            $("#Pagination").pagination(total, {
+                callback: PageCallback1,  
+                link_to:"javascript:InitTable(__id__)",
+                prev_text: '上一页',       //上一页按钮里text  
+                next_text: '下一页',       //下一页按钮里text  
+                items_per_page: pageSize,  //显示条数  
+                num_display_entries: 6,    //连续分页主体部分分页条目数  
+                current_page: pageIndex-1,   //当前页索引  
+                num_edge_entries: 2        //两侧首尾分页条目数  
+            });  
+            
+            //翻页调用  
+            function PageCallback1(index, jq) {    
+                return true;
+            }
+        }
+            
+        function InitTable(pageIndex) {
+            var province = $("input[name='province']").val();
+            var city = $("input[name='city']").val();
+            var area = $("input[name='area']").val();
+            pageIndex = parseInt(pageIndex)+1;
+            var pageSize=10;
+            $.ajax({ 
+                type: "POST",  
+                dataType: "html",  
+                url: '/cloud-statistics/stationmanager/mainlist',      //提交到一般处理程序请求数据  
+                data: {
+                    province:province,
+                    city:city,
+                    area:area,
+                    pageNum:pageIndex,
+                    pageSize:pageSize
+                }, //提交两个参数：page(页面索引)，pageSize(显示条数)
+                async: true,
+                success: function(data) {
+                    $("#flushDIV").empty().append(data);//将返回的数据追加到表格
+                    var total = $("#flushDIV input[id='total']").val();
+                    if(total>0){
+                        initPage(pageIndex,pageSize,total);
+                    }else{
+                        $("#Pagination").empty();
+                    }
+                }
+            });              
+        }
+        
+        $("#queryButton").click(function(){
+            InitTable(0);
+        }); 
+        showblock('');
+        //如果账户没有服务站总览权限，初始化服务站列表
+        if('false'){
+            InitTable(0);
+        }
+    </script>
+
+</body></html>

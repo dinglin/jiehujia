@@ -1,0 +1,59 @@
+<extend name="Base/common"/>
+<block name="style">
+<link href="__CSS__/global.css" rel="stylesheet" />
+<link rel="stylesheet" href="__CSS__/login.css">
+
+</block>
+<block name="content">
+    <div id="content" class="login">
+        <!--匿名下单成功后查看订单详情登陆显示-->
+        <form method="POST" action="" id="login_form">
+        <div class=" lv-proinfo-list">
+            <ul>
+                <if condition="$umember.head_pic">
+                <li style="border: 0;">
+                    <span><img src="{$umember.head_pic}" alt="{$member.nickname}" style="width:20%;margin-left: 40%;"></span>
+                </li>
+                </if>
+                <li style="border: 0;">
+                    <label for="username" style="width:50%;text-align:right;">昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称：</label>
+                    <span>{$member.nickname}</span>
+                </li>
+                <li style="border: 0;">
+                    <label for="password" style="width:50%;text-align:right;">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</label>
+                    <span>{$member.sex}</span>
+                </li>
+                <li style="border: 0;">
+                    <label for="password" style="width:50%;text-align:right;">出生日期：</label>
+                    <span>{$member.birthday}</span>
+                </li>
+                <if condition="$member.phone">
+                <li style="border: 0;">
+                    <label for="password" style="width:50%;text-align:right;">手&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机：</label>
+                    <span>{$member.phone}</span>
+                </li>
+                </if>
+            </ul>
+        </div>
+        </form>
+    </div><!-- /#content -->
+</block>
+<!--end content-->
+<block name="script">
+<script>
+$(function(){
+    /*input 框变色*/
+    $("input.lv-input-01").focus(function(e) {
+        $(this).addClass("lv-input01-focus");
+    });
+    $("input.lv-input-01").blur(function(e) {
+        $(this).removeClass("lv-input01-focus");
+    }); 
+    
+});
+
+function login(){
+    $("#login_form").submit();
+}
+</script>
+</block> 

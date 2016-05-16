@@ -1,0 +1,139 @@
+<extend name="Base/user"/>
+
+<block name="content">
+   <div id="main-container" class="container">
+        <!-- menu -->
+	<include file="Public/user_menu"/>
+	<!-- /menu -->
+	<div class="span9 bs-docs-example">
+		<section id="contents">
+		    <div class=""><h5>绑定微信</h5></div>
+		    <if condition="$bind_set_ok ">
+		       <div class="alert alert-warning fade in">
+		             <button data-dismiss="alert" class="close close-sm" type="button">
+		                 <i class="fa fa-times"></i>
+		             </button>
+		             <strong>注意！</strong> 设置成功后，请将您的微信号取消关注，重新关注后，才可以查看到高级功能菜单。否则24小时后才可以查看到。
+		       </div>
+		    </if>
+		</section>
+	</div>
+    <div class="span9">
+        <section class="panel bs-docs-example" style="margin: 20px 0;">
+            <header class="panel-heading" style="padding: 20px 0;">微信<strong>基础</strong>服务配置
+            <if condition="$wechat.is_bind ">
+                <span class="label label-success">微信基础服务已经成功绑定</span>
+            <else />
+                <span class="label label-warning" >Warning！您的微信基础服务还没有绑定<!-- ，点击<a href="#">查看如何绑定</a> --></span>
+            </if>
+            </header>
+             <table class="table">
+                 <tbody>
+                 <tr>
+                     <td>URL</td>
+                     <td>{$url}</td>
+                 </tr>
+                 <tr>
+                     <td>Token</td>
+                     <td>{$wechat.token}</td>
+                 </tr>
+                 </tbody>
+             </table>
+        </section>
+        <section class="panel bs-docs-example" style="margin: 20px 0;display:none;">
+           <header class="panel-heading" style="padding: 20px 0;">微信<strong>高级</strong>服务配置
+                    <if condition="$wechat.appid ">
+                        <span class="label label-success">微信高级服务已经成功绑定</span>
+                    <else />
+                        <span class="label label-warning" >Warning！您的微信高级服务还没有绑定<!-- ，点击<a href="#">查看如何绑定</a> --></span>
+                    </if>
+            </header>
+            <form class="form-horizontal" role="form" action="/index.php?s=/home/user/wechat.html" method="post">
+                <div class="control-group">
+                    <label for="inputEmail1" class=" control-label">APPID&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    <div class="controls">
+                        <input type="text" class="form-control span5" id="inputEmail1" placeholder="APPID" name="appid" value="{$wechat.appid}">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label for="inputPassword1" class=" control-label">APPSECRET&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    <div class="controls">
+                        <input type="text" class="form-control span5" id="inputPassword1" placeholder="APPSECRET" name="appsecret" value="{$wechat.appsecret}">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label for="inputPassword1" class=" control-label">&nbsp;</label>
+                    <div class="controls">
+                        <input type="hidden" name="act" value="{$form_action}" />
+                        <button type="submit" class="btn btn-primary">设置</button>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function(){
+        $(window).resize(function(){
+            $("#main-container").css("min-height", $(window).height() - 343);
+        }).resize();
+    })
+</script>
+<script type="text/javascript">
+(function(){
+	var ThinkPHP = window.Think = {
+		"ROOT"   : "", //当前网站地址
+		"APP"    : "/index.php?s=", //当前项目地址
+		"PUBLIC" : "/Public", //项目公共目录地址
+		"DEEP"   : "/", //PATHINFO分割符
+		"MODEL"  : ["3", "1", "html"],
+		"VAR"    : ["m", "c", "a"]
+	}
+})();
+</script>
+
+	<script type="text/javascript">
+
+    	$(document)
+	    	.ajaxStart(function(){
+	    		$("button:submit").addClass("log-in").attr("disabled", true);
+	    	})
+	    	.ajaxStop(function(){
+	    		$("button:submit").removeClass("log-in").attr("disabled", false);
+	    	});
+
+    	$("form").submit(function(){
+    		var self = $(this);
+    		$.post(self.attr("action"), self.serialize(), success, "json");
+    		return false;
+
+    		function success(data){
+    			if(data.status){
+    				self.find(".Validform_checktip").text("修改成功");
+    			} else {
+    				self.find(".Validform_checktip").text(data.info);
+    			}
+    			$('#error_show').show();
+    		}
+    	});
+	</script>
+ <!-- 用于加载js代码 -->
+     <link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+    <php>if(C('COLOR_STYLE')=='blue_color') echo '<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">';</php>
+    <link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+    <script type="text/javascript">
+    $(function(){
+        $('.time').datetimepicker({
+            format: 'yyyy-mm-dd',
+            language:"zh-CN",
+            minView:2,
+            autoclose:true
+        });
+    
+    });
+    </script>
+</block>
+

@@ -1,0 +1,54 @@
+<div class="profile-cover">
+    <div class="profile-cover-pic" style="background-image: url({:img_size_url('Public/Home/images/cover-pic-sample.png',1000,280)});">
+            <div class="profile-main">
+               <div class="profile-header">
+                 <div class="profile-top">
+                   <div class="profile-info clearfix">
+                     <div class="profile-left">
+                       <div class="profile-name clearfix">
+                         <a rel="nofollow" href="{:U('Club/detail?id='.$club_info['club_id'])}" class="name">{$club_info.club_name}<span class="v-club"></span></a>            
+                         <div class="profile-other clearfix">
+                             <div style="margin:6px 21px 0 0;"></div>
+                             <div style="margin:4px 0 0 0;">
+                                 <em> </em>
+                             </div>
+                             <div style="margin:0 0 0 28px;"> </div>
+                         </div>
+                       </div>
+                       <div class="profile-intro clearfix">
+                         <p>{$club_info.description}</p>
+                       </div>
+                     </div>
+                   </div>
+                   <if condition="$club_info['logo'] ">
+                   <div class="profile-avatar">
+                            <img width="180" height="180" src="{:img_size_url($club_info['logo'],180,180)}"> 
+                   </div>
+                   </if>   
+                   </div>
+                 </div>
+             </div>
+        <div class="profile-peels"></div>
+         <div class="profile-atten">
+           <ul>
+             <li class="{$tab_club=='active'?'tab_selected':''}"><a href="{:U('Club/active?id='.$club_info['club_id'])}"><strong>{$count_actives}</strong><span>活动</span></a></li>
+             <!-- <li class="{$tab_club=='story'?'tab_selected':''}"><a href="{:U('Club/story?id=1')}"><strong>5</strong><span>游记</span></a></li>
+             <li class="{$tab_club=='fans'?'tab_selected':''}"><a href="{:U('Club/fans?id=1')}"><strong>12</strong><span>粉丝</span></a></li>
+             <li class="{$tab_club=='user'?'tab_selected':''}"><a href="{:U('Club/user?id=1')}"><strong>373</strong><span>会员</span></a></li>
+             <li class="{$tab_club=='guide'?'tab_selected':''}"><a href="{:U('Club/guide?id=1')}"><strong>111</strong><span>领队</span></a></li> -->
+             <li class="{$tab_club=='photo'?'tab_selected':''}"><a href="{:U('Club/photo?id='.$club_info['club_id'])}"><strong>{$count_imgs}</strong><span>相册</span></a></li>
+             <!-- <li class="border-none {$tab_club=='about'?'tab_selected':''}"><a href="{:U('Club/about?id=1')}"><strong>111</strong><span>介绍</span></a></li> -->
+             </ul>
+         </div>
+         <div class="profile-badge">
+           <div class="badge-list profile-right-action" style="width:210px;">       
+             <ul> 
+               <!-- <li><a href="/club/85465/leader">+&nbsp;关注</a></li> -->
+               <if condition="$is_club_home ">
+               <li><a href="#comment_club">留言</a></li>
+               </if>
+             </ul>
+           </div>
+          </div>
+       </div>
+ </div>

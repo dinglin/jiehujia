@@ -1,0 +1,39 @@
+/* Login */
+.login{ overflow: hidden; padding: 10px;}
+.login .lv-box{ margin: 0;}
+.login .btn_bar{ overflow: hidden; margin-top: 10px;}
+.login .btn_bar a{ color: #d30775; line-height: 44px;}
+.login .btn_bar .btn_style_1{ height: 36px; line-height: 36px; font-size: 18px; border:none; border-radius: 4px; color: #fff;}
+.lv-proinfo-list { margin-bottom: -1px}
+.lv-proinfo-list li { border-bottom: 1px solid #d2d2d2; width: 100%; position: relative; padding: 5px 0}
+.lv-proinfo-list li:last-child { border-bottom: none; }
+.lv-proinfo-list li label { padding-left: 10px; font-size: 14px; width: 70px; display: inline-block; vertical-align: middle;}
+.lv-proinfo-list li .lv-text-input { background: #fff; border: 0; font-size: 14px; height: 34px; padding: 0 10px 0 0; width: 68%}
+.login_other { border-top: 1px solid #c7c7c7; width: 100%; margin: 10px 0 0 0}
+.login_other2 { display: block; margin: -13px auto 0 auto; font-size: 14px; color: #999; text-align: center; width: 126px; background: #fff}
+.login_other p { display: block; padding: 15px 0; text-align: center}
+.login_sina, .login_qq, .login_qqweibo { display: inline-block; width: 60px; height: 60px; border:1px #c3c3c3 solid; border-radius: 60px; box-shadow: 0 0 5px #ccc inset; background-image: url(../images/login_other.png); background-repeat: no-repeat; background-size: 40px}
+.login_sina{ background-position: center 10px }
+.login_qq { background-position: center -38px}
+.login_qqweibo { background-position: center -88px}
+.login_other a { margin: 0 13px 0 0; }
+/* Login */
+/* Reg */
+.lv-reg-content{ margin:10px;}
+.lv-reg .btn_style_1.disable{ background: #e456a3;}
+.lv-reg .btn_style_1{ height: 44px; display: block; line-height: 44px; font-size: 18px; border:none; border-radius: 4px; color: #fff; margin-top:10px;}
+.lv-reg .tab_select{}
+.lv-reg .tab_select ul{ display: block; overflow: hidden;}
+.lv-reg .tab_select li{ width: 33.3%; line-height:20px; height: 40px; padding: 5px 0; text-align:center; border:none; float: left;}
+.lv-reg .view_more{ margin:10px 0;}
+.lv-reg .clear-icon{ right:10px;}
+.lv-reg .lv-text-input{ border: 1px solid #D2D2D2; border-radius: 4px; height: 44px; padding-left:10px; position:relative; background:#fff; }
+.lv-reg .lv-text-input input{ height:20px; line-height:20px; padding: 11px 0; width:100%; border:none; background:none; font-size: 14px;}
+.lv-progress { color: #FFFFFF; height: 20px; font-size:14px;}
+.lv-progress-active { width: 23px; height: 23px; line-height: 23px; background: #de1482; border-radius: 23px; display: inline-block;}
+.lv-progress-node {width: 23px; height: 23px; line-height: 23px;  border-radius: 23px; display: inline-block;background: #a5a5a5;}
+.agreement{ color:#999; margin: 10px;}
+.agreement input{ vertical-align:middle;}
+.agreement a{ color:#39a2e3;}
+/* Reg */
+

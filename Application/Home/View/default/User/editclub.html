@@ -1,0 +1,235 @@
+<extend name="Base/user"/>
+
+
+<block name="header">
+    <header class="jumbotron subhead" id="overview">
+		<div class="container">
+			<h2>{$info.title}</h2>
+			<p>
+				<span  class="pull-left">
+					<span class="author">{$info.uid|get_username}</span>
+					<span> 发表于 {$info.create_time|date='Y-m-d H:i',###}</span>
+				</span>
+				<span class="pull-right">
+					<article:prev name="prev" info="info">
+                        <a href="{:U('?id='.$prev['id'])}">上一篇</a>
+                    </article:prev>
+                    <article:next name="next" info="info">
+                        <a href="{:U('?id='.$next['id'])}">下一篇</a>
+                    </article:next>
+				</span>
+			</p>
+		</div>
+	</header>
+</block>
+
+<block name="content">
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+<link href="__STATIC__/uploadify/uploadify.css" rel="stylesheet">
+    <div id="main-container" class="container">
+    <div class="row">
+        
+<!-- menu -->
+	<include file="Public/user_menu"/>
+	<!-- /menu -->
+
+        
+    <div class="span9 bs-docs-example">
+        <!-- Contents
+        ================================================== -->
+        <section id="contents">
+            <div class="sidebar-widget"><h5>修改俱乐部</h5></div>
+            <div>
+     <form action="{:U()}" method="post" class="form-horizontal">
+        <div class="form-item">
+            <label class="item-label">名称<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="club_name" value="{$data.club_name}">
+            </div>
+        </div>
+        <div class="form-item cf">
+                    <label class="item-label">头像<span class="check-tips">（0-无头像，大于0-头像图片ID，需要函数处理）</span></label>
+                    <div class="controls">
+                        <div class="controls">
+									<input type="file" id="upload_picture_logo">
+									<input type="hidden" name="logo" id="cover_id_logo" value="{$data.logo}" />
+									<div class="upload-img-box">
+											<notempty name="data.logo">
+										<div class="upload-pre-item"><img src="__ROOT__{$data.logo|get_cover_file='savename'}"/></div>
+									</notempty>							</div>
+								</div>
+									<script type="text/javascript">
+								//上传图片
+							    /* 初始化上传插件 */
+								$("#upload_picture_logo").uploadify({
+							        "height"          : 30,
+							        "swf"             : "__STATIC__/uploadify/uploadify.swf",
+							        "fileObjName"     : "download",
+							        "buttonText"      : "上传图片",
+							        "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+							        "width"           : 120,
+							        'removeTimeout'	  : 1,
+							        'fileTypeExts'	  : '*.jpg; *.png; *.gif;',
+							        "onUploadSuccess" : uploadPicturelogo,
+                                    'onFallback' : function() {
+                                        alert('未检测到兼容版本的Flash.');
+                                    }
+							    });
+								function uploadPicturelogo(file, data){
+					    	
+                                                                var data = $.parseJSON(data);
+							    	var src = '';
+							        if(data.status){
+							        	$("#cover_id_logo").val(data.id);
+							        	src = data.url || '__ROOT__' +'/Uploads/Download/'+ data.savepath+data.savename;
+							        	$("#cover_id_logo").parent().find('.upload-img-box').html(
+							        		'<div class="upload-pre-item"><img src="' + src + '"/></div>'
+							        	);
+							        } else {
+							        	updateAlert(data.info);
+							        	setTimeout(function(){
+							                $('#top-alert').find('button').click();
+							                $(that).removeClass('disabled').prop('disabled',false);
+							            },1500);
+							        }
+							    }
+								</script>                    </div>
+                </div>
+        
+        <div class="form-item">
+            <label class="item-label">地址<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="address" value="{$data.address}">
+            </div>
+        </div>
+        
+        <div class="form-item">
+            <label class="item-label">标签<span class="check-tips">以','隔开</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="tag" value="{$data.tag}">
+            </div>
+        </div>
+        
+        <div class="form-item">
+            <label class="item-label">手机<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="mobile" value="{$data.mobile}">
+            </div>
+        </div>
+        
+        <div class="form-item">
+            <label class="item-label">电话<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="telphone" value="{$data.telphone}">
+            </div>
+        </div>
+        
+        <div class="form-item">
+            <label class="item-label">qq<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="qq" value="{$data.qq}">
+            </div>
+        </div>
+        
+        <div class="form-item">
+            <label class="item-label">新浪微博<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="xl_wb" value="{$data.xl_wb}">
+            </div>
+        </div>
+        
+        <div class="form-item">
+            <label class="item-label">腾讯微博<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="qq_wb" value="{$data.qq_wb}">
+            </div>
+        </div>
+        
+        <div class="form-item">
+            <label class="item-label">微信<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="wx" value="{$data.wx}">
+            </div>
+        </div>
+        
+        <div class="form-item cf">
+            <label class="item-label">描述<span class="check-tips"></span></label>
+            <div class="controls">
+                <label class="textarea input-large">
+                        <textarea name="description">{$data.description}</textarea>
+                </label>                    
+            </div>
+        </div>
+        
+        <div class="form-item cf">
+            <label class="item-label">报名须知<span class="check-tips"></span></label>
+            <div class="controls">
+                <label class="textarea input-large">
+                        <textarea name="other">{$data.other}</textarea>
+                </label>                    
+            </div>
+        </div>
+        
+        <div class="form-item cf">
+            <label class="item-label">免责声明<span class="check-tips"></span></label>
+            <div class="controls">
+                <label class="textarea input-large">
+                        <textarea name="disclaimer">{$data.disclaimer}</textarea>
+                </label>                    
+            </div>
+        </div>
+        
+        <div class="form-item cf">
+            <label class="item-label">付款说明<span class="check-tips"></span></label>
+            <div class="controls">
+                <label class="textarea input-large">
+                        <textarea name="pay_before">{$data.pay_before}</textarea>
+                </label>                    
+            </div>
+        </div>
+        
+        <div class="form-item cf">
+            <label class="item-label">退款说明<span class="check-tips"></span></label>
+            <div class="controls">
+                <label class="textarea input-large">
+                        <textarea name="pay_back">{$data.pay_back}</textarea>
+                </label>                    
+            </div>
+        </div>
+      
+        <div class="form-item">
+            <input type="hidden" name="id" value="{$data.club_id}"/>
+            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+        </div>
+    </form>
+            </div>
+        </section>
+     
+       
+    </div>
+        </div>
+
+    </div>
+
+<script type="text/javascript">
+    $(function(){
+        $(window).resize(function(){
+            $("#main-container").css("min-height", $(window).height() - 343);
+        }).resize();
+    })
+</script>
+<script type="text/javascript">
+(function(){
+	var ThinkPHP = window.Think = {
+		"ROOT"   : "", //当前网站地址
+		"APP"    : "/index.php?s=", //当前项目地址
+		"PUBLIC" : "/Public", //项目公共目录地址
+		"DEEP"   : "/", //PATHINFO分割符
+		"MODEL"  : ["3", "1", "html"],
+		"VAR"    : ["m", "c", "a"]
+	}
+})();
+</script>
+ <!-- 用于加载js代码 -->
+</block>

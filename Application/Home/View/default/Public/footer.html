@@ -1,0 +1,140 @@
+<div id="footer">
+    <div class="f_con">
+        <div class="clearfix">
+	        <div class=" a_c ">©2014 路件科技 沪ICP备14006209号-3 </a>
+	        <a href='http://www.sgs.gov.cn/lz/licenseLink.do?method=licenceView&entyId=2014051611543512'><img src='__IMG__/gongshang.gif' border=0></a>
+	        </div>
+        </div>
+        <div class="f_r w_180" style="position:absolute;right:-65px;bottom:200px;">
+                <a><img src="__IMG__/erwei.jpg" title="" alt="" width="86"></a>
+        </div>
+    </div>
+</div>
+
+<include file="Public/var"/>
+
+<!-- 用于加载js代码 -->
+<block name="script"></block> 
+
+<!-- 页面footer钩子，一般用于加载插件JS文件和JS代码 -->
+{:hook('pageFooter', 'widget')}
+
+<!-- 用于加载统计代码等隐藏元素 -->
+<div class="hidden">
+	<block name="hidden"></block>
+</div>
+<script type="text/javascript">
+    jQuery.fn.center = function () {
+    this.css('position', 'absolute');
+    this.css('top', ($(window).height() - this.height()) 
+                    /2 +$(window).scrollTop() + 'px');
+    this.css('left', ($(window).width() - this.width()) 
+                     / 2 + $(window).scrollLeft() + 'px');
+    return this;
+}
+$(document).ready(function(){
+$(window).scroll(function(){
+if($(this).scrollTop()>100){
+$('.top').fadeIn();}
+else{
+$('.top').fadeOut();} });
+$('.top').click(function(){
+$('body,html').animate({scrollTop:0},800);});
+
+/*feedback*/
+$('#FeedBackBtn').click(function(){
+    $('#baidu_feedback_right_dialog').center();
+    $('#baidu_feedback_right_dialog').show();
+});
+$('#feedback-close_x').click(function(){
+		$('#baidu_feedback_right_dialog').hide();
+});
+$('#feedback_right_post_save').click(function(){
+    var content = $('#feedback_des_content').val();
+    var user_name = $('#feedback_email').val();
+    $.ajax({
+        'url':'index.php/home/index/feedback',
+        'type':'post',
+        'datatype':'json',
+        'data':{
+            content:content,
+            user_name:user_name
+        },
+        'success':function(data){
+            if(data.status==1){
+                $('#baidu_feedback_right_dialog').hide();
+                alert(data.content);
+            }else{
+                $('#baidu_feedback_right_dialog').hide();
+                alert(data.content);
+            }
+        }
+    });
+});
+
+});
+
+</script>
+<style>
+.top {position: fixed;display: none;width: 55px;height: 55px;right: 50px;bottom: 50px;
+background: #D6D6D6;color: #fff;font-size: 36px;line-height: 55px;text-align: center;
+cursor: pointer;border-radius: 40px;transition-property: background;transition-duration: 0.5s;
+-webkit-transition-property: background;-webkit-transition-duration: 0.5s;-moz-transition-property: background;
+-moz-transition-duration: 0.5s;
+}
+/*feedbak*/
+.FeedBackBtn {
+    position: fixed;
+    right: 0;
+    top: 40%;
+    z-index: 101
+}
+
+* html .FeedBackBtn {
+    position: absolute;
+    top: expression((document.documentElement.scrollTop || document.body.scrollTop)+Math.round(40 *(document.documentElement.offsetHeight || document.body.clientHeight) / 100)+'px')
+}
+
+.FeedBackBtn a {
+    width: 10px;
+    height: 68px;
+    display: block;
+    padding: 10px 8px 0 10px;
+    background-color: #fff8e6;
+    border: 1px solid #ffe0a6;
+    border-right: 0;
+    border-radius: 5px 0 0 5px;
+    color: #ffb13e;
+    font-weight: bold;
+    line-height: 1.2em
+}
+
+.FeedBackBtn a:hover {
+    background-color: #fff0ce;
+    border: 1px solid #ffda95;
+    border-right: 0;
+    color: #e58a00;
+    text-decoration: none
+}
+</style>
+<div class="top">↑
+</div>
+<div class="FeedBackBtn" id="FeedBackBtn"><a href="javascript:void(0)" >意见反馈</a></div>
+<div id="baidu_feedback_right_dialog" class="feedback_right_dialog" style="display: none;position: fixed; z-index: 5010; ">
+    <div class="feedback-modal feedback-animate-toside" style="background-color:white;cursor:default;top:100%;left:100%;width: 375px;overflow:hidden;height: 270px;border: 1px solid #999999;border-radius: 3px 3px 3px 3px;box-shadow: 0 0 9px #999999;" data-html2canvas-ignore="true">
+        <div class="feedback-header" id="feedback-dialog-header" unselectable="on" onselectstart="return false;" style="padding: 5px 10px 5px 17px; height: 25px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(221, 221, 221);  text-align: left; bottom: 314px; right: 6px;  width: 348px; left: 447px; top: 82px; background: rgb(245, 245, 245);">
+            <a class="feedback-close" style="margin-top: 2px;float: right;font-size: 20px;font-weight: bold;line-height: 18px;color: #000000;text-shadow: 0 1px 0 #ffffff;cursor:pointer;" id="feedback-close_x">×</a><h3 style="line-height:27px;font-size:18px;font-weight:bold;margin: 0;color: #333;text-rendering: optimizelegibility;">发送反馈</h3></div>
+			<div class="feedback-body" id="qa_feedback_body" style="text-align:left;">
+                <div class="feedback_action" style="margin-left:20px;margin-top:20px;">
+                    <form id="feedback_right_post_form" action="" method="post">
+                        <div class="feedback_tip_title" style="float:left;">反馈内容：<br><span style="color:red">（*必填）</span></div>
+                        <div class="feedback_textarea"><textarea maxlength="400" name="issuedesc" style="border:1px solid #ccc;margin-left: 0;padding: 4px;margin-bottom: 9px;font-size: 100%;vertical-align: top;font-size: 13px;line-height: 18px;width:270px;height:100px;resize:none;" class="feedback_des_content" id="feedback_des_content" data-exclude="true" placeholder="欢迎提出您在使用中遇到的问题或宝贵建议，感谢您对上海户外网的支持。"></textarea></div>
+                      
+                        <div class="email_block" style="height:30px;line-height:30px;margin-bottom:10px;clear:both;"><div style="float:left;">联系方式：</div>
+                                <div><input type="text" class="feddback_email" style="margin-right:0px;height: 20px;line-height: 20px;width: 270px;border: 1px solid #ccc;color:#9A9A9A;padding: 4px;font-size: 13px;display: inline-block;" placeholder="留下您的QQ/邮箱，便于我们及时回复您。"  name="email" id="feedback_email"></div></div>
+                        <input type="hidden" name="type" value="1" id="feedback_type"><input type="hidden" name="user_name" value="" id="feedback_user_name"><input type="hidden" name="userAgent" value="" id="feedback_userAgent"><input type="hidden" name="issuehtml" value="" id="feedback_issuehtml">
+                    </form></div><div class="feedback-footer" style="position:absolute;bottom:0px;width:345px;height:40px;line-height:40px;padding: 5px 14px 5px 15px;text-align: center;margin-bottom: 0;background-color: #f5f5f5;border-top: 1px solid #ddd;"><input type="button" class="feedback_btn" style="display: inline-block;padding: 6px 10px 6px;_padding: 3px 10px 3px;margin-bottom: 0;font-size: 13px;line-height: 18px;text-align: center;text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);vertical-align: middle;background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);background-repeat: repeat-x;border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);border: 1px solid #ccc;border-bottom-color: #bbb;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);cursor: pointer;filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);" id="feedback_right_post_save" value="提交反馈"></div>
+					</div>
+					
+					</div></div>
+            

@@ -1,0 +1,123 @@
+<extend name="Base/common"/>
+<block name="style">
+<link href="__JS__/jquery/themes/ui-lightness/jquery-ui-1.8.17.custom.css" rel="stylesheet" />
+<link href="__CSS__/tanchu.css" type="text/css" rel="stylesheet" />
+</block>
+
+<block name="cleft">
+    <div class="search_bar mg_b_15 clearfix">
+        <div class="f_l mg_r_120 v_m"><span class="v_m">出发地：</span><span class="orange v_m">上海</span></div>
+        <div class="f_l" style="width: 410px;">
+            <span class="v_m f_l">目的地：</span>
+            <div class="f_l"><include file="Public/index_area"/></div> 
+            <!-- <input type="text" class="date text v_m mg_r_20" id="search_text" placeholder="不限" value="{$search_s}"> -->
+            <a class="search_btn v_m f_r" href="javascript:void(0);" id="do_search">搜索</a>
+        </div>
+    </div>
+    <div style="clear:both;"></div>
+    <div class="search_con mg_b_25" id="search_options">
+        <div class="search_show">
+            <ul class="clearfix mg_b_10">
+                <li><span>出发月份：</span></li>
+                <volist name="c_month" id="c_m">
+                    <li>
+                        <if condition="$c_m.key eq $search_m">
+                        <a class="option" href="{$c_m.url}">{$c_m.val}</a>
+                        <else />
+                        <a href="{$c_m.url}">{$c_m.val}</a>
+                        </if>
+                    </li>
+                </volist>
+            </ul>
+            <ul class="clearfix">
+                <li><span>游玩天数：</span></li>
+                <volist name="c_days" id="c_d">
+                    <li>
+                        <if condition="$c_d.key eq $search_d">
+                        <a class="option" href="{$c_d.url}">{$c_d.val}</a>
+                        <else />
+                        <a href="{$c_d.url}">{$c_d.val}</a>
+                        </if>
+                    </li>
+                </volist>
+            </ul>
+        </div>
+        <div style="display:none;" class="search_hide hide">
+            <ul class="clearfix mg_b_10">
+                <li><span>出发时间：</span></li>
+                <li><a class="option">不限</a></li>
+                <li><a>周末</a></li>
+            </ul>
+        </div>
+        <div style="display:none;" class="a_c pd_t_15"><a class="icons down_icon" id="sh_option"></a></div>
+    </div>
+    <!--end search-->
+    <div class="result_con">
+        <h3>以下是为您找到的户外俱乐部活动（<span>{$pages.total_num}</span>个）</h3>
+        <div class="result_list">
+            <ul>
+                <volist name="actives" id="at">
+                <li class="clearfix">
+                    <div class="f_l"><a href="{:U('Actives/detail?id='.$at['active_id'])}" target="_blank"><img src="{:img_size_url($at['list_pic'],196,176)}" alt="{$at.title}" title="{$at.title}" width="196"></a></div>
+                    <div class="f_r">
+                        <span class="h4"><a href="{:U('Actives/detail?id='.$at['active_id'])}" target="_blank">{$at.title}</a></span>
+                        <p><span class="v_m color_81"><a target="_blank" href="{:U('Club/detail?id='.$at['club_id'])}" style="color:#444;">{$at.club.club_name}</a></span><i class="icons v_icon mg_l_5"></i></p>
+                        <p>活动时间：{$at.start_time|time_format}~{$at.end_time|time_format}（{$at.days}天）</p>
+                        <p style="display: initial;">活动地点：{$at.destination}</p>
+                        <p>人均价格：<span class="price">{$at.price}</span>￥</p>
+                        <p style="display:none;">活动人数：45</p>
+                        <p class="view_count"><span class="view">{$at.hits}人看过</span></p>
+                        <p style="display:none;"><i class="icons mobile_icon mg_r_5"></i><b class="inline_bk v_m mg_r_20">5413817346713</b><span class="v_m">（拨打电话时，请说是在上海户外网看到的）</span></p>
+                    </div>
+                </li>
+                </volist>
+            </ul>
+        </div>
+        <div id="pagination" class="pd_t_15">
+            <if condition="$pages.pre_page  neq ''">
+                <a class="prev_link" href="{$pages.pre_page}">&lt;前一页</a>
+            <else />
+                <a class="prev_link firt_prev">&lt;前一页</a>
+            </if>
+            <span style="color:#666;">{$pages.now_page}/{$pages.total_page}</span>
+            <if condition="$pages.next_page neq ''">
+                <a class="next_link" href="{$pages.next_page}">后一页&gt;</a>
+            <else />
+                <a class="next_link firt_prev">后一页&gt;</a>
+            </if>
+        </div>
+        <!--end pagination-->
+    </div>
+    <!--end result-->
+</block>
+
+<block name="cright">
+ <div class="figure mg_b_35">
+     <p class="mg_b_15"><a><img src="__IMG__/right_1.jpg" alt="" title="" width="285"></a></p>
+     <p><a class="publish_btn" href="{:U('User/login')}">+我也要发布活动</a></p>
+ </div>
+ <div class="act_club" style="display:none;">
+     <h4 class="mg_b_15">活跃俱乐部</h4>
+     <ul class="clearfix">
+         <li><a><img src="__IMG__/club_avatar.jpg" alt="" title=""> 驴时代户外</a></li>
+         <li><a><img src="__IMG__/club_avatar.jpg" alt="" title=""> 驴时代户外</a></li>
+         <li><a><img src="__IMG__/club_avatar.jpg" alt="" title=""> 驴时代户外</a></li>
+         <li><a><img src="__IMG__/club_avatar.jpg" alt="" title=""> 驴时代户外</a></li>
+     </ul>
+ </div>
+</block>
+<block name="script">
+    <script src="__JS__/jquery/jquery-ui-1.8.17.custom.min.js" type="text/javascript"></script>
+    <script src="__JS__/datapicker.js" type="text/javascript"></script>
+    <script src="__JS__/common.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        list.init();
+    </script>
+    <script type="text/javascript">
+        var search_url = "{$c_search}";
+        $('#do_search').click(function(){
+            var search = $("#s_text").val();
+            location.href=search_url+search+".html";
+        });
+    </script>
+</block>

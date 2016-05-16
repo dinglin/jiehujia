@@ -1,0 +1,716 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>智慧养老云平台</title>
+    <link rel="stylesheet" href="__CSS__/index/bootstrap.css">
+    <link rel="stylesheet" href="__CSS__/index/index.css">
+    <link rel="stylesheet" href="__CSS__/index/welcome.css">
+    <style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style></head>
+<body>
+<!-- 部门管理弹出框 start  -->
+<div class="zhy_popa addSertype">
+    <p class="color66"><font>部门管理</font><span class="pull-right close_icon" onclick="hidePop()"></span></p>
+    <div class="pop_content" style="height: 320px; overflow-y: scroll">
+        <form id="dptForm">
+            <div class="form-group">
+                <label class="control-label" style="width:100px">部门：</label>
+                <div class="inline">
+                    <input name="dptId" type="hidden" value="">
+                    <input type="text" class="form-control input200 validate[required,maxSize[8]]" placeholder="请输入部门名称" value="">
+                    <button type="button" class="btn btn_save2 ver_top" onclick="saveDpt(this)">保存</button>
+                </div>
+            </div>
+            <div id="departmentList"></div>
+            <div class="form-group">
+                <label class="control-label" style="width:100px"></label>
+                <button type="button" class="btn_white2 ml15" onclick="addbranch()"><i></i>继续填加</button>
+            </div>
+            <div class="operate_btn pull-right">
+                <button type="button" class="btn cancle_yes" onclick="hidePop()">关闭</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- 部门管理弹出框 end  -->
+<div class="main_content member_list">
+    <div class="col-xs-12 col-sm-12 ">
+        <div class="site_toggle_title">
+            <div class="nav_head ">
+                <ul id="">
+                    <li class="on"><a href="cloud-live-web/employee/list">员工总表</a></li>
+                    
+                </ul>
+            </div>
+            <div style="height: 20px; background: #edf0f2;"></div>
+        </div>
+        <div class="panel panel-default div_bordered">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+                <div class="site_change">
+                    <h4 class="pl20"><b class="colorshenblue">员工总表</b></h4>
+                </div>
+                <div class="form-inline pl20">
+                    <form id="searchForm" action="cloud-live-web/employee/list">
+                        <input type="hidden" name="pageNum" value="">
+                        <input type="hidden" name="employeeType" value="">
+                        <input type="hidden" name="departmentId" value="">
+                        <div class="form-group">
+                            <input name="keyWord" type="text" placeholder="员工姓名/联系电话" class="form-control input150" value="">
+                        </div>
+                        <div class="form-group">
+                            <div class="btn-group ">
+                                <button id="qDptId" type="button" class="btn btn-default dropdown-text" style="width:85px;" value="">部门</button>
+                                <button type="button" class="btn btn-default dropdown-toggle">
+                                    <span class="caret"></span>
+                                    <span class="sr-only">切换下拉菜单</span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="javascript:void(0);" value="0">全部</a></li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="btn-group ">
+                                <button id="qEmpType" type="button" class="btn btn-default dropdown-text" style="width: 85px;" value="">员工类型</button>
+                                <button type="button" class="btn btn-default dropdown-toggle">
+                                    <span class="caret"></span>
+                                    <span class="sr-only">切换下拉菜单</span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="javascript:void(0);" value="0">全部</a></li>
+                                    <li><a href="javascript:void(0);" value="1">管理员</a></li>
+                                    <li><a href="javascript:void(0);" value="2">护理师</a></li>
+                                    <li><a href="javascript:void(0);" value="3">护工</a></li>
+                                    <li><a href="javascript:void(0);" value="4">坐席</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="form-group">入职时间：
+                            <div class="inline relative mr0">
+                                <input name="inductionStart" type="text" class="form-control mr0" style="width: 105px;" id="inductionStart" input-type="date" value=""><!-- endDate id不要修改 -->
+                            </div>
+                            <em>至</em>
+                            <div class="inline relative mr0">
+                                <input name="inductionEnd" type="text" class="form-control mr0" style="width: 105px;" id="inductionEnd" input-type="date" value=""><!-- endDate id不要修改 -->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn_white20" onclick="searchSub(0)">搜索</button>
+                        </div>
+
+                        <div class="pull-right mr15">
+                            <a class="btn btn_blueg2 mr0" href="javascript:dptManage(this);">部门管理</a>
+                            <a class="btn btn_blueg2 mr0" href="cloud-live-web/employee/create">+新增员工</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <table class="table table-bordered table-hover table_fixed table-multicols">
+                <thead>
+                <tr>
+                    <th width="10%" class="border_right">员工姓名</th>
+                    <th width="8%" class="border_right">身份证号</th>
+                    <th width="10%" class="border_right">联系电话</th>
+                    <th width="12%" class="border_right">部门</th>
+                    <th width="8%" class="border_right">员工类型</th>
+                    <th width="10%" class="border_right">是否有登录权限</th>
+                    <th width="8%" class="border_right">入职时间</th>
+                    <th width="8%" class="border_right">离职时间</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                
+                
+                    <tr style="height: 50px"><td colspan="9" style="text-align: center">暂无数据</td></tr>
+                
+                </tbody>
+            </table>
+            <div class="divider" style="width: 100%;"></div>
+            <div class="row text-center">
+                <div id="emp_pagination" class="pagination"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="./employee_files/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="./employee_files/common.js"></script>
+<script type="text/javascript" src="./employee_files/jquery.ptTimeSelect.js"></script><!--日历插件-->
+<script type="text/javascript" src="./employee_files/pickday.js"></script><!--日历插件配置和调用-->
+<script type="text/javascript" src="./employee_files/jquery.pagination.js"></script>
+<script>
+    //部门管理，查询部门列表
+    function dptManage(_this){
+        $.post('/cloud-live-web/department/list',{},function(dataS){
+            var res = eval(dataS);
+            if(res.resultCode == "SUCC"){
+                var dpts = res.data.departmentList;
+                $("#departmentList").html("");
+                $.each(dpts, function(i, dpt){
+                    var dptDiv = '<div class="form-group">'+
+                            '<label class="control-label" style="width:100px" >部门：</label> ' +
+                            '<div class="inline" deptId="'+dpt.id+'" >'+
+                            '<span class="input200 inline  font14">'+dpt.departmentName+'</span>'+
+                            ' <button type="button" class="btn btn_white20" onclick="editbranch(this)">修改</button> '+
+                            '<button type="button" class="btn btn-linkr" onclick="deletebranch(this)" style="margin-left: 5px;">删除</button>'+
+                            '</div>'+
+                            '</div>';
+                    $("#departmentList").append($(dptDiv));
+                });
+            }
+        },'json');
+        showPop(_this,'addSertype');
+        var scrollTo = $('#dptForm');
+        var container = $(".pop_content");
+        container.scrollTop(
+                scrollTo.offset().top - container.offset().top + container.scrollTop()
+        );
+    }
+    //修改部门
+    function editbranch(obj){
+        var text =$(obj).siblings("span").text();
+        if($(obj).siblings("span").length==1){
+            $(obj).siblings("span").remove();
+            var inp=$("<input type='text' class='form-control input200' value='"+text+"'/>")
+            var html=' <button type="button" class="btn btn_save2 ver_top" onclick="saveDpt(this)">保存</button>'
+            $(obj).parent().html("").prepend(inp).append(html);
+        }
+    }
+    //保存部门
+    function saveDpt(obj){
+        var text =$.trim($(obj).siblings(':text').val());//所填内容
+        if (text.length > 8) {
+            zhyAlert("部门名称不能超过8个字符");
+            return;
+        }
+        /*var html=' <button type="button" class="btn btn_white20" onclick="editbranch(this)">修改</button> '+
+                '<button type="button" class="btn btn-linkr"  style="margin-left: 5px;" onclick="deletebranch(this)">删除</button>';*/
+        if(text==""){
+            zhyAlert("请填写部门名称");
+            return;
+        }
+        var param = {};
+        var _deptId = $(obj).parent().attr("deptId");
+        if(_deptId){
+            param = {'deptId':_deptId,'departmentName':text};
+        }else{
+            param = {'departmentName':text};
+        }
+        $.post('/cloud-live-web/department/edit',param,function(dataS){
+            var res = eval(dataS);
+            if(res.resultCode == "SUCC"){
+                //$(obj).siblings(':text').val("");
+                $(obj).parents('.form-group').remove();
+
+                var dptDiv = '<div class="form-group">'+
+                        '<label class="control-label" style="width:100px" >部门：</label> ' +
+                        '<div class="inline" deptId="'+res.data.id+'" >'+
+                        '<span class="input200 inline  font14">'+text+'</span>'+
+                        ' <button type="button" class="btn btn_white20" onclick="editbranch(this)">修改</button> '+
+                        '<button type="button" class="btn btn-linkr" onclick="deletebranch(this)" style="margin-left: 5px;">删除</button>'+
+                        '</div>'+
+                        '</div>';
+                $("#departmentList").prepend($(dptDiv));
+            }else{
+                zhyAlert(res.failureMessage);
+            }
+        },'json');
+    }
+    //删除部门
+    function deletebranch(obj){
+        var _deptId = $(obj).parent().attr("deptId");
+        $.post("/cloud-live-web/department/delete",{'deptId':_deptId},function(dataS){
+            var res = eval(dataS);
+            if(res.resultCode == "SUCC"){
+                $(obj).parents('.form-group').remove();
+            }else{
+                zhyAlert(res.failureMessage);
+            }
+        },"json");
+    }
+    //添加部门
+    function addbranch(){
+        var html='<div class="form-group">'+
+                '<label class="control-label" style="width:100px" >部门：</label> '+
+                '<div class="inline">'+
+                '<input type="text" class="form-control input200 "  placeholder="请输入部门名称"> '+
+                '<button type="button" class="btn btn_save2 ver_top" onclick="saveDpt(this)">保存</button>'+
+                '</div>'+
+                '</div>';
+        $("#dptForm").prepend(html);
+    }
+
+    /********* 分页函数开始 **********/
+    var pageIndex = 1;     //页面索引初始值
+    var pageSize = 10;     //每页显示条数初始化，修改显示条数，修改这里即可
+    var total = 0;
+
+    $(function(){
+        if(total>0){
+            initPage();
+        }
+    });
+    //dfasdfasdf
+    function initPage(){
+        //分页，PageCount是总条目数，这是必选参数，其它参数都是可选
+        $("#emp_pagination").pagination(total, {
+            callback: PageCallback1,
+            link_to:"javascript:searchSub(__id__)",
+            prev_text: '上一页',       //上一页按钮里text
+            next_text: '下一页',       //下一页按钮里text
+            items_per_page: pageSize,  //显示条数
+            num_display_entries: 6,    //连续分页主体部分分页条目数
+            current_page: pageIndex-1,   //当前页索引
+            num_edge_entries: 2        //两侧首尾分页条目数
+        });
+        //翻页调用
+        function PageCallback1(index, jq) {
+            return true;
+        }
+    }
+
+    function searchSub(no){
+        //入职查询时间
+        var inductionStart = $("#inductionStart").val();
+        var inductionEnd = $("#inductionEnd").val();
+        if (inductionEnd!='' && inductionStart != ''){
+            if(inductionEnd < inductionStart) {
+                zhyAlert("入职查询开始时间不能大于结束时间！");
+                return;
+            }
+        }
+
+
+        $("#searchForm [name=employeeType]").val($("#qEmpType").attr("value"));
+        $("#searchForm [name=departmentId]").val($("#qDptId").attr("value"));
+        if(no==0){
+            $("#searchForm").submit();
+        }else{
+            $("#searchForm [name=pageNum]").val(no+1);
+            $("#searchForm").submit();
+        }
+    }
+    /********** 分页函数结束 **********/
+
+</script>
+
+<!--遮罩层-->
+<div class="zhy_zhezhao_pop " style="height:800px;"></div>
+<!--遮罩层 end-->
+<!--离职弹框-->
+<div class="zhy_popa dialog_0 " style="width: 450px;margin-left: -225px;">
+    <p class="color66">温馨提示<span class="pull-right close_icon" onclick="hidePop()"></span></p>
+    <div class="pop_content">
+        <p>您确定是否让<span id="leaveName"></span>离职？</p>
+        <div class="operate_btn pull-right">
+            <button type="button" class="btn cancle_yes" onclick="changeStatus()">确定</button>
+            <button type="button" class="btn cancle_btn" onclick="hidePop()">取消</button>
+        </div>
+    </div>
+</div>
+<!-- 重新入职弹框 start -->
+<div class="zhy_popa dialog_3 " style="width: 450px;margin-left: -225px;">
+    <p class="color66">温馨提示<span class="pull-right close_icon" onclick="hidePop()"></span></p>
+    <div class="pop_content">
+        <p>您确定是否让<span id="joinName"></span>重新入职？</p>
+        <div class="operate_btn pull-right">
+            <button type="button" class="btn cancle_yes" onclick="changeStatus()">确定</button>
+            <button type="button" class="btn cancle_btn" onclick="hidePop()">取消</button>
+        </div>
+    </div>
+</div>
+<!-- 重新入职弹框 end -->
+<!-- 开通账号弹框 start-->
+<div class="zhy_popa sitepop">
+    <p class="color66">开通账号权限<span class="pull-right close_icon" onclick="hidePop()"></span></p>
+    <div class="col-xs-12 col-sm-12 pop_content">
+        <table border="0" cellspacing="0" cellpadding="0" class="font14" width="100%">
+            <tbody><tr>
+                <td colspan="2"><p class="colorred font14" style="text-indent: 0px;">注意：开通账号权限后，需要消耗您购买的账号权限的个数</p></td>
+            </tr>
+            <tr>
+                <td width="50%" align="left">
+                    <label>姓名：</label>
+                    <div class="inline " id="empAcctName"></div>
+                </td>
+                <td width="50%" align="left">
+                    <label>联系方式：</label>
+                    <div class="inline " id="empPhone"></div>
+                </td>
+            </tr>
+            <tr>
+                <td width="50%" align="left">
+                    <label>选择账号角色：</label>
+                    <div class="btn-group inline">
+                        <button id="roleId" type="button" class="btn btn-default dropdown-text" style="width:115px;" value="0">请选择</button>
+                        <button type="button" class="btn btn-default dropdown-toggle">
+                            <span class="caret"></span>
+                            <span class="sr-only">切换下拉菜单</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        </tbody></table>
+        <p style="color: #26BFAB;font-size: 15px;padding-left: 0px;text-indent: 0px;margin-top: 20px;margin-bottom: 0px;">选择服务站：</p>
+        <div style="height:2px;background: #26BFAB;margin: 5px -15px 10px;"></div>
+        <form class="form-inline text-left">
+            <div class="form-group" style="margin-top: 10px;">
+                <div id="jsAddress_3" class="selectbox_s">
+                    <input type="hidden" class="province" value="-1">
+                    <input type="hidden" class="city" value="-1">
+                    <input type="hidden" class="area" value="-1">
+                    <span class="" for="">省份：</span>
+                    <div name="province" type="selectbox" class="btn-group inline  sb" style="width: 111px; height: 32px;"><button type="button" class="btn btn-default dropdown-text selected">请选择</button><button type="button" class="btn btn-default dropdown-toggle"><span class="caret"></span><span class="sr-only">切换下拉菜单</span></button><ul class="opts dropdown-menu" style="display: none;"><li><a href="javascript:void(0);" val="-1">请选择</a></li><li><a href="javascript:void(0);" val="110000">北京市</a></li><li><a href="javascript:void(0);" val="120000">天津市</a></li><li><a href="javascript:void(0);" val="130000">河北省</a></li><li><a href="javascript:void(0);" val="140000">山西省</a></li><li><a href="javascript:void(0);" val="150000">内蒙古自治区</a></li><li><a href="javascript:void(0);" val="210000">辽宁省</a></li><li><a href="javascript:void(0);" val="220000">吉林省</a></li><li><a href="javascript:void(0);" val="230000">黑龙江省</a></li><li><a href="javascript:void(0);" val="310000">上海市</a></li><li><a href="javascript:void(0);" val="320000">江苏省</a></li><li><a href="javascript:void(0);" val="330000">浙江省</a></li><li><a href="javascript:void(0);" val="340000">安徽省</a></li><li><a href="javascript:void(0);" val="350000">福建省</a></li><li><a href="javascript:void(0);" val="360000">江西省</a></li><li><a href="javascript:void(0);" val="370000">山东省</a></li><li><a href="javascript:void(0);" val="410000">河南省</a></li><li><a href="javascript:void(0);" val="420000">湖北省</a></li><li><a href="javascript:void(0);" val="430000">湖南省</a></li><li><a href="javascript:void(0);" val="440000">广东省</a></li><li><a href="javascript:void(0);" val="450000">广西壮族自治区</a></li><li><a href="javascript:void(0);" val="460000">海南省</a></li><li><a href="javascript:void(0);" val="500000">重庆市</a></li><li><a href="javascript:void(0);" val="510000">四川省</a></li><li><a href="javascript:void(0);" val="520000">贵州省</a></li><li><a href="javascript:void(0);" val="530000">云南省</a></li><li><a href="javascript:void(0);" val="540000">西藏自治区</a></li><li><a href="javascript:void(0);" val="610000">陕西省</a></li><li><a href="javascript:void(0);" val="620000">甘肃省</a></li><li><a href="javascript:void(0);" val="630000">青海省</a></li><li><a href="javascript:void(0);" val="640000">宁夏回族自治区</a></li><li><a href="javascript:void(0);" val="650000">新疆维吾尔自治区</a></li></ul><div class="sb_icon arrow" style="top: 16px;"></div><input type="hidden" name="province" value="-1"></div>
+                    <span class="" for="">城市：</span>
+                    <div name="city" type="selectbox" class="btn-group inline sb" style="width: 111px; height: 32px;"><button type="button" class="btn btn-default dropdown-text selected">请选择</button><button type="button" class="btn btn-default dropdown-toggle"><span class="caret"></span><span class="sr-only">切换下拉菜单</span></button><ul class="opts dropdown-menu" style="display: none;"><li><a href="javascript:void(0);" val="-1">请选择</a></li></ul><div class="sb_icon arrow" style="top: 16px;"></div><input type="hidden" name="city" value="-1"></div>
+                    <span class="" for="">区县：</span>
+                    <div name="area" type="selectbox" class="btn-group inline sb" style="width: 111px; height: 32px;"><button type="button" class="btn btn-default dropdown-text selected">请选择</button><button type="button" class="btn btn-default dropdown-toggle"><span class="caret"></span><span class="sr-only">切换下拉菜单</span></button><ul class="opts dropdown-menu" style="display: none;"><li><a href="javascript:void(0);" val="-1">请选择</a></li></ul><div class="sb_icon arrow" style="top: 16px;"></div><input type="hidden" name="area" value="-1"></div>
+                </div>
+                <div class="inline"><button type="button" class="btn btn_white20" onclick="loadStation()">搜索</button></div>
+            </div>
+            <div class="row " style="margin-top: 10px;">
+                <div class="arrow-right"></div>
+                <div class="pull-left col-xs-6 col-sm-6">
+                    <p class="text-left">选择站点</p>
+                    <ul class="list-group choose-list">
+                        
+                            
+                                <li class="list-group-item" onclick="addSite(this)">JLL下属服务站<input type="hidden" value="160429175024029235"></li>
+                            
+                        
+                    </ul>
+                </div>
+                <div class="pull-left col-xs-6 col-sm-6">
+                    <p class="text-left">已选站点</p>
+                    <ul class="list-group choosed-list" id="chosenSt"></ul>
+                </div>
+            </div>
+        </form>
+        <div class="operate_btn pull-right">
+            <button type="button" class="btn cancle_yes" onclick="openAccount()">确定开通</button>
+            <button type="button" class="btn cancle_btn" onclick="resetAllOpts()">不开通</button>
+        </div>
+    </div>
+</div>
+<!-- 开通账号弹框 end -->
+<!-- 工单详情 start -->
+<div class="zhy_popa  dialog_2 " style="width:840px;margin-left: -420px;">
+    <p class="color66"><span id="orderListName"></span><span class="pull-right close_icon" onclick="hidePop()"> </span></p>
+    <div id="empOrderTb"></div>
+    <div class="operate_btn text-right ">
+        <button type="button" class="btn cancle_btn" onclick="hidePop()">关闭</button>
+    </div>
+    <div style="height: 25px;"></div>
+</div>
+<!-- 工单详情 end-->
+<!-- 创建账号成功弹出 start -->
+<div class="zhy_popa create_zh_s " style="width: 450px;margin-left: -225px;">
+    <p class="color66">温馨提示<span class="pull-right close_icon" onclick="hidePop(&#39;/cloud-live-web/employee/list&#39;)"></span></p>
+    <div class="pop_content text-center">
+        <p>尊敬的好的，您已成功创建账号<span id="createAccountName"></span></p>
+        <p>默认登录密码： <font class="colorbg">123456</font></p>
+        <p>请登录系统及时修改密码，保护账号安全</p>
+        <p></p>
+        <div class="operate_btn pull-right">
+            <button type="button" class="btn cancle_yes" onclick="hidePop(&#39;/cloud-live-web/employee/list&#39;)">关闭</button>
+        </div>
+    </div>
+</div>
+<!-- 实名认证用户没有权限 start-->
+<div class="zhy_popa create_site_1 " style="width: 450px;margin-left: -225px;">
+    <p class="color66">温馨提示<span class="pull-right close_icon" onclick="hidePop()"></span></p>
+    <div class="pop_content text-center">
+        <p>尊敬的，您的账号创建权限已用完 </p>
+        <p>如需创建更多的账号，请前往“官方应用”-&gt;“应用中心”中购买</p>
+        <div class="operate_btn pull-right">
+            
+            <a class="btn cancle_yes" href="cloud-portal/order/myAppList">立即购买</a>
+            <button type="button" class="btn cancel" onclick="hidePop()">关闭</button>
+        </div>
+    </div>
+</div>
+<!-- 实名认证用户没有权限 end -->
+
+
+<!-- 省市区联动 s -->
+<script type="text/javascript" src="./employee_files/jquery.ganged.js"></script>
+<script type="text/javascript" src="./employee_files/pro.js"></script><!--  省市区的json数据 -->
+<!-- 省市区联动 e -->
+<!--表单验证 s-->
+<script type="text/javascript" src="./employee_files/jquery.validationEngine-zh_CN.js"></script>
+<script type="text/javascript" src="./employee_files/jquery.validationEngine.js"></script>
+<script>
+    $('#jsAddress_3').ganged({'data': provinceList, 'selectAll':true, 'width': 111, 'height': 32});
+    //展示已选站点
+    function showSite(){
+        $("#multi_site_block").html("");
+        $("#multi_site_block").addClass("txt ml15").removeClass("ml150");
+        var div=$("<div class='choosed-list-show'></div>");
+        var more =$("<a href='javascript:void(0);' onclick='showList()' class='new_link2'>更多<i class='arrow_d_icon_0'></i></a>");
+        // var more_choose =$("<a href='javascript:void(0);' class='new_link2'>继续添加</a>");
+        var more_choose = $('<button type="button" class="btn_white2 margin10 site_add" onclick="deleteM(this,\'sitepop\')" ><i></i>继续添加</button>')
+        var len= $(".choosed-list li").length;//已选站点的长度
+        var choosed_li = $(".choosed-list li")//被选站点
+        for(var i=0 ; i<len;i++){
+            if(parseInt(i/6)==0){ //每六个一行
+                var choosed_input=$(choosed_li[i]).find("input");
+                var li= $("<div class='inline'></div>");
+                var i_cancle=$("<i class='cancel_icon' value='"+choosed_input.val()+"' onclick='removeSite(this)'></i>");
+                li.text(choosed_li.eq(i).text());
+                li.append(i_cancle);
+                div.append(li);
+                if(len>6){
+                    div.append(more);//如果有第二行才加更多
+                }
+            }
+        }
+        $("#multi_site_block").append(div);
+        $("#multi_site_block").append(more_choose);
+        hidePop();
+    }
+    // 移除展示站点
+    function removeSite(obj){
+        $(obj).parent().remove();
+        cancelSite($(".choosed-list li input[value="+$(obj).attr("value")+"]").parent().find("span"));
+        if($(".new_link2").css('display')!='none'){
+            showSite()
+        }
+    }
+
+    //展示  更多
+    function showList(){
+        var more_up =$("<a href='javascript:void(0);' onclick='hideList()' class='new_link2'>收起<i class='arrow_d_icon_1'></i></a>");
+        var len= $(".choosed-list li").length;//已选站点的长度
+        var choosed_li = $(".choosed-list li")//被选站点
+        var row= parseInt((len-6)/6)+1 ;//还剩几行没显示
+        for(var j=1 ; j <=row; j++){
+            var div=$("<div class='choosed-list-show'></div>");
+            div.css('marginTop',"10px");
+            for(var i=j*6  ; i< len;i++){
+                if(parseInt(i/6)==j){ //每六个一行
+                    var choosed_input=$(choosed_li[i]).find("input");
+                    var li= $("<div class='inline'></div>");
+                    var i_cancle=$("<i class='cancel_icon' value='"+choosed_input.val()+"' onclick='removeSite(this)'></i>");
+                    li.text(choosed_li.eq(i).text());
+                    li.append(i_cancle);
+                    div.append(li);
+                    div.append(more_up);//最后一行加收起
+                }
+            }
+            $("#multi_site_block .choosed-list-show:last").after(div);//添加到下一行
+        }
+        // $("#multi_site_block .choosed-list-show:last").after(div);//添加到下一行
+        $("#multi_site_block .choosed-list-show:first").find(".new_link2").hide();
+    }
+    //展示  收起
+    function hideList(){
+        showSite();
+        /*$(".choosed-list-show:gt(0)").remove();//除第一行外其其他行隐藏
+         $("#multi_site_block .choosed-list-show:first").find(".new_link2").show();*/
+    }
+    //清除右侧已经选择的站点
+    function clearChosenSt(){
+        hidePop();
+        //
+        var chosenLi = $("#chosenSt").children("li");
+        $.each(chosenLi, function(i, _li){
+            var _thidStCode = $(_li).find("input").val();
+            cancelSite($(_li).find("span"));
+        });
+
+        var hasChoseSt = $(".choosed-list-show").children("div");
+        var _canChoseLi = $(".choose-list").children("li");
+
+        $.each(hasChoseSt, function(i, _div){
+            var chosenCode = $(_div).find("i").attr("value");
+            console.log("chosenCode = "+chosenCode);
+            $.each(_canChoseLi, function(j, _li){
+                var thisCode = $(_li).find("input").val();
+                console.log("thisCode = "+thisCode);
+                if(thisCode == chosenCode){
+                    addSite($(_li));
+                }
+            })
+        });
+    }
+
+    function loadStation(){
+        var province=$("div[name=province] input[name=province]").val();
+        var city=$("div[name=city] input[name=city]").val();
+        var area=$("div[name=area] input[name=area]").val();
+        $.ajax({
+            type:"POST",
+            url:"/cloud-portal/station/accountStationList",
+            dataType:"json",
+            //contentType:"application/json",
+            data:{"province":province,
+                "city":city,
+                "area":area,
+                "pageSize":"10000"},
+            success:function(dataStr){
+                $(".choose-list").empty();
+
+                var choosed=$(".choosed-list li input");
+                //console.log(choosed);
+                var map={};
+                for(var i=0;i<choosed.length;i++){
+                    map[$(choosed[i]).val()]=1;
+                }
+                var stations=dataStr.serviceStations;
+                if(stations!=null&&stations.length>0){
+                    //console.log(map)
+                    for(var i=0;i<stations.length;i++){
+                        if(map[stations[i].serverStationCode]=="1"){
+                            continue;
+                        }
+                        var $li =$('<li class="list-group-item" onclick="addSite(this)">'+stations[i].serverStationName+'</li>');
+                        $li.append('<input type="hidden" value="'+stations[i].serverStationCode+'"/>');
+                        $(".choose-list").append($li)
+
+                    }
+                }
+            }
+        });
+    }
+
+    function addSite(obj){
+        $(obj).remove();//移除被选择项
+        var str =$(obj).html();
+        var $li=$("<li  class='list-group-item'></li>");
+        var $span=$('<span class="badge cancel_icon" onclick="cancelSite(this)"></span>');
+        $li.html(str);
+        $span.appendTo($li);
+        $(".choosed-list").prepend($li);
+    }
+
+    function cancelSite(obj){
+        var str =$(obj).parent().text();//添加取消项
+        var stationCode = $(obj).parent().find("input");
+        var $li =$('<li class="list-group-item" onclick="addSite(this)">'+str+'</li>');//添加取消项
+        $li.append(stationCode);
+        $(".choose-list").append($li)//添加取消项
+        $(obj).parents("li").remove();
+    }
+
+    var currEmpId = 0;
+
+    //显示弹框
+    function showPop(obj,className){
+        //获取当前员工的姓名
+        if(obj){
+            var thisTr = $(obj).parents("tr");
+            var empName = $(thisTr).find("td:first").text();
+            var phone = $(thisTr).find("td:eq(2)").text();
+            currEmpId = $(thisTr).find("input").val();
+            $("#joinName").html(empName);
+            $("#leaveName").html(empName);
+            $("#orderListName").html(empName);
+            $("#empAcctName").html(empName);
+            $("#empPhone").html(phone);
+            $("#createAccountName").html(empName);
+        }
+        $(".zhy_zhezhao_pop").show();
+        var top = $('html',parent.document).scrollTop(); //兼容scrolltop写法
+        var win_h = $("body",parent.document).height();
+        $(".zhy_zhezhao_pop").height($("html").height());
+        var this_h = $("." + className).height();
+        var cha = win_h - this_h-160;
+        if (cha > 0) {
+            top += cha / 2;
+        } else {
+            top += 0;
+        }
+        $("." + className).css("top", top).show();
+    }
+    // 隐藏修改弹框
+    function hidePop(url) {
+        $(".zhy_zhezhao_pop").hide();
+        $(".zhy_popa").hide();
+        if(url){
+            window.location.href=url;
+        }
+    }
+
+    //还原设置项
+    function resetAllOpts(){
+        //
+        $("#roleId").attr("value", 0).text("请选择");
+        clearChosenSt();
+    }
+
+    //员工离职
+    function changeStatus(){
+        $.post("/cloud-live-web/employee/change_status", {'empId':currEmpId}, function(dataS){
+            var res = eval(dataS);
+            if (res.resultCode == 'SUCC'){
+                zhyAlert("操作成功！");
+                hidePop();
+                window.location.href='/cloud-live-web/employee/list';
+            }else{
+                zhyAlert(res.failureMessage);
+            }
+        }, "json");
+    }
+    //开通账号
+    function openAccount(){
+        var roleId = $("#roleId").attr("value");
+        //var personCode = $("#personCode").val();
+        //选择的站点
+        var _psersonStation = [];
+        $("#chosenSt li").each(function(i,liE){
+            _psersonStation.push({"serverStationCode":$(liE).find("input").val()});
+        });
+        var param = {};
+        $.post("/cloud-live-web/employee/open_account", {'empId':currEmpId, 'roleId':roleId, 'personStations':JSON.stringify(_psersonStation)}, function(dataS){
+            var res = eval(dataS);
+            if (res.resultCode == 'SUCC'){
+                //zhyAlert("操作成功！");
+                hidePop();
+                showPop(undefined, 'create_zh_s');
+            }else{
+                if(res.failureCode=='OVERLIMIT'){
+                    hidePop();
+                    showPop(undefined, 'create_site_1');
+                    return;
+                }
+                zhyAlert(res.failureMessage);
+            }
+        }, "json");
+    }
+
+    //
+    function empOrderDetail(_this){
+        showPop(_this,'dialog_2');
+        $.ajax({
+            type: "POST",
+            url: "/cloud-live-web/employee/emp_orders",
+            data: {empId:currEmpId},
+            dataType: "html",
+            success:function(data){
+                $("#empOrderTb").empty().html(data);
+            }
+        });
+    }
+</script>
+
+
+</body></html>

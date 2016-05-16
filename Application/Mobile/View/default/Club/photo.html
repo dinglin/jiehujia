@@ -1,0 +1,37 @@
+<extend name="Base/common"/>
+<block name="style">
+<link href="__CSS__/global.css" rel="stylesheet" />
+<link rel="stylesheet" href="__CSS__/login.css">
+    <style>
+    .profile-album-item{
+	   margin-bottom:15px;
+    }
+    </style>
+</block>
+<block name="content">
+    <div id="content" class="login">
+        <div class="profile-album clearfix">
+          <volist name="imgs" id="imgsrc">
+          <div class="profile-album-item">
+            <a href="{:U('Actives/detail?id='.$imgsrc['active_id'])}" title="{$imgsrc.active_name}">
+              <img src="{:img_size_url($imgsrc['img_src'],290,260)}" alt="{$imgsrc.active_name}" width="290" height="260">
+              <p>{$imgsrc.active_name}</p>
+            </a>
+          </div>
+          </volist>
+      </div>
+    </div><!-- /#content -->
+</block>
+<!--end content-->
+<block name="script">
+<script type="text/javascript" src="__STATIC__/jquery.lazyload.js"></script>
+<script type="text/javascript">
+$(function() {
+    var default_img="{:img_size_url("",290,260)}";
+    $("img").lazyload({
+           effect : "fadeIn",
+           placeholder : default_img,   
+    });
+});
+</script>
+</block> 

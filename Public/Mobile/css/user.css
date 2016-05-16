@@ -1,0 +1,29 @@
+.lv-banner-mylvbg { background: url(../images/my-banner-bg.jpg) no-repeat left center; height: 116px; overflow:hidden; margin:0 auto; position:relative; background-size:cover;}
+.lv-banner-mylvbg h2{ height:116px; font-size:18px; color:#fff; padding:0 20px 0 90px; display:table-cell; vertical-align:middle; }
+.lv-banner-mylvbg h2 span{ line-height:20px; }
+.lv-user-photobg { background: url(../images/user-photo-bg.png) no-repeat left center; height: 68px; width: 68px; position:absolute; left:10px; top:50%; margin-top:-34px;}
+.lv-user-photobg img { width: 56px; height: 56px; border-radius: 28px; margin: 6px}
+.lv-welcome-panel { height: 28px; line-height: 27px}
+.lv-welcome-panel2 { height: 60px; line-height: 25px; text-shadow: 2px 2px 2px #CCC; width: 219px; margin: -63px 0 0 77px; table-layout: fixed; word-break: break-all; overflow: hidden}
+.lv-banner-mylvbg .integral { border-radius: 90px; display: block; position: absolute; width: auto; padding: 3px 7px; color: #fff; background: #434343; height: 17px; line-height: 17px; bottom:10px; right: 10px;}
+
+.no_login_con { width: 220px; margin: 0 auto; color: #fff; text-align: center; line-height: 30px; padding-top: 20px}
+.no_login1 { font-size: 18px}
+.no_login { padding-top: 5px}
+.no_login a { font-size: 16px; font-weight: bold; color: #fff; border-bottom: 1px dashed #fff; padding-bottom: 3px;;}
+
+.ic_my1, .ic_my2, .ic_my3, .ic_my4, .ic_my5, .ic_my6 { background: url(../images/my_loging.png) no-repeat; width: 30px; height: 30px; display: block; float: left; background-size: 30px;}
+.ic_my1 { background-position: 0 -80px}
+.ic_my2 { background-position: 0 -110px}
+.ic_my3 { background-position: 0 -140px}
+.ic_my4 { background-position: 0 -170px}
+.ic_my5{ background-position: 0 0;}
+.ic_my6{ background-position: 0 -30px;}
+.my_lv{ background: #fff;border: 1px solid #d2d2d2; margin: 10px; border-bottom:none; margin-bottom: 20px;}
+.my_lv .sp{ border-bottom: 1px solid #d2d2d2; width: 100%; overflow: hidden; }
+.my_lv .sp a{ width: 50%; border-left: 1px solid #d2d2d2; float: left; text-align: center; margin: 15px 0 15px -1px;}
+.my_lv em, .my_lv li a { display: block;}
+.my_lv em { float: left; font-style: normal; padding-left: 5px; font-size: 14px}
+.my_lv li { overflow: hidden; border-bottom: 1px solid #d2d2d2; position:relative; }
+.my_lv li a { padding: 7px 7px 7px 15px; height:30px; line-height: 30px; overflow: hidden}
+.ic_enval { border-radius: 15px; position: absolute; margin-top: -2px; right: 30px; border: 1px solid #bcbcbc}.ic_enval i { border: 2px solid #fff; background: #014464; background: -moz-linear-gradient(top, #f98389, #ea3039 50%, #ea151f 51%, #cc0307); background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #f98389), color-stop(.5, #ea3039), color-stop(.5, #ea151f), to(#cc0307)); -moz-border-radius: 90px; -webkit-border-radius: 90px; border-radius: 90px; color: #fff; font-weight: bold; padding: 0 7px; font-style: normal; display: block}

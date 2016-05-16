@@ -1,0 +1,153 @@
+<extend name="Public/base"/>
+
+<block name="sidebar"></block>
+
+<block name="style">
+    <style>
+        body{padding: 0}
+        .schedule{
+			 background-color: #EEEEEE;
+		    border: 1px solid #666666;
+		    display: block;
+		    height: 20px;
+		    width: 90%;
+        	float: left;
+        }
+        .schedule_do{
+			background-color: #008000;
+		    display: block;
+		    height: 20px;
+        	float: left;
+        }
+    </style>
+</block>
+
+<block name="body">
+    <!-- 主体 -->
+    <div id="indexMain" class="index-main">
+       <!-- 插件块 -->
+       <div class="container-span">
+           <!-- no end -->
+           <if condition="$delay">
+           <div class="span">
+			    <div class="columns-mod">
+			        <div class="hd cf">
+			            <h5 style="color:red;">未完成任务</h5>
+			            <div class="title-opt"></div>
+			        </div>
+			        <div class="bd" style="height:auto;">
+			            <div class="sys-info">
+			                <table>
+			                    <tr>
+			                        <th>任务</th>
+			                        <th style="width:15%">责任人</th>
+                                    <th style="width:30%">进度</th>
+                                    <th style="width:10%">操作</th>
+			                    </tr>
+			                    <volist name="delay" id="task">
+			                    <tr>
+                                    <td style="color:red;"><a href="{:U('Task/finish_delay?id='.$task['id'])}">{$task.name}&nbsp;[{$task.days}D]</a></td>
+                                    <td>{$task.people}</td>
+                                    <td><span class="schedule" style="border:1px solid red;"><i class="schedule_do" style="width:{$task.schedule}%">{$task.delay_time}</i></span>{$task.schedule}%</td>
+                                    <td><a href="{:U('Task/finish_delay?id='.$task['id'])}"><b>完成</b></a></td>
+                                </tr>
+                                </volist>
+			                </table>
+			            </div>
+			        </div>
+			    </div>
+			</div>
+			</if>
+           <!-- today -->
+           <div class="span4">
+                <div class="columns-mod">
+                    <div class="hd cf">
+                        <h5>今天（{$today_date}）任务</h5>
+                        <div class="title-opt"><a href="{:U('Task/add')}" title="创建任务"><b>+</b></a></div>
+                    </div>
+                    <div class="bd" style="height:auto;">
+                        <div class="sys-info">
+                            <table>
+                                <tr>
+                                    <th>任务</th>
+                                    <th style="width:15%">责任人</th>
+                                    <th style="width:30%">进度</th>
+                                    <th style="width:10%">操作</th>
+                                </tr>
+                                <volist name="today" id="task">
+                                <tr>
+                                    <td >
+                                    <if condition="$task.status eq 1">
+                                    <a href="{:U('Task/add?id='.$task['id'])}">{$task.name}&nbsp;[{$task.days}D]</a>
+                                    <else/>
+                                    {$task.name}&nbsp;[{$task.days}D]
+                                    </if>
+                                    </td>
+                                    <td>{$task.people}</td>
+                                    <td><span class="schedule"><i class="schedule_do" style="width:{$task.schedule}%"></i></span>{$task.schedule}%</td>
+                                    <td>
+                                        <if condition="$task.status eq 1">
+                                        <a href="{:U('Task/finish?id='.$task['id'])}" class="ajax-get"><b>完成</b></a>
+                                        <a href="{:U('Task/del?id='.$task['id'])}" style="color:#666;" class="ajax-get">删除</a>
+                                        </if>
+                                    </td>
+                                </tr>
+                                </volist>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           <!-- nextday -->
+           <if condition="$tomorrow_date">
+           <div class="span4">
+                <div class="columns-mod">
+                    <div class="hd cf">
+                        <h5>明天（{$tomorrow_date}）任务</h5>
+                        <div class="title-opt"></div>
+                    </div>
+                    <div class="bd" style="height:auto;">
+                        <div class="sys-info">
+                            <table>
+                                <tr>
+                                    <th>任务</th>
+                                    <th style="width:15%">责任人</th>
+                                    <th style="width:30%">进度</th>
+                                    <th style="width:10%">操作</th>
+                                </tr>
+                                <volist name="tomorrow" id="task">
+                                <tr>
+                                    <td ><a href="{:U('Task/add?id='.$task['id'])}">{$task.name}&nbsp;[{$task.days}D]</a></td>
+                                    <td>{$task.people}</td>
+                                    <td><span class="schedule"><i class="schedule_do" style="width:{$task.schedule}%"></i></span>{$task.schedule}%</td>
+                                    <td>
+                                        <a href="{:U('Task/del?id='.$task['id'])}" style="color:#666;" class="ajax-get">删除</a>
+                                    </td>
+                                </tr>
+                                </volist>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </if>
+       </div>
+    </div>
+</block>
+
+<block name="script">
+<script type="text/javascript">
+    /* 插件块关闭操作 */
+    $(".title-opt .wm-slide").each(function(){
+        $(this).click(function(){
+            $(this).closest(".columns-mod").find(".bd").toggle();
+            $(this).find("i").toggleClass("mod-up");
+        });
+    })
+    $(function(){
+        // $('#main').attr({'id': 'indexMain','class': 'index-main'});
+        $('.copyright').html('<div class="copyright"> ©2014 <a href="http://www.66mate.com" target="_blank">www.66mate.com</a> 上海路件科技有限公司版权所有</div>');
+        $('.sidebar').remove();
+    })
+</script>
+</block>

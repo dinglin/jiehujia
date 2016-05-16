@@ -1,0 +1,16 @@
+<div style="width:166px;" class="fl">
+      <div class="SideBar">
+        <ul class="ul_bullet">
+          <!---是当前页的时候li的class使用Curr,比如（<li class="Curr">）-->
+          <li class="<if condition="$nav eq 'about'">Curr</if>"><a href="{:U('Other/about')}">关于上海户外网</a></li>
+          <li class="<if condition="$nav eq 'copyright'">Curr</if>"><a href="{:U('Other/copyright')}">版权声明</a></li>
+          <li class="<if condition="$nav eq 'privacy'">Curr</if>"><a href="{:U('Other/privacy')}">隐私保护</a></li>
+          <ul class="ul_bullet">
+            <li class="<if condition="$nav eq 'events'">Curr</if>"><a href="{:U('Other/events')}">户外活动</a></li>
+          </ul>
+          <li class="<if condition="$nav eq 'links'">Curr</if>"><a href="{:U('Other/links')}">友情链接</a></li>
+          <li class="<if condition="$nav eq 'contact'">Curr</if>"><a href="{:U('Other/contact')}">联系我们</a></li>
+          <li class="<if condition="$nav eq 'job'">Curr</if>"><a href="{:U('Other/job')}">工作机会</a></li>
+        </ul>
+      </div>
+    </div>

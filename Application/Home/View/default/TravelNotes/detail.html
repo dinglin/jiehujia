@@ -1,0 +1,76 @@
+<extend name="Base/travelnotes"/>
+
+<block name="style">
+<link href="__CSS__/strategy_0213.css" type="text/css" rel="stylesheet" />
+<link href="__CSS__/base.css" type="text/css" rel="stylesheet" />
+</block>
+
+
+<block name="content">
+    
+<div class="wrap_guide" style="margin-top: 64px;">
+  <div class="strategy clearfix">
+  
+    <div class="strategy_left">
+      <h1>{$info.title}</h1>
+      <h5>{$info.nickname} 发表于 {$info.add_time}，来源：</h5>
+      <h5>已有<span id="hits">{$info.clicknum}</span>次浏览， <span id="commentCount">{$info.comment_num}</span> 条评论 </h5>
+      <div class="strategy_introd">
+        <dl>
+          <dt>攻略导读：</dt>
+          <dd>{$info.description}</dd>
+        </dl>
+        <dl>
+          <dt>关键词：</dt>
+          <dd>{$info.keywords}</dd>
+        </dl>
+      </div>
+	  
+	  
+      <div class="strategy_prod">
+        {$info.content}
+      </div>
+      <!--prod-->
+      <div class="strategy_share">
+        <div class="share_box">
+
+        </div>
+        <p> 版权申明： <br/>
+          ① 本网转载其他媒体稿件是为传播更多的信息，此类稿件不代表本网观点，本网不承担此类稿件侵权行为的连带责任。 <br/>
+          ② 在本网本稿发表言论者，不代表本网评论，文责自负。 <br/>
+          ③ 如您因版权等问题需要与本网联络，请在30日内联系我们。 <br/>
+          特别注意：本站所提供的摄影照片，插画，设计作品，如需使用，请与原作者联系，版权归原作者所有 </p>
+      </div>
+      <!--share-->
+      <div style="margin-top:5px;"> {:hook('documentDetailAfter',$info)} </div>
+
+
+    </div>
+    <!--left-->
+    <div class="strategy_right"> 
+
+	
+	   <div class="gl_recommend_box" id="block_show_pos_2_info_show">
+	    		  <h2 class="right_tit">活动推荐</h2>
+			<div class="gl_recommend_cont">
+				<a href="javascript:" target="_blank" rel="nofollow">
+					 <img src="__IMG__/20140616042342151.jpg" width="210" height="105" alt="【免费体验】海底世界+水世界" />
+					 <em title="【免费体验】海底世界+水世界">【免费体验】海底世界+水世界</em>
+					 <p title="无水不夏天！海底世界和水世界，High翻初夏！参与写点评，即有机会免费水狂欢！而且机会大大滴！">无水不夏天！海底世界和水世界，High翻初夏！参与写点评，即有机会免费水狂欢！而且机会大大滴！</p>
+				</a>
+			</div>
+	  </div> 
+	  <div class="gl_recommend_box product_box" id="topProduct2" number="10"></div>
+	  
+	
+    </div>
+    <!--right-->
+    <!--addnewend-->
+  </div>
+</div>
+
+    <script>
+        
+    </script>
+    
+</block>

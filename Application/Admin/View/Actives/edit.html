@@ -1,0 +1,213 @@
+<extend name="Public/base" />
+
+<block name="body">
+    <script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+	<!-- 标题栏 -->
+		<div class="tab-wrap">
+		<ul class="tab-nav nav">
+		<li class="current"><a href="javascript:">基本信息</a></li>
+		</ul>
+		<div class="tab-content">
+	<!-- 修改密码表单 -->
+    <form action="{:U('Actives/edit')}" method="post" class="form-horizontal" autocomplete="off">
+		 <div class="form-item">
+            <label class="item-label">活动名<span class="check-tips">（活动名会作为默认的活动名）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="title" value="{$data.title}">
+            </div>
+        </div>
+        
+        <div class="form-item cf">
+            <label class="item-label">所属俱乐部<span class="check-tips"></span></label>
+            <div class="controls">
+                <select name="club_id">
+                    <volist name="club" id="vo">
+                            <option value="{$vo.club_id}" <if condition="$data.club_id eq $vo.club_id ">selected="selected"</if>>{$vo.club_name}</option>                               
+                   </volist>
+                </select>                    
+            </div>
+        </div>
+        
+        <div class="form-item cf">
+            <label class="item-label">领队<span class="check-tips"></span></label>
+            <div class="controls">
+                <select name="guide_id">
+                    <option value="0">选择领队</option>
+                    <volist name="guides" id="vo">
+                            <option value="{$vo.cuser_id}" <if condition="$data.guide_id eq $vo.cuser_id ">selected="selected"</if>>{$vo.nick_name}</option>                               
+                   </volist>
+                </select>                    
+            </div>
+        </div>
+        
+               <div class="form-item cf">
+                    <label class="item-label">缩略图<span class="check-tips">（0-无缩略图，大于0-缩略图片ID，需要函数处理）</span></label>
+                    <div class="controls">
+                        <div class="controls">
+									<input type="file" id="upload_picture_logo">
+									<input type="hidden" name="logo" id="cover_id_logo" value="{$data.list_pic}" />
+									<div class="upload-img-box">
+										<notempty name="data.list_pic">
+										<div class="upload-pre-item">
+										<img src="{$data.list_pic}"/>
+										</div>
+									</notempty>									</div>
+								</div>
+									<script type="text/javascript">
+								//上传图片
+							    /* 初始化上传插件 */
+								$("#upload_picture_logo").uploadify({
+							        "height"          : 30,
+							        "swf"             : "__STATIC__/uploadify/uploadify.swf",
+							        "fileObjName"     : "download",
+							        "buttonText"      : "上传图片",
+							        "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+							        "width"           : 120,
+							        'removeTimeout'	  : 1,
+							        'fileTypeExts'	  : '*.jpg; *.png; *.gif;',
+							        "onUploadSuccess" : uploadPicturelogo,
+                                    'onFallback' : function() {
+                                        alert('未检测到兼容版本的Flash.');
+                                    }
+							    });
+								function uploadPicturelogo(file, data){
+							    	var data = $.parseJSON(data);
+							    	var src = '';
+							        if(data.status){
+							        	$("#cover_id_logo").val(data.id);
+							        	src = data.url || '__ROOT__' + data.path;
+							        	$("#cover_id_logo").parent().find('.upload-img-box').html(
+							        		'<div class="upload-pre-item"><img src="' + src + '"/></div>'
+							        	);
+							        } else {
+							        	updateAlert(data.info);
+							        	setTimeout(function(){
+							                $('#top-alert').find('button').click();
+							                $(that).removeClass('disabled').prop('disabled',false);
+							            },1500);
+							        }
+							    }
+								</script>                    </div>
+                </div>
+        
+        <div class="form-item cf">
+            <label class="item-label">开始时间<span class="check-tips">（0-永久有效）</span></label>
+            <div class="controls">
+                <input type="text" name="start_time" class="text input-large time" value="{$data.start_time|date='Y-m-d H:i',###}" placeholder="请选择时间">                    </div>
+        </div>
+        
+        <div class="form-item cf">
+            <label class="item-label">结束时间<span class="check-tips">（0-永久有效）</span></label>
+            <div class="controls">
+                <input type="text" name="end_time" class="text input-large time" value="{$data.end_time|date='Y-m-d H:i',###}" placeholder="请选择时间">                    </div>
+        </div>
+        
+        <div class="form-item">
+            <label class="item-label">出发地<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="departure" value="{$data.departure}">
+            </div>
+        </div>
+        
+        <div class="form-item cf">
+            <label class="item-label">省份<span class="check-tips"></span></label>
+            <div class="controls">
+                <select name="province_id">
+                    <option value="0">选择省份</option>
+                    <volist name="provinces" id="vo">
+                            <option value="{$vo.region_id}" <if condition="$data.province_id eq $vo.region_id ">selected="selected"</if>>{$vo.region_name}</option>                               
+                   </volist>
+                </select>                    
+            </div>
+        </div>
+        
+        <div class="form-item">
+            <label class="item-label">目的地<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="destination" value="{$data.destination}">
+            </div>
+        </div>
+        
+        <div class="form-item">
+            <label class="item-label">报名上限<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="people_limit" value="{$data.people_limit}">
+            </div>
+        </div>
+        
+        <div class="form-item">
+            <label class="item-label">价格<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="price" value="{$data.price}">
+            </div>
+        </div>
+        
+        <div class="form-item">
+            <label class="item-label">儿童价<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="price_child" value="{$data.price_child}">
+            </div>
+        </div>
+        
+        <div class="form-item cf">
+            <label class="item-label">报名结束时间<span class="check-tips">（0-永久有效）</span></label>
+            <div class="controls">
+                <input type="text" name="end_apply" class="text input-large time" value="{$data.end_apply|date='Y-m-d H:i',###}" placeholder="请选择时间">                    </div>
+        </div>
+        
+        <div class="form-item">
+            <label class="item-label">seo关键词<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="seo_kwords" value="{$data.seo_kwords}">
+            </div>
+        </div>
+        
+        <div class="form-item">
+            <label class="item-label">来源网址<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="from_url" value="{$data.from_url}">
+            </div>
+        </div>
+        
+        <div class="form-item">
+            <label class="item-label">内容<span class="check-tips"></span></label>
+            <div class="controls">
+                <label class="textarea">
+                <textarea name="content">{$data_content.content}</textarea>
+                {:hook('adminArticleEdit', array('name'=>'content','value'=>$data_content['content']))}
+                </label>
+            </div>
+        </div>
+		<div class="form-item">
+			<button type="submit" class="btn submit-btn ajax-post" target-form="form-horizontal">确 认</button>
+			<button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+		</div>
+        <input type="hidden" name="id" value="{$data.active_id}"/>
+	</form>
+			</div>
+	</div>
+</block>
+
+<block name="script">
+      <link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+<php>if(C('COLOR_STYLE')=='blue_color') echo '<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">';</php>
+<link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+<script type="text/javascript">
+$(function(){
+    $('.time').datetimepicker({
+        format: 'yyyy-mm-dd hh:ii',
+        language:"zh-CN",
+        minView:2,
+        autoclose:true
+    });
+
+});
+</script>
+<script type="text/javascript">
+        //导航高亮
+        highlight_subnav('{:U('Actives/index')}');
+    </script>
+	<script src="__STATIC__/thinkbox/jquery.thinkbox.js"></script>
+</block>

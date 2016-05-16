@@ -1,0 +1,51 @@
+# Created by .gitignore support plugin (hsz.mobi)
+
+### Eclipse template
+*.pydevproject
+.metadata
+.gradle
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+*.project
+*.classpath
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# CDT-specific
+.cproject
+
+# PDT-specific
+.buildpath
+
+# sbteclipse plugin
+.target
+
+# TeXlipse plugin
+.texlipse
+
+*.iml
+.idea/
+
+# apple
+.DS_Store
+
+#windows
+*Thumbs.db
+
+# jiehujia
+Runtime/Cache/*
+Runtime/Data/*
+Runtime/Logs/*
+Runtime/Temp/*
+!*.keep

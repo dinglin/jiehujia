@@ -1,0 +1,107 @@
+<extend name="Public/base" />
+
+<block name="body">
+	<!-- 标题栏 -->
+	<div class="main-title">
+		<h2>活动列表</h2>
+	</div>
+	<div class="cf">
+		<div class="fl">
+            <a class="btn" href="{:U('Actives/index')}">返回</a>
+        </div>
+    </div>
+    <!-- 数据列表 -->
+    <div class="data-table table-striped">
+	<table class="">
+    <thead>
+        <tr>
+		<th class="">ID</th>
+		<th class="">俱乐部</th>
+		<th class="">域名</th>
+		<th class="">最后更新时间</th>
+		<th class="">操作</th>
+		</tr>
+    </thead>
+    <tbody>
+		<notempty name="data">
+		<volist name="data" id="vo">
+		<tr>
+			<td>{$vo.id} </td>
+			<td class="title">{$vo.name}</td>
+			<td>{$vo.domain}</td>
+			<td><span>{$vo.last_update|time_format}</span></td>
+			<td class="option">
+				<a href="{:U('Spider/loadActiveList?id='.$vo['id'])}" class="ajax-get">更新</a>
+            </td>
+		</tr>
+		</volist>
+		<else/>
+		<td colspan="9" class="text-center"> aOh! 暂时还没有内容! </td>
+		</notempty>
+	</tbody>
+    </table>
+	</div>
+</block>
+
+<block name="script">
+	<script src="__STATIC__/thinkbox/jquery.thinkbox.js"></script>
+
+	<script type="text/javascript">
+    //导航高亮
+    highlight_subnav("{:U('Actives/index')}");
+	</script>
+	
+	<script type="text/javascript">
+	function get_view_data(target,object){
+		$(object).text("读取中...");
+		$(object).css("color","green");
+		$var = $(object).attr('doing');
+		if(!$var){
+		    $.get(target).success(function(data){
+	            if (data.status==1) {
+	                $title = $(object).parent().parent().children(".title");
+	                $title.text(data.info);
+	                $(object).hide();
+	            }else{
+	                $(object).css("color","red");
+	                $(object).text("读取单页");
+	                $(object).attr('doing',0);
+	            }
+	        });
+		}
+	}
+	$('.ajax-spider').click(function(){
+        var target;
+        var that = this;
+        if ( target = $(this).attr('href') ) {
+            get_view_data(target,that);
+        }
+        return false;
+    });
+	$('.ajax-spider-post').click(function(){
+		if($(".ids:checked").length > 0){
+			$(".ids:checked").each(function(){
+		        var id = $(this).val();
+		        var target = '/index.php?s=/Admin/Spider/doSpider/method/loadActive/id/'+id+'.html';
+		        var obj = $(this).parent().parent().children('.option').children(".ajax-spider");
+		        get_view_data(target,obj[0]);
+		    });
+		}else{
+			updateAlert("没有选择活动！");
+			setTimeout(function(){
+				$('#top-alert').find('button').click();
+            },1500);
+		}
+	});
+	$('.ajax-spider-refrash').click(function(){
+		if ( target = $(this).attr('url') ) {
+			$.get(target).success(function(data){
+				setTimeout(function(){
+                    location.reload();
+                },1500);
+            });
+        }
+	});
+	
+	</script>
+</block>

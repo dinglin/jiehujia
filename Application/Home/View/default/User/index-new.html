@@ -1,0 +1,450 @@
+<!DOCTYPE html PUBLIC >
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>介护家老云平台</title>
+    <link rel="stylesheet" href="__CSS__/index/bootstrap.css">
+    <link rel="stylesheet" href="__CSS__/index/index.css">
+    <link rel="stylesheet" href="__CSS__/index/welcome.css">
+
+<style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style></head>
+<body class="wid_1130" style="background: #edf0f2 url(__IMG__/index/left_bg.jpg) repeat-y 0px 0px; overflow:hidden;">
+<div class="header">
+    <div class="logo fl"><a href="javascript:void(0);"><img src="__IMG__/index/logo_2.png" height="33px" alt="介护家智慧养老云平台" title="介护家智慧养老云平台"></a></div>
+    <div class="fr">
+        
+       
+        
+        <div class="login_box pull-right btn-group">
+            <p class="dropdown-toggle"><span>Admin</span><i class="arrow_down"></i></p>
+            <ul class="dropdown-menu-header" style="display: none;">
+                  <li><a href="javascript:void(0);" onclick="linkToMain(this,'/index.php?s=/home/user/profile.html')"  target="_blank" style="text-decoration: none;">个人信息</a></li>
+                  <li><a href="javascript:void(0);" onclick="linkToMain(this,'/index.php?s=/home/user/changepwd.html')"  target="_blank" style="text-decoration: none;">修改密码</a></li>
+                  <li><a href="/index.php?s=/home/user/logout.html"   style="text-decoration: none;">安全退出</a></li>
+            </ul>
+        </div>
+
+        <div class="mes pull-right" onclick="showUrgent()">
+            <em class="amount_tip" id="orderRemaindNum">0</em>
+            <a href="javascript:void(0);"></a>        
+        </div>
+        <div class="mes advice pull-right" id="feed_back">意见<br>反馈</div>
+        <div class="login_box pull-right">
+            <p class="dropdown-toggle"><span>Admin</span><i class="arrow_down"></i></p>
+            <notempty name="ngs">
+            <ul class="dropdown-menu-header" style="display: none;">
+                <volist name="ngs" id="vo" key="k">
+                <li><a href="javascript:void(0);"   style="text-decoration: none;">{$vo.name}</a></li>
+                </volist>
+            </ul>
+            </notempty>
+        </div>
+         <!-- Load CTI -->
+    </div>
+
+</div>
+
+<div id="mainFrame">
+    
+    <div class="left_menu fl" style="margin-top: 0px;">
+    
+        <div>
+        <div class="left_dotted"></div>
+            
+            
+            
+                <ul class="second_left" style="display: block;">
+                        
+                            
+                            <li class="center on"><a href="javascript:void(0);" onclick="linkToMain(this,&#39;{:U('Temp/appcenter')}&#39;)"><i class="icon_center"></i><span>应用中心</span></a></li>
+                            
+                        
+                            
+                            <li class="account"><a href="javascript:void(0);" onclick="linkToMain(this,&#39;{:U('Temp/acount')}&#39;)"><i class="icon_account"></i><span>账户总览</span></a></li>
+                            
+                        
+                            
+                            <li class="multisite"><a href="javascript:void(0);" onclick="linkToMain(this,&#39;{:U('Temp/service')}&#39;)"><i class="icon_multisite"></i><span>服务站管理</span></a></li>
+                            
+                        
+                            
+                            <li class="num"><a href="javascript:void(0);" onclick="linkToMain(this,&#39;{:U('Temp/acount')}&#39;)"><i class="icon_num"></i><span>账号管理</span></a></li>
+                            
+                        
+                            
+                            <li class="mem"><a href="javascript:void(0);" onclick="linkToMain(this,&#39;{:U('Temp/vip')}&#39;)"><i class="icon_mem"></i><span>会员管理</span></a></li>
+                            
+                        
+                            
+                            <li class="employee"><a href="javascript:void(0);" onclick="linkToMain(this,&#39;{:U('Temp/employee')}&#39;)"><i class="icon_employee"></i><span>员工管理</span></a></li>
+                            
+                        
+                            
+                            <li class="ability"><a href="javascript:void(0);" onclick="linkToMain(this,&#39;{:U('Temp/capability')}&#39;)"><i class="icon_ability"></i><span>能力评估</span></a></li>
+                            
+                        
+                            
+                            <li class="heal_file"><a href="javascript:void(0);" onclick="linkToMain(this,&#39;{:U('Temp/healthy')}&#39;)"><i class="icon_heal_file"></i><span>健康档案</span></a></li>
+                            
+                        
+                            
+                            <li class="call_alarm"><a href="javascript:void(0);" onclick="linkToMain(this,&#39;{:U('Temp/alarm')}&#39;)"><i class="icon_call_alarm"></i><span>呼叫报警</span></a></li>
+                            
+                        
+                </ul>
+            
+        </div>
+    </div>
+    <div class="right_main fl" style="width: 1105px;">
+        <!-- 用户到期提示用的  -->
+        <p class="bgfcfaf2" style="" id="module_expire_p1">
+            <font class="marquee" id="moduleName" style="right: 182px;"><span style="" class="right400"><i class="icon_alert"></i>您还没有实名，<a hrefs="/cloud-portal/auth/auditProcess" target="_blank">立即认证</a>，享受更多免费模块！</span></font></p>
+        
+        <div id="div_pannel" style="height: 454px;">
+            <iframe src="" frameborder="0" width="100%" height="100%" name="mainf" id="mainf" border="0"></iframe>
+        </div>
+
+    </div>
+</div>
+
+<div id="feed_back_dialog"></div>
+
+<!--紧急提醒-->
+<div id="urgentAlert" class="fenceAlert urgentAlert">
+    
+
+
+
+
+
+
+
+
+
+
+<p class="color66">
+    <a href="javascript:void(0);" class="on">紧急工单</a>
+    <a href="javascript:void(0);" class=" ml_15">无人可指派</a>
+    <span class="pull-right close_icon" onclick="hideUrgent()"></span>
+</p>
+<div class="pop_content">
+    <form id="orderInfoHidden">
+        <input type="hidden" name="orderRemaindNum" value="">
+    </form>     
+    <table class="table table-hover table-bordered table_0">
+        <thead>
+            <tr><th>工单编号</th>
+            <th>申请人</th>
+            <th>剩余时间</th>
+        </tr></thead>
+        <tbody>
+            
+                <tr>
+                    <td colspan="9">暂无数据</td>
+                </tr>
+            
+            
+        </tbody>
+    </table>
+    <table class="table table-hover table-bordered table_1" style="display: none;">
+        <thead>
+            <tr><th>工单编号</th>
+            <th>申请人</th>
+            <th>剩余时间</th>
+        </tr></thead>
+        <tbody>
+            
+                <tr>
+                    <td colspan="9">暂无数据</td>
+                </tr>
+            
+            
+        </tbody>
+    </table>
+</div>
+
+</div> 
+
+<input type="hidden" id="isSosAndFall_auth" value="1"><!-- 是否有呼救报警权限 0:没有,1:有-->
+
+<script type="text/javascript" src="__JS__/jquery/jquery-1.8.3.min.js"></script>
+<script>
+$(function(){
+    $(".login_box").mouseover(function(){
+        $(this).find(".dropdown-menu-header").show();
+    });
+    $(".login_box").mouseout(function(){
+        $(this).find(".dropdown-menu-header").hide();
+    });
+});
+// 跨域实现
+
+$("#mainf").attr("src", "{:U('Temp/appcenter')}");
+function linkToMain(obj,url){
+    url=url+"&r="+Math.random();
+    $("#mainf").attr("src", url);
+    
+    $("ul.second_left li").removeClass("on");
+    $(obj).parent().addClass("on");
+}
+
+$(".right_main").width($(document.body).width()-180);
+    //内容页刷新链接
+    var contentUrl = "/cloud-portal/order/myAppCenter";
+    var tag = '0';//目标页面tag
+    var tagName = '';//目标页面tag
+    var _defaultSite = '';//账户设置的默认站点
+
+    function initPage(pageIndex,pageSize,total){
+        //分页，PageCount是总条目数，这是必选参数，其它参数都是可选
+        $("#chosesite_pagination").pagination(total, {
+            callback: PageCallback1,
+            link_to:"javascript:InitTable(__id__)",
+            prev_text: '上一页',       //上一页按钮里text
+            next_text: '下一页',       //下一页按钮里text
+            items_per_page: pageSize,  //显示条数
+            num_display_entries: 6,    //连续分页主体部分分页条目数
+            current_page: pageIndex-1,   //当前页索引
+            num_edge_entries: 2        //两侧首尾分页条目数
+        });
+        //翻页调用
+        function PageCallback1(index, jq) {
+            return true;
+          //  InitTable(index);
+        }
+    }
+    //请求数据
+    function InitTable(pageIndex) {
+        var province = $("input[name='province']").val();
+        var city = $("input[name='city']").val();
+        var area = $("input[name='area']").val();
+        pageIndex = parseInt(pageIndex)+1;
+        
+        $.ajax({
+            type: 'POST',
+            url: "/cloud-portal/station/accountStationList",
+            data: {
+                province:province,
+                city:city,
+                area:area,
+                page:pageIndex,
+                pageSize:5
+            },
+            dataType: "json",
+            success:function(data){
+                var stations=data.serviceStations;
+                if(stations!=null&&stations.length>0&&data.totalCount>0){
+                    $("#choseStationTb").empty();
+                    for(var i=0;i<stations.length;i++){
+                        var $tr =$('<tr>'+'<td onclick="tableTdchooseRC(this)"><input type="radio" index="'+i+'" name="site" value="'+stations[i].serverStationCode+'"></td>'
+                                +'<td onclick="tableTdchooseRC(this)"  class="ellipsis">'+stations[i].serverStationName+'</td>'
+                                +'<td onclick="tableTdchooseRC(this)">'+stations[i].provinceName+'</td>'
+                                +'<td onclick="tableTdchooseRC(this)">'+stations[i].cityName+'</td>'
+                                +'<td onclick="tableTdchooseRC(this)">'+stations[i].areaName+'</td>'+'</tr>');
+                        $("#choseStationTb").append($tr)
+                    }
+                    initPage(data.pageNum,data.pageSize,data.totalCount);
+                }else{
+                    $("#choseStationTb").html('<tr><td colspan="5" style="text-align: center">暂无数据</td></tr>');
+                    $("#chosesite_pagination").empty();
+                }
+                
+            }
+        });
+    }
+
+    //记住站点
+    function rememberSt(){
+        //获取选中的站点
+        var chkSt = $("input[name=site]:checked").val() == undefined ? "" : $("input[name=site]:checked").val();
+   
+        if((_defaultSite != "" && _defaultSite != "0" && _defaultSite == null) || (chkSt !="" && chkSt != null && chkSt != undefined)){
+            //如果内容链接不为空，继续加载内容
+            if(contentUrl != ""){
+               //websocket 重新注册
+              /* var is_sos_auth = $("#isSosAndFall_auth").val();
+               console.info("is_sos_auth:"+is_sos_auth);
+               if(is_sos_auth == 1){
+                  leave();
+                  $("#websocket_server_station_code").val(chkSt);
+                  listen("alarm_"+chkSt,callBack);
+               }
+ */
+                CreateDiv(tag,contentUrl+'?station='+chkSt,tagName);
+                contentUrl = "";
+            }
+            hideWhere();
+        }
+    }
+
+    function changeSt(_this){
+        var chkSt = $(_this).attr("stCode");
+
+        setOtherSite(_this);
+        $("#currentSt").find("input").val(chkSt);
+ 
+        //websocket 重新注册
+       var is_sos_auth = $("#isSosAndFall_auth").val();
+       //console.info("is_sos_auth:"+is_sos_auth);
+       if(is_sos_auth == 1){
+            leave();
+             $("#websocket_server_station_code").val(chkSt);
+             //console.info("listen:"+chkSt);
+             listen("alarm_"+chkSt,callBack);
+       }
+ 
+       var mainfUrl=document.getElementById("mainf").contentWindow.location.href
+        contentUrl=mainfUrl;
+       var index=mainfUrl.indexOf("?");
+ 
+       if(index>0){
+        contentUrl=contentUrl.substring(0,index); 
+       }
+        //设置默认站点，完成后加载菜单主页
+        $.post("/cloud-portal/module/rememberStation",{"_pt":chkSt}, function(result){
+            $("#mainf").attr("src", contentUrl+'?station='+chkSt);
+        });
+
+    }
+
+    //初始化页面参数
+    function initContextPram(_tag, _tagName, freshUrl){
+        tag = _tag;
+        tagName = _tagName;
+        contentUrl = freshUrl;
+    }
+
+    //搜索框
+    $("#queryButton").click(function(){
+        InitTable(0);
+    });
+    
+    $(function(){
+        var accountType = 2;
+        if (accountType!=1){
+            $("#personInfo").css("display","none");
+        }
+    });
+    //意见反馈
+    $("#feed_back").click(function(){
+        var moduleName = "";
+        $(".second_left").children("li").each(function(){
+            var reg = /^[a-zA-z]+[ ]{1}(on){1}$/gi;
+            if(reg.test($(this).attr("class"))){
+                moduleName = $(this).children("a").children("span").html();
+                return false;//跳出each循环
+            }
+        })
+    });
+
+    //显示紧急信息
+    function showUrgent(){
+        if($("#urgentAlert:visible").length==1){
+            $("#urgentAlert").fadeOut();
+        }else{
+            $("#urgentAlert").fadeIn(300)
+        }
+    }
+    //隐藏紧急信息
+    function hideUrgent(){
+        $("#urgentAlert").fadeOut();
+    }
+    
+    //紧急工单和app工单切换
+    $("#urgentAlert>p>a").live("click",function(){
+        $(this).addClass("on").siblings("a").removeClass("on");
+        var i= $(this).index();
+        $(".table_"+i).show().siblings("table").hide();
+        $("#urgentAlert .pop_content").scrollTop(0);
+    })
+    
+    
+  //显示弹框
+    function showPop(obj,className){
+        $(".zhy_zhezhao_pop").show();
+        var top = document.body.scrollTop||document.documentElement.scrollTop;
+        var this_h = $("." + className).height();
+        var win_h = ($('html',parent.document).height()-this_h-100)/2
+        // console.log("top="+top+";win_h="+win_h);
+        $(".zhy_zhezhao_pop").height($("html").height());
+        var this_h = $("." + className).height();
+        top= top +win_h;
+        $("." + className).css("top", top).show();
+    }
+  
+    // 隐藏修改弹框
+    function hidePop() {
+        $(".zhy_zhezhao_pop").hide();
+        $(".zhy_popa").hide();
+    }
+</script>
+
+
+
+
+
+
+
+    
+
+
+
+<!--弹框呼救-->
+ <div class="zhy_popa callForHelp3" style="width: 525px;margin-left: -262px;">
+  <p class="color66">跌倒警报<span class="pull-right close_icon" onclick="hidePop()"> </span></p>
+  <div class="pop_content call_sos_content">
+    <div style="height: 20px;"></div>
+    <div class="member_img">
+        <img src="__IMG__/index/touxiang.jpg" id="touxiang_fall" width="90">
+    </div>
+    <p id="personName_fall">张三</p>
+    <p class="sos_text">跌倒报警提醒</p>
+    <div style="height: 20px;"></div>
+    <div class="operate_btn "> 
+        <button id="chakan_fall" sos_id="" type="button" class="btn cancle_yes" onclick="chakan_fall();">查看</button>
+        <button type="button" class="btn cancle_btn " onclick="hidePop()">忽略</button>
+    </div>
+  </div>
+</div>
+
+<!--呼救提醒-->
+<div id="fallAlert" class="fenceAlert">
+  <p class="color66">跌倒报警<span class="pull-right close_icon"> </span></p>
+  <div class="pop_content">
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr><th>跌倒时间</th>
+            <th>跌倒人员</th>
+            <th>操作</th>
+        </tr></thead>
+        <tbody id="fallReportInfo">
+        </tbody>
+    </table>
+    <a href="javascript:void(0);" onclick="findFallInfo();" class="colorblue pl55">查看未处理警报</a>
+    <div class="row text-center">
+        <div id="fall_pagination" class="pagination">
+        </div>
+    </div>
+  </div>
+</div> 
+ 
+<script type="text/javascript"> function callBack(data){var obj=eval('(' + data + ')');var type = obj.type;var sos_Id = obj.id;if(type == 0){}else if(type == 1){}else if(type == 2){$('#touxiang_fall').attr('src',obj.avatar);$('#personName_fall').text(obj.name);$('#chakan_fall').attr('sos_Id',sos_Id);showPop(null,'callForHelp3');InitTable_Fall(0);}}</script>
+
+<script type="text/javascript"> function callBack(data){var obj=eval('(' + data + ')');var type = obj.type;var sos_Id = obj.id;if(type == 0){}else if(type == 1){}else if(type == 2){$('#touxiang_fall').attr('src',obj.avatar);$('#personName_fall').text(obj.name);$('#chakan_fall').attr('sos_Id',sos_Id);showPop(null,'callForHelp3');InitTable_Fall(0);}}</script>
+
+</body></html>

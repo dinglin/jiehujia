@@ -1,0 +1,151 @@
+<extend name="Base/index"/>
+<block name="content">
+<link href="__CSS__/tanchu.css" type="text/css" rel="stylesheet" />
+<div id="content_index" class="clearfix">
+    <div class="a_c pd_30_0"><a><img src="__IMG__/index_info.jpg" width="620" alt="上海户外" title="" /></a></div>
+    <div class="index_select clearfix mg_b_60">
+        <div class="f_l" id="sequence">
+		    <ul class="sequence-canvas">
+		      <volist name="banners" id="ban">
+		        <li class="banners_click {$i?'':'animate-in'}" style="{$i?'':'z-index:3;'}" href="{$ban.link}">
+		            <img alt="{$ban.title}" src="{$ban.src}" width="576" >
+		            <h2 style="">{$ban.title}</h2>
+		        </li>
+		      </volist>
+		    </ul>
+		    <ul class="sequence-pagination">
+		        <li class="current">Bedruthan</li>
+		        <li>Boscastle</li>
+		        <li>Dartmoor</li>
+		    </ul>
+		</div>
+        <div class="f_r select_box">
+            <p class="mg_b_5">我想出去游玩的时间在？</p>
+            <div class="mg_b_15">
+            <span class="vm_select w_280">
+                <select class="w_280" id="s_month">
+                       <option value="0">不限</option>
+                       <option value="w">本周末</option>
+                       <option value="1">1月</option>
+                       <option value="2">2月</option>
+                       <option value="3">3月</option>
+                       <option value="4">4月</option>
+                       <option value="5">5月</option>
+                       <option value="6">6月</option>
+                       <option value="7">7月</option>
+                       <option value="8">8月</option>
+                       <option value="9">9月</option>
+                       <option value="10">10月</option>
+                       <option value="11">11月</option>
+                       <option value="12">12月</option>
+                   </select>
+                </span>
+            </div>
+            <p class="mg_b_5">我出去游玩的天数有？</p>
+            <div class="mg_b_15">
+                <span class="vm_select w_280">
+                    <select class="w_280" id="s_day">
+                        <option value="0">不限</option>
+                        <option value="1|3">1~3天</option>
+                        <option value="4|7">4~7天</option>
+                        <option value="8|5">8~15天</option>
+                        <option value="15|0">15天以上</option>
+                    </select>
+                </span>
+            </div>
+            <!--觉得做成选择的会比较好一点-->
+            <p class="mg_b_5">我选择的户外目的地是？</p>
+            <div class="mg_b_15">
+                
+                    <include file="Public/index_area"/>
+              
+			</div>
+            <!--觉得做成选择的会比较好一点-->
+            <div><a class="now_btn mg_r_10" id="to_search" href="javascript:void(0);">马上查找活动</a><span>出发地：</span><span class="orange">上海</span></div>
+        </div>
+    </div>
+    <div class="clearfix">
+        <div class="con_l">
+            <div class="recommend_con mg_b_35">
+                <div class="recommend_title mg_b_15 clearfix">
+                    <h3>本月推荐户外活动</h3>
+                    <div class="f_r"><span class="inline_bk v_m mg_r_10"><em class="page_num">1</em>/<i class="page_len">4</i></span><a class="icons prev_tan mg_r_5" id="prev"></a><a class="icons next_tan" id="next"></a></div>
+                </div>
+                <div class="recommend_box">
+                    <ul class="recommend_list clearfix" id="actlist">
+                        <volist name="recomactives" id="at">
+                        <li>
+                            <p><a href="{:U('Actives/detail?id='.$at['active_id'])}"><img src="{:img_size_url($at['list_pic'],196,176)}" alt="{$at.title}" title="{$at.title}" width="196"></a></p>
+                            <p><a href="{:U('Actives/detail?id='.$at['active_id'])}">{$at.title|cnsubstr=30}</a></p>
+                            <p><a class="v_m" href="{:U('Club/detail?id='.$at['club_id'])}" style="color:#666;">{$at.club.club_name}</a><i class="icons v_icon mg_l_5"></i></p>
+                            <p><span class="view">{$at.hits}人看过</span></p>
+                        </li>
+                        </volist>
+                    </ul>
+                    <!--li个数以3 的倍数出现-->
+                </div>
+            </div>
+            <div><a href="http://shanghaihuwai.com/index.php?s=/Home/Article/detail/id/4.html" target="_blank"><img src="__IMG__/index_2.jpg" width="655" alt="" title="" /></a></div>
+        </div>
+        <div class="con_r">
+            <div class="mg_b_25"><a><img src="__IMG__/index_3.jpg" alt="上海户外俱乐部" title="" width="285" /></a></div>
+            <div class="news_list">
+                <h3 class="mg_b_10"><a>上海户外资讯</a></h3>
+                <ul>
+                    <volist name="articles" id="data">
+                    <li><a href="{:U('Article/detail?id='.$data['id'])}">{$data.title}</a></li>
+                    </volist>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--end con_r-->
+</div>
+<!--end content-->
+</block>
+
+<block name="script">
+    <link href="__CSS__/sequencejs-theme.ken-burns-effect.css" media="screen" rel="stylesheet">
+    <script src="__JS__/common.js" type="text/javascript"></script>
+    <script src="__JS__/jquery.sequence-min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        common.actlist();
+    </script>
+    <script type="text/javascript">
+        var base_url = '{$base_search}';
+       $('#to_search').click(function(){
+           var day = $("#s_day").val();
+           var month = $("#s_month").val();
+           var text = $("#s_text").val();
+           location.href=base_url+"m"+month+"-d"+day+"-s"+text+".html";//m2-d0-s
+       });
+    </script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        var options = {
+            //nextButton: true,
+            //prevButton: true,
+            pagination: true,
+            navigationSkip: false,
+            autoPlay:true,
+            //autoPlayDelay: 15,
+            reverseAnimationsWhenNavigatingBackwards: false
+        };
+
+        var sequence = $("#sequence").sequence(options).data("sequence");
+
+        sequence.beforeCurrentFrameAnimatesOut = function() {
+            $("#sequence-theme .nav, #sequence-theme .controls").animate({"opacity": 0.5}, 250);
+        }
+
+        sequence.afterNextFrameAnimatesIn = function() {
+            $("#sequence-theme .nav, #sequence-theme .controls").animate({"opacity": 1}, 250);
+        }
+    });
+    $('.banners_click').each(function(){
+        $(this).click(function(){
+            location.href=$(this).attr('href');
+        });
+    });
+    </script>
+</block> 

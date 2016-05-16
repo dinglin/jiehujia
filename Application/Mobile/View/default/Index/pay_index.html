@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>在线支付</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--[if lt IE 9]>
+<script type="text/javascript" src="__STATIC__/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<!--[if gte IE 9]><!-->
+<script type="text/javascript" src="__JS__/jquery/jquery-1.7.1.min.js"></script>
+<!--<![endif]-->
+<script type="text/javascript" src="__STATIC__/base.js"></script>
+<script>
+    $(function(){
+        $('#subBt').click(function(){
+            var check = $('#isConfirm').attr('checked');
+            if(!checkfrm()){
+                return false;
+            }
+            if(!check||check=="undefined"){
+                $('#isConfirmLabel').addClass('yellow');
+                $('#isConfirmLabel').addClass('blod');
+                return false;
+            }else{
+                $('#subBt').val('加载中...');
+                $('#subBt').attr('disabled',true);
+                $('#payForm').submit();
+            }
+        });
+    });
+    
+    
+
+</script>
+        <style>
+            html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,blockquote,th,td,ins,img{margin:0;padding:0;word-wrap:break-word}
+html{background:#f2f2f2;overflow-y:scroll}
+body{font:12px/22px verdana,Arial,Helvetica,'宋体',sans-serif;color:#333}
+img{border:none 0}
+img{vertical-align:middle;_vertical-align:baseline}
+table{border-collapse:collapse}
+input{outline:0;border-radius:0;vertical-align:middle}
+ul li{list-style:none;padding:0;margin:0}
+ol{list-style-type:decimal;list-style:decimal;padding-left:22px}
+.clear:after,.button:after,.ui_layout:after,.abeam:after,.list li:after,.tales60:after,.tales100:after,.selectOptions:after,.inner:after,.nav_tabs:after{content:'content';clear:both;display:block;visibility:hidden;height:0;width:0;font-size:0}
+.clear,.button,.ui_layout,.abeam,.list li,.tales60,.tales100,.selectOptions,.inner{zoom:1}
+.cls{display:block;clear:both;height:0;width:0;line-height:0;font-size:0;margin:0;padding:0}
+h1,h2,h3,h4,h5,h6{display:inline}
+a{color:#c30;text-decoration:none;outline:0}
+a:hover{color:#f60;text-decoration:underline}
+em{font-style:normal}
+.left{float:left}
+.right{float:right}
+.yellow{color:#f60}
+.bold{font-weight:bold}
+.inner{padding:10px}
+.payOrderSteps{width:100%;background:#eee;border-radius:2px;overflow:hidden}
+.payOrderSteps li{width:33%;color:#999;height:34px;line-height:34px;text-align:center;float:left;font-size:14px;font-weight:bold;background-position:right -68px}
+.payStep02 .step1,.payStep03 .step2,.payStep04 .step3{background-position:right 0}
+.payStep01 .step1,.payStep02 .step2,.payStep03 .step3,.payStep04 .step4{background-color:#f96;background-position:right -34px;color:#fff}
+.payStep02 .step3,.payStep03 .step1,.payStep04 .step1,.payStep04 .step2{background-position:right -68px}
+.ui_sport .payStep02 .step1,.ui_sport .payStep03 .step2,.ui_sport .payStep04 .step3{background-position:right -280px}
+.ui_sport .payStep01 .step1,.ui_sport .payStep02 .step2,.ui_sport .payStep03 .step3,.ui_sport .payStep04 .step4{background-color:#64bde9;background-position:right -314px}
+.ui_layout{ margin:0 auto;background:#fff}
+.step1,.step2,.step3,.limitTime,.freeTag1,.delcredits,.addcredits,.unselect2,.paytips,.wabiQa,.oAddPhone,.oDelPhone,.s_noSales .innerBox,.s_noSales .ui_close,.s_noSales .arrow{background:url(/Public/Home/images/steps.png) no-repeat}
+.payBox{border:1px solid #ebebeb}
+.payBox_header{height:35px;border-bottom:1px solid #ebebeb}
+.payBox_header .pad,.paymenu_head a{background:#f2f2f2;background:-moz-linear-gradient(center top,#fff 0,#e3e3e3 100%);background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#fff),color-stop(100%,#e3e3e3));filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff',endColorstr='#e3e3e3',GradientType=0)}
+.payBox_header .pad{color:#333;border:1px solid #fff;padding:0 15px;height:34px;line-height:34px}
+.payBox_header h2{font-size:14px;font-weight:bold;width:auto;overflow:hidden;font-family:'微软雅黑','宋体'}
+.payBox_body{overflow:hidden}
+.payBox_body dl.ui_media{padding:15px 15px 50px;width:279px;border-right:1px solid #eee;float:left;margin-bottom:-30000px;padding-bottom:30000px}
+.payBox_body_left{ position:relative;overflow:hidden}
+.payBox_body_right{border-left:1px solid #eee;padding-left:10px;color: #eb6120;}
+.payBox_body_left .ui_pic{margin-right:15px;margin-top:5px}
+.payBox_body_left li{line-height:20px}
+.payBox_body_left ol{padding:15px 20px 0;list-style:none;float:left;}
+.mt20{margin-top:20px!important}
+.paymenu_head{border-bottom:2px solid #eb6120;position:relative;z-index:2}
+.paymenu_head a{display:inline-block;padding:6px 24px;border:1px solid #ccc;border-bottom:0;font-size:14px;color:#333;font-weight:bold;cursor:pointer;_margin-right:5px}
+.paymenu_head a:hover,.paymenu_head a.select{border-color:#eb6120;background:#eb6120;color:#fff;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#eb6120',endColorstr='#eb6120',GradientType=0)}
+.paymenu_head a input{position:absolute;left:-999px;top:-99px}
+.paymenu_body{padding:10px 0;position:relative}
+a,a:hover{text-decoration:none}
+.paymenu_body_t{height:28px;line-height:28px;font-size:14px;font-weight:bold}
+.paymenu_body dl{height:100%;overflow:hidden;}
+.paymenu_body dt{margin-left:-90px;_margin-left:-45px;text-align:right;margin-top:10px;width:90px;float:left}
+.paymenu_body dd{padding-bottom:10px}
+.payway label{display:inline-block;height:40px;position:relative; width:122px;overflow:hidden;background:url(/Public/Home/images/icon_pay.png) no-repeat;border:1px solid #fff;cursor:pointer;margin:0 10px 0 0}
+.payway label.select{border-color:#fc9e6c}
+.payway label input{position:absolute;top:14px;left:8px;*top:10px}
+.ipsPay dt{margin-top:0}
+.umPay{font-size:14px;font-weight:bold}
+.paytips{position:absolute;width:430px;height:22px;line-height:22px;padding:5px 10px 5px 30px;left:60px;top:40px;background-color:#fff;border:1px solid #ccc;background-position:-274px -234px;color:#ff6200}
+.paytips img{position:absolute;left:16px;bottom:-7px}
+#isConfirmDiv{border-color:#76b7d5}
+.isConfirm{border:1px solid #eee;padding:10px;border:2px solid #ccc}
+.payBox_body_people ul{padding:0 20px 0 20px;list-style:none;}
+.people_li{ line-height: 25px;padding-bottom: 10px;border-bottom: 1px solid #b3b3b3;padding-top: 10px;}
+.payBox_body_people li:last-child{
+    border:0;
+}
+.people_li input{
+	border: 1px solid #b3b3b3;
+    height: 1.36rem;
+}
+#subBt{
+border: 1px solid;
+-webkit-border-radius: .5em;
+border-radius: .5em;
+padding: 6px 24px;
+font-size: 14px;
+min-width: 7em;
+border-color: #c40000;
+background-color: #c40000;
+color: #fff;
+    font-weight: bold;
+    line-height: 22px;
+}
+        </style>
+        <script>
+            function checkfrm(){
+                var msg = [];
+                var flag = true;
+                var message = '';
+                $('.cname').each(function(){
+                    var index = $('.cname').index(this)+1;
+                    if(isEmpty($(this).val())){
+                        msg.push('第'+index+'个报名信息名称为空！');
+                        flag = false;
+                    }else{
+                        if(!isChinese($(this).val())){
+                            msg.push('第'+index+'个报名信息名称不是2-4个中文字符！');
+                            flag = false;
+                        }
+                    }
+                });
+                $('.card').each(function(){
+                    var index = $('.card').index(this)+1;
+                    if(isEmpty($(this).val())){
+                        msg.push('第'+index+'个报名信息身份证为空！');
+                        flag = false;
+                    }else{
+                        if(!isCardNo($(this).val())){
+                            msg.push('第'+index+'个报名信息身份证不正确！');
+                            flag = false;
+                        }
+                    }
+                });
+                $('.mobile').each(function(){
+                    var index = $('.mobile').index(this)+1;
+                    if(isEmpty($(this).val())){
+                       
+                    }else{
+                        if(!isMobile($(this).val())){
+                            msg.push('第'+index+'个手机号码不正确！');
+                            flag = false;
+                        }
+                    }
+                });
+                if(!flag){
+                    message = msg.join("\n");
+                    alert(message);
+                    return false;
+                }else{
+                    return true;
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <div class="ui_layout">
+            <div class="inner" id="orderForm">
+                <div class="payStep03">
+                        <ul class="payOrderSteps clear">
+
+                                <li class="step2">1.选择活动</li>
+                                <li class="step3">2.确认支付</li>
+                                <li class="step4">3.报名成功</li>
+                        </ul>
+                </div>
+                <form id="payForm" action="" method="post" target="_blank">
+                <div class="payBox mt20">
+                        <div class="payBox_header">
+                                <div class="pad">
+                                        <h2>订单基本信息</h2>
+                                </div>
+                        </div>
+                        <div class="payBox_body clear">
+                                <div class="payBox_body_left">
+                                     
+                                        <ol>
+                                                <li><em>订单号：</em>{$order.order_sn}</li>
+                                                <li><em>报名活动：</em> <em >{$order.goods.goods_name}</em> </li>
+                                                <li><em>人数：</em> <em >{$order.goods.goods_number}</em> </li>
+                                                <li><em>手机号码：</em> <em >{$order.mobile}</em> </li>
+                                                 <li class="mt10"><b class="fs14">应付金额：</b><span  style="color:#c40000;"><b>{$order.order_amount}</b></span>元<em>(总金额：{$order.goods_amount}元  )</em></li>
+                                        </ol>
+                                </div>
+                                <div class="payBox_body_right">
+                                        <div class="limitTimedetail inner">
+                                                <p><span class="fs14 cf60">请在尽快完成付款哦</span>，支付中如遇到问题请致电：<b>4000-400-400</b></p>
+                                              
+                                        </div>
+                                </div>
+                                                        </div>
+                </div>
+                    <div class="payBox mt20">
+                        <div class="payBox_header">
+                                <div class="pad">
+                                        <h2>报名信息</h2>
+                                </div>
+                        </div>
+                        <div class="payBox_body clear">
+                                <div class="payBox_body_people">
+                                     
+                                        <ul>
+                                            <volist name="people" id="vo" key="k">
+                                            <li class="people_li">
+                                                姓&nbsp;&nbsp;&nbsp;名：<input type="text" name="cname[]" class="cname" value="{$vo.cname}" size="10"/> 
+                                                &nbsp;&nbsp;&nbsp;手机：<input type="number" name="mobile[]" class="mobile" value="{$vo.mobile}" /> <br/>
+                                                 身份证：<input type="text" name="card[]" class="card" value="{$vo.card_id}" size="20" /> 
+                                                </li>
+                                                </volist>
+                                        </ul>
+                                </div>
+                                                        </div>
+                </div>
+                    <div class="mt20 paymenu_head" id="menu_ck">
+		
+			<a lang="netPay" for="emptyPay1" class="select">
+		<input type="radio" value="" id="emptyPay1" name="paymethod">
+		网上支付
+	</a>
+			
+	</div>
+                <div class="payBox" style="margin-top:-1px;">
+                    <div class="paymenu_body">
+                        <div id="netPay" tab="true">
+                            <dl   class="clear">
+                             <dd class="lineB payway clear">
+                                    <div class="clear" style="text-align: center;">
+                                            <label style="background-position:30px -880px; " for="directPay_no1" class="">
+                                                  <input type="radio" name="paytype" value="alipay" id="directPay_no1">
+                                            </label>
+                                            <label style="background-position:30px -1385px; width:145px;" for="tempusPay_no1" class="">
+                                                 <input type="radio" name="paytype" value="tenpay" checked="checked" id="tempusPay_no1">
+                                            </label>
+                                     </div>
+                             </dd>
+                            </dl>
+                        </div>
+                        <dl class="clear">
+				<dd>
+					<div class="isConfirm" id="isConfirmDiv">
+						<label for="isConfirm" id="isConfirmLabel" class="fs14"><input type="checkbox" style="margin-top:-3px;" id="isConfirm">
+							<b class="ml5">服务条款</b>（重要提示：请仔细阅读服务条款，同意并勾选后付款）
+						</label><br>1、请仔细核对您的预订信息，本次预订的服务一旦支付成功，将不予退换。<br>
+				     </div>
+				</dd>
+			</dl>
+               <dl class="clear" style="text-align: center;">
+		         <dd>
+			        <span id="submitSpan"><label for="subBt" class="button maxBt redBt" style="vertical-align: middle;"><input type="submit" id="subBt" value="确认无误，支付"></label></span>
+		         </dd>
+               </dl>
+                    </div>
+                </div>
+                    
+                <label style="display: none;"><input type="radio" name="paytype" value="palpay"  />贝宝</label>
+                <label style="display: none;"><input type="radio" name="paytype" value="yeepay"  />易付宝</label>
+                <label style="display: none;"><input type="radio" name="paytype" value="kuaiqian" />快钱</label>
+                <label style="display: none;"><input type="radio" name="paytype" value="unionpay"  />银联</label>
+                <input type="hidden" name="money" value="{$order.order_amount}" />
+                <input type="hidden" name="order_sn" value="{$order.order_sn}" />
+                <input type="hidden" name="rec_id" value="{$order.goods.rec_id}" />
+                <input type="hidden" name="order_id" value="{$order.order_id}" />
+            </form>
+            </div>
+            
+        </div>
+    </body>
+</html>

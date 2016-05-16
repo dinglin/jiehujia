@@ -1,0 +1,147 @@
+<extend name="Public/base" />
+
+<block name="body">
+	<!-- 标题栏 -->
+	<div class="main-title">
+		<h2>用户列表</h2>
+	</div>
+	<div class="cf">
+		<div class="fl">
+            <a class="btn" href="{:U('User/add')}">新 增</a>
+            <button class="btn ajax-post" url="{:U('User/changeStatus',array('method'=>'resumeUser'))}" target-form="ids">启 用</button>
+            <button class="btn ajax-post" url="{:U('User/changeStatus',array('method'=>'forbidUser'))}" target-form="ids">禁 用</button>
+            <button class="btn ajax-post confirm" url="{:U('User/changeStatus',array('method'=>'deleteUser'))}" target-form="ids">删 除</button>
+        </div>
+
+        <!-- 高级搜索 -->
+		<div class="search-form fr cf">
+			<div class="sleft">
+				<input type="text" name="nickname" class="search-input" value="{:I('nickname')}" placeholder="请输入用户昵称或者ID">
+				<a class="sch-btn" href="javascript:;" id="search" url="{:U('index')}"><i class="btn-search"></i></a>
+			</div>
+		</div>
+    </div>
+    <!-- 数据列表 -->
+    <div class="data-table table-striped">
+	<table class="">
+    <thead>
+        <tr>
+		<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+		<th class="">UID</th>
+		<th class="">昵称</th>
+		<th class="">积分</th>
+		<th class="">登录次数</th>
+		<th class="">最后登录时间</th>
+		<th class="">最后登录IP</th>
+		<th class="">状态</th>
+                                    <th class="">账号类型</th>
+		<th class="">操作</th>
+		</tr>
+    </thead>
+    <tbody>
+		<notempty name="_list">
+		<volist name="_list" id="vo">
+		<tr>
+            <td><input class="ids" type="checkbox" name="id[]" value="{$vo.uid}" /></td>
+			<td>{$vo.uid} </td>
+			<td>{$vo.nickname}</td>
+			<td>{$vo.score}</td>
+			<td>{$vo.login}</td>
+			<td><span>{$vo.last_login_time|time_format}</span></td>
+			<td><span>{:long2ip($vo['last_login_ip'])}</span></td>
+			<td>{$vo.status_text}</td>
+                        <td>
+                <notempty name="groups">
+                    <select name="group_id" id="group_id" uid="{$vo.uid}" onchange="U.changeGroup(this);">
+                        <option value="0">普通会员</option>
+                        <volist name="groups" id="item">
+                            <option value="{$item.id}" <if condition="$item.id = $vo.group_id ">selected="selected"</if>>{$item.title}</option>
+                        </volist>
+                        <if condition="!$vo.group_id ">
+                            <option value="other">绑定其它</option>
+                        </if>
+                        </select>
+                    </notempty>
+                        </td>
+			<td><eq name="vo.status" value="1">
+				<a href="{:U('User/changeStatus?method=forbidUser&id='.$vo['uid'])}" class="ajax-get">禁用</a>
+				<else/>
+				<a href="{:U('User/changeStatus?method=resumeUser&id='.$vo['uid'])}" class="ajax-get">启用</a>
+				</eq>
+				<a href="{:U('AuthManager/group?uid='.$vo['uid'])}" class="confirm ajax-get">删除</a>
+                </td>
+		</tr>
+		</volist>
+		<else/>
+		<td colspan="9" class="text-center"> aOh! 暂时还没有内容! </td>
+		</notempty>
+	</tbody>
+    </table>
+	</div>
+    <div class="page">
+        {$_page}
+    </div>
+</block>
+
+<block name="script">
+	<script src="__STATIC__/thinkbox/jquery.thinkbox.js"></script>
+
+	<script type="text/javascript">
+	//搜索功能
+	$("#search").click(function(){
+		var url = $(this).attr('url');
+        var query  = $('.search-form').find('input').serialize();
+        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+        query = query.replace(/^&/g,'');
+        if( url.indexOf('?')>0 ){
+            url += '&' + query;
+        }else{
+            url += '?' + query;
+        }
+		window.location.href = url;
+	});
+	//回车搜索
+	$(".search-input").keyup(function(e){
+		if(e.keyCode === 13){
+			$("#search").click();
+			return false;
+		}
+	});
+    //导航高亮
+    highlight_subnav('{:U('User/index')}');
+    
+    //用户对象
+    var U={
+        changeGroup:function(obj){
+            //更改用户类型
+            var uid = $(obj).attr("uid");
+            var group_id = $(obj).val();
+            if(group_id == "other"){
+                var href ="{:U('User/changeUserClub?uid=_uid_')}";
+                var reg = new RegExp("_uid_");
+                href = href.replace(reg,uid);
+                location.href = href;
+                return;
+            }
+            $.ajax({
+                "url":"{:U('User/changeStatus?method=changegroup')}",
+                "type":"get",
+                "datatype":"json",
+                "data":{
+                    method : 'changegroup',
+                    id : uid,
+                    group_id : group_id
+                },
+                "success" : function(data){
+                    if(data.status==1){
+                        alert(data.content);
+                    }else{
+                        alert(data.content);
+                    }
+                    location.reload();
+                }
+            });
+        }
+    }
+	</script>
+</block>

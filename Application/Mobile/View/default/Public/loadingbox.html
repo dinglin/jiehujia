@@ -1,0 +1,34 @@
+<style>
+#loadingBox{position:fixed;z-index:100;top:50%;left:50%;width:100px;height:100px;margin:-60px auto auto -85px;padding:10px 30px;border: 1px solid #D09DC7;color:#fff;text-align:center;border-radius:10px;background:rgba(114, 97, 114, 0.66);}
+#loadingBox i{position:absolute;z-index:9;top:60%;left:50%;margin:-16px 0 0 -16px;display:inline-block;width:20px;height:20px;border:4px dotted #000;border-color:rgba(255,255,255,.1) rgba(255,255,255,.2) rgba(255,255,255,.4) rgba(255,255,255,.5);border-radius:300px;-webkit-animation:loadforever 1.5s infinite linear;}
+@-webkit-keyframes loadforever{0%{
+-webkit-transform:rotate(0deg);
+}100%{
+-webkit-transform:rotate(360deg);
+}}
+</style>
+
+<section style="display: none;" class="fullHtml" id="loadingBox"><i></i><span>加载中...</span></section>
+
+<script>
+function link_to(url,fun){
+    setTimeout(function(){
+        $('#loadingBox').show();
+    },1);
+    setTimeout(function(){
+        if(typeof url == 'string'){
+           location.href=url;
+        }
+        if(typeof url == 'function'){
+           url();
+        }
+    },300);
+    setTimeout(function(){$('#loadingBox').hide();},600);
+    if(typeof fun == 'string'){
+        var jscode = new Function('return function(){'+fun+'}')();
+        jscode();
+    }else if(typeof fun == 'function'){
+        fun();
+    }
+}
+</script>

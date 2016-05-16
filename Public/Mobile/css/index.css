@@ -1,0 +1,77 @@
+.index nav{width:99.9%;margin:0 auto;overflow:hidden;padding-top:15px;border-bottom:1px #ddd solid;background:#fff}
+.index nav li{display:block;float:left;width:33.3%;height:110px;text-align:center}
+.index nav li i{width:80px;height:60px;background:url(../images/icon-channel.png);background-size:240px;display:inline-block}
+.index nav li:nth-child(1) i{background-position:0 0}
+.index nav li:nth-child(2) i{background-position:-80px 0}
+.index nav li:nth-child(3) i{background-position:-160px 0}
+.index nav li:nth-child(4) i{background-position:0 -60px}
+.index nav li:nth-child(5) i{background-position:-80px -60px}
+.index nav li:nth-child(6) i{background-position:-160px -60px}
+.index nav li span{display:block;font-size:16px;padding-top:9px;text-align:center}
+.index nav li a{display:block;color:#4b4946}
+.index-recommend{padding:0 4px 5px;overflow:hidden}
+.index-recommend li{width:50%;float:left}
+.index-recommend li a{display:block;overflow:hidden;margin:5px 3px 0;border:1px #e2e2e2 solid;background:#fff;padding:10px 0 10px 10px;color:#5f646e;line-height:16px}
+.index-recommend li .t_icon{width:40px;height:40px;float:left;margin-right:10px;background:url(../images/icon-recommend.png);background-size:80px}
+.index-recommend li .t_icon_svg{width:40px;height:40px;float:left;margin-right:10px;font-size:40px;line-height:40px;text-align:center}
+.index-recommend li .t_icon_svg.icon-svg2{font-size:30px}
+.index-recommend li .t_icon_svg.icon-svg3{font-size:28px}
+.index-recommend li .t_icon_svg.icon-svg6{font-size:25px}
+.index-recommend li .t_icon_svg.icon-bus{font-size:33px}
+.index-recommend li .t_icon.icon-1{background-position:0 0}
+.index-recommend li .t_icon.icon-2{background-position:-40px 0}
+.index-recommend li .t_icon.icon-3{background-position:0 -40px}
+.index-recommend li .t_icon.icon-4{background-position:-40px -40px}
+.index-recommend li .t_info{float:left;padding-top:4px;position:relative}
+.index-recommend li .t_info h2{font-size:14px}
+.index-recommend li .t_info h3{font-size:12px;position:absolute;top:20px;left:0;white-space:nowrap}
+.i-banner a,.i-banner img{display:block}
+.i-banner .t_li{margin:10px;position:relative;overflow:hidden}
+.i-banner .t_tips{position:absolute;top:20px;left:18px;color:#fff;text-shadow:0 1px 1px rgba(0,0,0,.75);width:100%}
+.i-banner .t_tips:before{position:absolute;top:2px;left:-12px;content:"";width:8px;height:15px;display:block}
+.i-banner .t_tips h2{font-size:12px}
+.i-banner .t_tips h3{font-size:14px;width:90%}
+.i-banner .t_tips .pro-value{margin-top:5px;color:#d30775}
+.i-banner .t_tips .pro-value i{color:#fff}
+.month-hot{background:#fff;border-bottom:1px #e1e1e1 solid}
+.month-hot h2{height:20px;padding:5px 0 0 8px;line-height:20px;font-size:12px}
+.month-hot .tablist{overflow:hidden;position:relative;z-index:11}
+.month-hot .tablist li{width:25%;height:30px;line-height:30px;float:left;border-bottom:2px #e4e4e4 solid;color:#4c4c4c;font-size:14px;text-align:center}
+.month-hot .tablist li.active{border-bottom:2px #ff7613 solid;color:#ff7613}
+.month-hot .t_list{width:100%;margin:0 auto;cursor:move;overflow:hidden;-webkit-perspective:1000;height:122px}
+.month-hot .t_in_list{width:400%;float:left}
+.month-hot .t_in_list ul{width:25%;float:left;background:#fff;position:relative}
+.month-hot .t_list li{width:33.3%;float:left;position:relative;height:40px;border-bottom:1px #e4e4e4 solid;text-align:center;line-height:40px;color:#4c4c4c;font-size:14px}
+.month-hot .t_list li a{padding:5px 10px}
+.month-hot .t_list li:before{content:"";position:absolute;right:-3px;top:12px;background:#e4e4e4;width:1px;height:16px}
+.i-top{background:#fff;border-bottom:1px #e1e1e1 solid}
+.i-top h2{height:30px;padding-left:8px;line-height:30px;font-size:12px}
+.i-top ul{margin-top:-5px}
+.i-top li{border-bottom:1px #d2d2d2 solid;padding:10px 8px}
+.i-top li a{display:block;height:68px}
+.i-top li .t_num{width:38px;height:23px;float:left;padding-top:45px;font-size:10px;font-weight:700;color:#fff;background:#ff7613;text-align:center;text-shadow:1px 1px 0 #e0974b}
+.i-top li .t_num i{font-size:20px}
+.i-top li .t_pic{width:89px;height:68px;float:left}
+.i-top li .t_pic img{width:89px;height:68px}
+.i-top li .t_info{overflow:hidden;position:relative;display:block;padding:8px 0 0 8px}
+.i-top li .t_info_body{width:100%}
+.i-top li .t_info_body h3{font-size:13px;line-height:16px;height:32px;overflow:hidden;color:#333;margin-bottom:4px}
+.i-top p{font-size:12px;width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.i-top .value{font-size:20px}
+.i-top .value i{font-size:10px;color:#666}
+.i-sp1{margin:10px 5px;overflow:hidden}
+.i-sp1 a{width:33.3%;float:left}
+.i-sp1 .t_content{border:1px #ddd solid;background:#fff;margin:0 5px;height:116px;position:relative}
+.i-sp1 .t_info{padding:10px}
+.i-sp1 .t_info h2{font-size:14px}
+.i-sp1 .t_info h3{font-size:13px;opacity:.5}
+.i-sp1 .t_icon{position:absolute;right:5px;bottom:0}
+.i-banner .t_tips:before{background:#21b273}
+.month-hot .tablist li.active{color:#21b273;border-color:#21b273}
+.i-top li .t_num{text-shadow:1px 1px 0 #1ea168}
+.i-top ul li:nth-child(1) .t_num{background:#21b273}
+.i-top ul li:nth-child(2) .t_num{background:#21b281}
+.i-top ul li:nth-child(3) .t_num{background:#21b29f}
+.i-top ul li:nth-child(4) .t_num{background:#3ec0af}
+.i-top ul li:nth-child(5) .t_num{background:#5dcabc}
+.index-recommend .t_icon_svg,.index-recommend h2{color:#21b273}

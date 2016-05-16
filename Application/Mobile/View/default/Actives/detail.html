@@ -1,0 +1,236 @@
+<extend name="Base/common"/>
+
+<block name="style">
+    <link href="__CSS__/detail.css" rel="stylesheet">
+    <link href="__CSS__/idangerous.swiper.css" rel="stylesheet">
+    <style>
+    #prop_fav,#prop_fav_del{
+		display: inline-block;
+		width: 60px;
+		height: 16px;
+		font-size: 12px;
+		color: #666;
+		text-align: center;
+		border-left: 1px solid #d9d9d9;
+		padding-top: 24px;
+		background: url("__IMG__/favorite.png") no-repeat center 0px;
+		background-size: 20px;
+    }
+	#prop_fav_del {
+	   color: #CCC;
+	   background: url("__IMG__/favorite.png") no-repeat center -40px;
+	   background-size: 20px;
+	}
+    </style>
+	<style>
+	.mico {
+		position: fixed;
+		left: 0;
+		bottom: 0;
+		border-top: 1px solid #d9d9d9;
+		height: 35px;
+		background-color: #f4f4f4;
+		display: -webkit-box;
+		padding: 8px 0;
+		width: 100%;
+		z-index: 999;
+	}
+	.mico .micoIcon {
+	   -webkit-box-flex: 1;
+	}
+	.mico .micoIcon, .mico .micoTel, .comBtn {
+		display: block;
+		-webkit-box-flex: 2;
+		height: 35px;
+		background-color: #d30775;
+		border-radius: 4px;
+		margin: 0 2%;
+		text-align: center;
+		line-height: 35px;
+		font-size: 15px;
+		font-weight: bold;
+		color: #FFF;
+	}
+	 #tel {
+	   z-index: 98;
+	}
+	.micoIcon em, .micoTel i, .msg_text {
+		display: inline-block;
+		padding-left: 120px;
+		background: url("__IMG__/phone.png") no-repeat center -27px;
+		background-size: 18px;
+		font-size: 15px;
+	}
+	.tel{
+	   background: url("__IMG__/phone.png") no-repeat left 0px;
+	   background-size: 18px;
+		padding-left: 20px;
+	}
+    </style>
+    <style>
+    #prop_f_pop {
+		-webkit-box-sizing: border-box;
+		width: 102px;
+		height: 102px;
+		padding-top: 15px;
+		background-color: rgba(0,0,0,0.8);
+		background-size: 30px;
+		position: fixed;
+		border-radius: 10px;
+		top: 50%;
+		left: 50%;
+		margin-left: -51px;
+		margin-top: -51px;
+		font-size: 16px;
+		text-align: center;
+		color: white;
+		z-index: 20000;
+		display: none;
+		text-align: center;
+    }
+    #prop_f_pop a{
+	    font-size:10px;
+    }
+    </style>
+</block>
+
+<block name="content">
+<div id="content">
+   <div class="lv-project-detail">
+       <div class="swiper-main detail-banner">
+           <div class="swiper-container swiper-banner">
+               <div class="swiper-wrapper" style="transform: translate3d(-3789px, 0px, 0px); transition-duration: 0.3s;">
+                   <volist name="info.imgs" id="imgs">
+                           <div class="swiper-slide" style="width: 1263px;"><img alt="" src="{:img_size_url($imgs['img_src'],400,160)}"></div>
+                   </volist>
+               </div>
+           </div>
+           <div class="pagination"><span class="swiper-pagination-switch"></span><span class="swiper-pagination-switch"></span><span class="swiper-pagination-switch swiper-active-switch swiper-activeslide-switch"></span><span class="swiper-pagination-switch"></span></div>
+       </div>
+       <div class="t_base_info">
+           <div style="display: -webkit-box;"><h2>{$info['title']}</h2><i id="prop_fav">收藏</i><i id="prop_fav_del" style="display:none;">已收藏</i></div>
+           <p class="line">
+               <span class="info_p3">活动时间：{$info.start_time|time_format}~{$info.end_time|time_format}（{$info.days}天）</span>
+           </p>
+           <p class="line">
+               <span class="info_p3">活动地点：{$info.destination}</span>
+           </p>
+           <p class="line">
+               <span class="info_p1">俱乐部：{$info.club.club_name}</span>
+               <if condition="$info['club']['mobile'] or $info['club']['telphone']">
+               <span class="info_p2 "><a class="tel" href="tel:{$info['club']['mobile']?$info['club']['mobile']:$info['club']['telphone']}">&nbsp;电话咨询：{$info['club']['mobile']?$info['club']['mobile']:$info['club']['telphone']} &nbsp;&nbsp;> </a></span>
+               </if>
+           </p>
+           <p class="mt5">
+               <span class="fr">
+                    <if condition="($info.price gt 0) and ($info.member_id gt 0)">
+                       <a class="btn_style_1" href="{:U('User/tobuy?id='.$info['active_id'])}">在线报名</a>
+                   </if>
+               </span>
+               <span class="pro-value">
+                   ¥{$info.price}<!-- <br><del>¥538</del> -->
+               </span>
+           </p>
+       </div>
+       <div class="t_info">
+               
+          
+               
+        
+           <!-- 行程 -->
+               <div class="lv-box set-btn">
+                   <h3>活动详情</h3>
+                   <div class="t_content journey">{$info.content}</div>
+               </div>
+               <neq  name="$info.club.other" value="">
+	               <div class="lv-box set-btn">
+	                   <h3>报名须知</h3>
+	                   <div class="t_content journey">{$info.club.other}</div>
+	               </div>
+               </neq>
+                <neq name="$info.club.pay_before" value="">
+	               <div class="lv-box set-btn">
+	                   <h3>付款说明</h3>
+	                   <div class="t_content journey">{$info.club.pay_before}</div>
+	               </div>
+               </neq>
+                <neq name="$info.club.pay_back" value="">
+	               <div class="lv-box set-btn">
+	                   <h3>退款说明</h3>
+	                   <div class="t_content journey">{$info.club.pay_back}</div>
+	               </div>
+               </neq>
+                <neq name="$info.club.disclaimer" value="">
+	               <div class="lv-box set-btn">
+	                   <h3>免责声明</h3>
+	                   <div class="t_content journey">{$info.club.disclaimer}</div>
+	               </div>
+               </neq>
+           <!-- 点评  -->
+               <div class="lv-box set-btn" style="display:none;">
+                   <div onclick="javascript:" class="t_content">
+                        <div class="comment_block">
+                            <span class="lv-score lv-score-45"></span><br>
+                            <small><i class="f-color-1">22</i>人点评</small>
+                        </div>
+                        <h4>用户点评</h4>
+                        <span class="ic_ri"></span>
+                    </div>
+                </div>
+            
+        </div>
+    </div>
+    
+</div>
+<if condition="$info['club']['mobile'] or $info['club']['telphone']">
+<div class="mico" style="display:none;">
+     <!-- <a href="sms:{$info['club']['mobile']?$info['club']['mobile']:$info['club']['telphone']}" class="micoIcon"><img src="__IMG__/message.png" style="width:1.3em;"><em>短信</em></a> -->
+     <a id="tel" class="micoTel" href="tel:{$info['club']['mobile']?$info['club']['mobile']:$info['club']['telphone']}">
+        <i class="a7">联系俱乐部</i>
+    </a>
+</div>
+</if>
+<div id="prop_f_pop"   style="display: none;">☆<br><span id="prop_f_pop_con">收藏成功</span>!<br><a href="{:U('UserFavorite/index')}">进入我的收藏</a></div>
+</block>
+
+<block name="script">
+
+<script src="__JS__/swiper.min.js"></script>
+<script>
+    var active_id="{$info['active_id']}";
+    $("#prop_fav").click(function(){
+    	$.post("/index.php?s=/Mobile/UserFavorite/favorite_add.html",{active_id:active_id},function(data){
+    	    if(data.status==3||data.status==3){
+    	    	$("#prop_fav").hide();
+    	    	$("#prop_fav_del").show();
+    	    }
+    	    show_notice(data.msg);
+    	},"json");
+    });
+    $("#prop_fav_del").click(function(){
+    	$.post("/index.php?s=/Mobile/UserFavorite/favorite_del.html",{active_id:active_id},function(data){
+            if(data.status==1){
+            	$("#prop_fav_del").hide();
+                $("#prop_fav").show();
+            }
+            show_notice(data.msg);
+        },"json");
+    });
+    $(function(){
+        $.post("/index.php?s=/Mobile/UserFavorite/favorite_is.html",{active_id:active_id},function(data){
+            if(data.status==1){
+                $("#prop_fav_del").show();
+                $("#prop_fav").hide();
+            }else{
+            	$("#prop_fav_del").hide();
+            	$("#prop_fav").show();
+            }
+        },"json");
+    });
+    function show_notice($msg){
+    	$("#prop_f_pop_con").html($msg);
+    	$("#prop_f_pop").show();
+        setTimeout(function(){$("#prop_f_pop").hide('slow');},4000);
+    }
+</script>
+</block>

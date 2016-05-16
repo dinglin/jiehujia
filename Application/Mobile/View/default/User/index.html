@@ -1,0 +1,39 @@
+<extend name="Base/common"/>
+<block name="style">
+<link href="__CSS__/global.css" rel="stylesheet" />
+<link rel="stylesheet" href="__CSS__/user.css">
+
+</block>
+<block name="content">
+    <div class="lv-banner-mylvbg">
+            <div class="lv-wrapper-container">
+                     <div class="lv-user-photobg fl">
+                        <if condition='$umember["head_pic"] '>
+                          <img src='{$umember["head_pic"]}'>
+                        <else/>
+                          <img src="__IMG__/default-photo.gif">
+                        </if>
+                     </div>
+                      <h2><span>{$member['nickname']}</span></h2>
+                      <a href="javascript:void(0);" class="integral">{$member['score']}积分</a>
+            </div>
+        </div>
+        <div class="my_lv">
+            <ul>
+                    <li><a href="{:U('User/profile')}" ><span class="ic_my1"></span><em>个人信息</em><span class="ic_ri"></span></a></li>
+                    <li><a href="{:U('User/orderlist')}" ><span class="ic_my2"></span><em>我的订单</em><span class="ic_ri"></span></a></li>
+                    <li><a href="{:U('UserFavorite/index')}" ><span class="ic_my4"></span><em>我的收藏</em><span class="ic_ri"></span></a></li>
+                    <li style="display:none;">
+                        <a href="{:U('User/travelNotes')}" >
+                            <span class="ic_my3"></span><em>我的游记</em>
+                            <span class="ic_ri"></span>
+                        </a>
+                    </li>
+            </ul>
+        </div>
+</block>
+<!--end content-->
+<block name="script">
+<script>
+</script>
+</block> 

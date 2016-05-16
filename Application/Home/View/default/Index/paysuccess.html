@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>在线支付</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--[if lt IE 9]>
+<script type="text/javascript" src="__STATIC__/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<!--[if gte IE 9]><!-->
+<script type="text/javascript" src="__JS__/jquery/jquery-1.7.1.min.js"></script>
+<!--<![endif]-->
+        <style>
+            html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,blockquote,th,td,ins,img {
+    margin: 0;
+    padding: 0;
+    word-wrap: break-word
+}
+
+html {
+    overflow-y: scroll
+}
+
+body {
+    font: 12px/22px verdana,Arial,Helvetica,'宋体',sans-serif;
+    color: #333
+}
+
+img {
+    border: none 0
+}
+
+img {
+    vertical-align: middle;
+    _vertical-align: baseline
+}
+
+table {
+    border-collapse: collapse
+}
+
+input {
+    outline: 0;
+    border-radius: 0;
+    vertical-align: middle
+}
+
+ul li {
+    list-style: none;
+    padding: 0;
+    margin: 0
+}
+
+ol {
+    list-style-type: decimal;
+    list-style: decimal;
+    padding-left: 22px
+}
+
+.clear:after,.button:after,.ui_layout:after,.abeam:after,.list li:after,.tales60:after,.tales100:after,.selectOptions:after,.inner:after,.nav_tabs:after {
+    content: 'content';
+    clear: both;
+    display: block;
+    visibility: hidden;
+    height: 0;
+    width: 0;
+    font-size: 0
+}
+
+.clear,.button,.ui_layout,.abeam,.list li,.tales60,.tales100,.selectOptions,.inner {
+    zoom: 1
+}
+
+.cls {
+    display: block;
+    clear: both;
+    height: 0;
+    width: 0;
+    line-height: 0;
+    font-size: 0;
+    margin: 0;
+    padding: 0
+}
+
+h1,h2,h3,h4,h5,h6 {
+    display: inline
+}
+a {
+    color: #c30;
+    text-decoration: none;
+    outline: 0
+}
+
+a:hover {
+    color: #f60;
+    text-decoration: underline
+}
+
+em {
+    font-style: normal
+}
+
+.left {
+    float: left
+}
+
+.right {
+    float: right
+}
+.yellow {
+color: #f60;
+}
+.bold {
+font-weight: bold;
+}
+
+        </style>
+    </head>
+    <body>
+        <div style="margin: 100px auto;width: 300px; border: 2px solid #85B6E2; padding: 20px; font-family:'microsoft Yahei' ">
+            <h1>^_^ 支付成功！</h1>
+            <div style="text-align: left;">订单号：{$order.order_sn}</div>
+            <div style="text-align: left;"><a href="{:U('Home/User/orderlist')}">查看订单</a></div>
+        </div>
+    </body>
+</html>

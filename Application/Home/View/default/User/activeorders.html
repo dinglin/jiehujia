@@ -1,0 +1,64 @@
+<extend name="Base/user"/>
+
+
+
+
+
+<block name="content">
+   <div id="main-container" class="container">
+        
+<!-- menu -->
+	<include file="Public/user_menu"/>
+	<!-- /menu -->
+
+        
+    <div class="span9 bs-docs-example">
+        <!-- Contents
+        ================================================== -->
+        <section id="contents">
+            <div class="sidebar-widget"><h5>活动报名 - {$_active_info.title}</h5></div>
+            <div>
+                <span>报名人数：<strong>{$_applynum}</strong></span>&nbsp;&nbsp;&nbsp;&nbsp;<span>付款人数：<strong>{$_paynum}</strong></span>
+            </div>
+        </section>
+        <div >
+        <notempty name="_list">
+            <br/>
+            <table class="table table-hover">
+                <tr>
+                  <th>订单号</th>
+                  <th>网友</th>
+                  <th>手机</th>
+                  <th>付款</th>
+                  <th>付款时间</th>
+                </tr>
+                <volist name="_list" id="vo">
+                    <tr>
+                    <td>{$vo.order_sn}</td>
+                    <td>{$vo.user_name}</td>
+                    <td>{$vo.mobile}</td>
+                    <td>{$vo.money_paid}</td>
+                    <td>{$vo.pay_time|time_format}</td>
+                  </tr>
+                </volist>
+                
+                
+            </table>
+            <else/>
+            <div class="text-center"> aOh! 暂时还没人报名! </div>
+            </notempty>
+            </div>
+            
+    </div>
+
+    </div>
+	<script type="text/javascript">
+    $(function(){
+        $(window).resize(function(){
+            $("#main-container").css("min-height", $(window).height() - 343);
+        }).resize();
+    })
+</script>
+</block>
+
+

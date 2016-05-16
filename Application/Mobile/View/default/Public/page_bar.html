@@ -1,0 +1,74 @@
+<link rel="stylesheet" type="text/css" href="__CSS__/page_bar.css">
+<div class="top_bar" style="-webkit-transform:translate3d(0,0,0)">
+  <nav>
+    <ul id="top_menu" class="top_menu">
+    
+        <if condition="$is_club">
+        <li> <a onclick="javascript:displayit(0)"><img src="__IMG__/bar_group.png"><label>俱乐部</label></a>
+            <ul id="menu_list0" class="menu_font" style="display: none;">
+                <li > <a  onClick="javascript:link_to('{:U('Index/index'.($main_club_id?'?cid='.$main_club_id:''))}');stop_default_event(arguments[0]);return false;" ><img src="__IMG__/bar_home2.png"><label>微官网</label></a></li>
+                <li > <a  onClick="javascript:link_to('{:U('Club/about'.($main_club_id?'?cid='.$main_club_id:''))}');stop_default_event(arguments[0]);return false;" ><img src="__IMG__/bar_news.png"><label>俱乐部介绍</label></a></li>
+                <li > <a  onClick="javascript:link_to('{:U('Club/photo'.($main_club_id?'?cid='.$main_club_id:''))}');stop_default_event(arguments[0]);return false;" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>俱乐部相册</label></a></li>
+            </ul>
+        </li>
+        </if>
+        
+        <li> <a onClick="javascript:link_to('{:U('Actives/index'.($main_club_id?'?cid='.$main_club_id:''))}');return false;"><img src="__IMG__/bar_active.png"><label>线路活动</label></a></li>
+        
+        <li class="home"><a onClick="javascript:link_to('{:U('Index/index'.($main_club_id?'?cid='.$main_club_id:''))}');return false;"  ></a></li>
+        
+        <if condition="$is_club">
+        <li> <a onClick="javascript:link_to('{:U('Club/guide'.($main_club_id?'?cid='.$main_club_id:''))}');return false;"><img src="__IMG__/bar_leader.png"><label>领队</label></a></li>
+        </if>
+        
+        <li> <a onclick="javascript:displayit({$is_club?'1':'0'})"><img src="__IMG__/bar_user.png"><label>会员中心</label></a>
+            <ul id="menu_list3" class="menu_font" style="display: none;">
+	            <if condition="$user_login ">
+	            <li> <a onClick="javascript:link_to('{:U('User/index')}');stop_default_event(arguments[0]);return false;" ><img src="__IMG__/bar_home2.png"><label>个人主页</label></a></li>
+	            <li> <a onClick="javascript:link_to('{:U('User/profile')}');stop_default_event(arguments[0]);return false;" ><img src="__IMG__/bar_news.png"><label>个人信息</label></a></li>
+	            <li> <a onClick="javascript:link_to('{:U('User/orderlist')}');stop_default_event(arguments[0]);return false;" ><img src="__IMG__/bar_active.png"><label>我的订单</label></a></li>
+	            <li> <a onClick="javascript:link_to('{:U('UserFavorite/index')}');stop_default_event(arguments[0]);return false;" ><img src="__IMG__/bar_active.png"><label>我的收藏</label></a></li>
+	            <li> <a onClick="javascript:link_to('{:U('User/logout')}');stop_default_event(arguments[0]);return false;" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>退出</label></a></li>
+                <else/>
+                <!-- <li> <a onClick="javascript:link_to('{:U('User/register')}');stop_default_event(arguments[0]);return false;" ><img src="__IMG__/bar_active.png"><label>免费注册</label></a></li>
+                -->
+                <li> <a onClick="javascript:link_to('{:U('User/login')}');stop_default_event(arguments[0]);return false;" ><img src="__IMG__/bar_active.png"><label>登录</label></a></li>
+                </if>
+            </ul>
+        </li>
+    </ul>
+  </nav>
+</div>
+<div id="plug-wrap" onclick="closeall()" style="display: none;"></div>
+<script>
+function displayit(n){
+    var count = document.getElementById("top_menu").getElementsByTagName("ul").length;  
+    for(i=0;i<count;i++){
+        if(i==n){
+         if(document.getElementById("top_menu").getElementsByTagName("ul").item(n).style.display=='none'){
+             document.getElementById("top_menu").getElementsByTagName("ul").item(n).style.display='';
+             document.getElementById("plug-wrap").style.display='';
+            }else{
+                 document.getElementById("top_menu").getElementsByTagName("ul").item(n).style.display='none';
+                  document.getElementById("plug-wrap").style.display='none';
+            }
+        }else{
+            document.getElementById("top_menu").getElementsByTagName("ul").item(i).style.display='none';
+        }
+    }
+}
+function stop_default_event(event){
+    var evt = event|| window.event;
+    evt.stopPropagation ?evt.stopPropagation() : (evt.cancelBubble=true);
+}
+function closeall(){
+    var count = document.getElementById("top_menu").getElementsByTagName("ul").length;  
+    for(i=0;i<count;i++){
+         document.getElementById("top_menu").getElementsByTagName("ul").item(i).style.display='none';
+    }
+     document.getElementById("plug-wrap").style.display='none';
+}
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+    WeixinJSBridge.call('hideToolbar');
+});
+</script>

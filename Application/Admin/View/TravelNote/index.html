@@ -1,0 +1,195 @@
+<extend name="Public/base" />
+
+<block name="body">
+	<!-- 标题栏 -->
+	<div class="main-title">
+		<h2>游记列表</h2>
+	</div>
+	<div class="cf">
+		<div class="fl">
+              </div>
+
+        <!-- 高级搜索 -->
+		<div class="search-form fr cf">
+			<div class="sleft">
+                            <div class="drop-down">
+					<span id="sch-sort-txt" class="sort-txt" data=""><if condition="$status eq 1"> 已审核<elseif condition="$status eq 0"/>未审核</if></span>
+					<i class="arrow arrow-down"></i>
+					<ul id="sub-sch-menu" class="nav-list hidden">
+						<li><a href="javascript:;" value="1">已审核</a></li>
+						<li><a href="javascript:;" value="0">未审核</a></li>
+					</ul>
+				</div>
+				<input type="text" name="title" class="search-input" value="{:I('title')}" placeholder="游记名称或游记ID">
+				<a class="sch-btn" href="javascript:;" id="search" url="{:U('index')}"><i class="btn-search"></i></a>
+			</div>
+		</div>
+    </div>
+    <!-- 数据列表 -->
+    <div class="data-table table-striped">
+	<table class="">
+    <thead>
+        <tr>
+		<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+		<th class="">ID</th>
+		<th class="">标题</th>
+		<th class="">点击量</th>
+		<th class="">状态</th>
+		<th class="">操作</th>
+		</tr>
+    </thead>
+    <tbody>
+		<notempty name="_list">
+		<volist name="_list" id="vo">
+		<tr>
+            <td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}" /></td>
+			<td>{$vo.id} </td>
+                        <td class="title"><a href="{:U('Home/TravelNotes/detail?id='.$vo['id'])}" target="_blank">{$vo.title}</a></td>
+			<td>{$vo.clicknum}</td>
+			<td>
+                    <select name="status" id="status" dataid="{$vo.id}" onchange="T.changeStatus(this);">
+                        <option value="0" <if condition="$vo.status eq 0">selected="selected"</if>>未审核</option>
+                        <option value="1" <if condition="$vo.status eq 1">selected="selected"</if>>审核通过</option>
+                        </select>
+            
+                        </td>
+			<td class="option">
+                </td>
+		</tr>
+		</volist>
+		<else/>
+		<td colspan="9" class="text-center"> aOh! 暂时还没有内容! </td>
+		</notempty>
+	</tbody>
+    </table>
+	</div>
+    <div class="page">
+        {$_page}
+    </div>
+</block>
+
+<block name="script">
+	<script src="__STATIC__/thinkbox/jquery.thinkbox.js"></script>
+
+	<script type="text/javascript">
+	//搜索功能
+	$("#search").click(function(){
+		var url = $(this).attr('url');
+		var status = $("#sch-sort-txt").attr("data");
+        var query  = $('.search-form').find('input').serialize();
+        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+        query = query.replace(/^&/g,'');
+		if(status != ''){
+			query += 'status=' + status + "&" + query;
+        }
+        if( url.indexOf('?')>0 ){
+            url += '&' + query;
+        }else{
+            url += '?' + query;
+        }
+		window.location.href = url;
+	});
+        /* 状态搜索子菜单 */
+	$(".search-form").find(".drop-down").hover(function(){
+		$("#sub-sch-menu").removeClass("hidden");
+	},function(){
+		$("#sub-sch-menu").addClass("hidden");
+	});
+	$("#sub-sch-menu li").find("a").each(function(){
+		$(this).click(function(){
+			var text = $(this).text();
+			$("#sch-sort-txt").text(text).attr("data",$(this).attr("value"));
+			$("#sub-sch-menu").addClass("hidden");
+		})
+	});
+	//回车搜索
+	$(".search-input").keyup(function(e){
+		if(e.keyCode === 13){
+			$("#search").click();
+			return false;
+		}
+	});
+    //导航高亮
+    highlight_subnav('{:U('TravelNote/index')}');
+	</script>
+	
+	<script type="text/javascript">
+	function get_view_data(target,object){
+		$(object).text("读取中...");
+		$(object).css("color","green");
+		$var = $(object).attr('doing');
+		if(!$var){
+		    $.get(target).success(function(data){
+	            if (data.status==1) {
+	                $title = $(object).parent().parent().children(".title");
+	                $title.text(data.info);
+	                $(object).hide();
+	            }else{
+	                $(object).css("color","red");
+	                $(object).text("读取单页");
+	                $(object).attr('doing',0);
+	            }
+	        });
+		}
+	}
+	$('.ajax-spider').click(function(){
+        var target;
+        var that = this;
+        if ( target = $(this).attr('href') ) {
+            get_view_data(target,that);
+        }
+        return false;
+    });
+	$('.ajax-spider-post').click(function(){
+		if($(".ids:checked").length > 0){
+			$(".ids:checked").each(function(){
+		        var id = $(this).val();
+		        var target = '/index.php?s=/Admin/Spider/doSpider/method/loadActive/id/'+id+'.html';
+		        var obj = $(this).parent().parent().children('.option').children(".ajax-spider");
+		        get_view_data(target,obj[0]);
+		    });
+		}else{
+			updateAlert("没有选择活动！");
+			setTimeout(function(){
+				$('#top-alert').find('button').click();
+            },1500);
+		}
+	});
+	$('.ajax-spider-refrash').click(function(){
+		if ( target = $(this).attr('url') ) {
+			$.get(target).success(function(data){
+				setTimeout(function(){
+                    location.reload();
+                },1500);
+            });
+        }
+	});
+	
+        
+        //用户对象
+    var T={
+        changeStatus:function(obj){
+            //更改用户类型
+            var id = $(obj).attr("dataid");
+            var status = $(obj).val();
+            $.ajax({
+                "url":"{:U('TravelNote/changeStatus')}",
+                "type":"get",
+                "datatype":"json",
+                "data":{
+                    method : 'check',
+                    id : id,
+                    status : status
+                },
+                "success" : function(data){
+                    if(data.status==1){
+                        alert(data.content);
+                    }else{
+                        alert(data.content);
+                    }
+                }
+            });
+        }
+    }
+	</script>
+</block>

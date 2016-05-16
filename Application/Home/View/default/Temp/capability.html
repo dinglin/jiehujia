@@ -1,0 +1,376 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="renderer" content="webkit">
+        <title>智慧养老云平台</title>
+        <link rel="stylesheet" href="__CSS__/index/bootstrap.css">
+    <link rel="stylesheet" href="__CSS__/index/index.css">
+    <link rel="stylesheet" href="__CSS__/index/welcome.css">
+    <script src="./ability_files/hm.js"></script><script type="text/javascript" src="./ability_files/baidu-sa.js"></script><!-- 百度统计 -->
+        <script type="text/javascript" src="./ability_files/jquery-1.8.3.min.js"></script>
+        <script type="text/javascript" src="./ability_files/common.js"></script>
+    <style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style></head> 
+    <body>
+        
+ <!--切换服务站 -->
+<div class="zhy_pub_header" id="zhy_pub_header">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--切换服务站 -->
+
+    <div class="site_change">
+        <div class="site_crent" id="currentSt">
+            当前服务站：
+            
+            
+            
+                <font>JLL下属服务站</font>
+            
+            
+            
+        </div>
+        <div class="site_list" style="width: 795px;">
+            <div class="inline" id="acctSts">
+                
+                <span>所有服务站：</span>
+                
+                
+                    <span class="on"><a href="javascript:void(0)" onclick="window.parent.changeSt(this)" stcode="160429175024029235">JLL下属服务站</a></span>
+                    
+                
+                
+                
+                
+            </div>
+        </div>
+        <div class="site_other" style="display: none;">
+            <span><a href="javascript:void(0)">其它</a></span>
+        </div>
+        <div class="site_other_absolute">
+            <ul id="otherSts">
+            
+            
+            <li><span><a href="javascript:void(0)" onclick="window.parent.changeSt(this)" stcode="160429175024029235">JLL下属服务站</a></span></li>
+            
+            
+            </ul>
+        </div>
+    </div>
+
+
+<!-- <script>
+    var currSt = '';
+    $(function(){
+
+        $.post("/cloud-portal/station/accountStationList",{"pageSize":500},function(data){
+            var stations=data.serviceStations;
+            $("#acctSts").html("<span>所有服务站：</span>");
+            $.each(stations, function(i, st){
+                var _htm = '<span><a href="javascript:void(0)" onclick="window.parent.changeSt(this)" stCode="'+st.serverStationCode+'">'+st.serverStationName+'</a></span>';
+                var _stLi = '<li><span><a href="javascript:void(0)" onclick="window.parent.changeSt(this)" stCode="'+st.serverStationCode+'">'+st.serverStationName+'</a></span></li>';
+                if (currSt == st.serverStationName){//选中当前服务站
+                    _htm = '<span class="on"><a href="javascript:void(0)" onclick="window.parent.changeSt(this)" stCode="'+st.serverStationCode+'">'+st.serverStationName+'</a></span>';
+                }
+                $("#acctSts").append(_htm);
+                $("#otherSts").append(_stLi);
+            });
+            setTabWidth();
+        },"json");
+    });
+</script> --></div>
+<div style="height: 54px;"></div> 
+<script>
+
+    $(function(){
+         $("#zhy_pub_header").load("/cloud-portal/station/changeStationList",function(){
+            setTabWidth();
+        }); 
+        
+    });
+</script>
+        
+<div class="check_bggr">
+    <ul class="site_ul">
+        <zhyauth:haspermission name="ability:ability_analizy">
+            <li class="on crent">
+                    <a hrefs="cloud-member/ability/main?flag=hide&fhsy=1">
+                    <div class="well">
+                    <i class="icon_fx"></i>
+                    <h5>运营分析</h5>
+                    <p>能力评估的相关数据分析</p>
+                </div>
+            </a>
+            </li>
+        </zhyauth:haspermission>
+        <zhyauth:haspermission name="ability:create">
+            <li class="on">
+                    <a hrefs="cloud-member/ability/get_ability_list">
+                    <div class="well">
+                    <i class="icon_addpg"></i>
+                    <h5>进行能力评估</h5>
+                    <p>给会员进行能力评估</p>
+                </div>
+            </a>
+            </li>
+        </zhyauth:haspermission>
+        <zhyauth:haspermission name="ability:edit">
+            <li class="on">
+                    <a hrefs="cloud-member/abilityUpdate/get_abilityUpdate_list">
+                    <div class="well">
+                    <i class="icon_editpg"></i>
+                    <h5 class="color999">修改能力评估</h5>
+                    <p>修改会员能力评估</p>
+                </div>
+            </a>
+            </li>
+        </zhyauth:haspermission>
+        <zhyauth:haspermission name="ability:change">
+            <li class="on">
+                    <a hrefs="cloud-member/modifyability/get_list">
+                    <div class="well">
+                        <i class="icon_bg"></i>
+                    <h5 class="color999">办理等级变更</h5>
+                    <p>给会员办理等级变更</p>
+                </div>
+            </a>
+            </li>
+        </zhyauth:haspermission>
+        <zhyauth:haspermission name="ability:manage">
+            <li class="on">
+                <a hrefs="cloud-member/abilityManager/ability_yes_list">
+                    <div class="well">
+                        <i class="icon_pggl"></i>
+                    <h5 class="color999">评估管理</h5>
+                    <p>已评估、未评估会员管理</p>
+                </div>
+            </a>
+            </li>
+        </zhyauth:haspermission>
+    </ul>
+</div>
+
+        <!-- 会员等级年龄分布 -->
+        <div class="annly_block_1">
+            <div class="panel panel_black">
+                <div class="panel-heading ">会员年龄段分布数据
+                     <span id="goto"></span>
+                </div>
+                <div class="panel-body">
+                    
+                        
+                        
+                            <img src="__IMG__/index/data_null.png" class="data_null_sm">
+                        
+                    
+                </div>
+            </div>
+        </div>
+        <div class="annly_block clearfix">
+            <div class="panel  panel_black ">
+                <div class="panel-heading color333">
+                    会员能力等级对比数据
+                </div>
+                <div class="panel-body">
+                    
+                        
+                        
+                            <img src="__IMG__/index/data_null.png" class="data_null_sm">
+                        
+                    
+                </div>
+            </div>
+            <div class="panel  panel_black ">
+                <div class="panel-heading color333">
+                    会员能力等级变更原因
+                </div>
+                <div class="panel-body">
+                    
+                        
+                        
+                            <img src="__IMG__/index/data_null.png" class="data_null_sm">
+                        
+                    
+                </div>
+            </div>
+        </div>
+        <!-- 引入echarts-all.js-->
+        <script src="__IMG__/index/echarts-all.js"></script>
+        <script type="text/javascript">
+            $(".site_ul li").each(function(i)
+            {
+                if(i == 0)
+                {
+                    $(".site_ul li:eq(0)").addClass("crent");
+                }
+                else
+                {
+                    $(".site_ul li:eq("+i+")").attr("class","").addClass("on");
+                }
+            });
+            
+            $(function()
+            {
+                var age_flag = 'false';
+                if(age_flag=='true')
+                {
+                    /*会员年龄环形图s
+                     * /
+                     */
+                    var myChart2 = echarts.init(document.getElementById('age_echart'));
+                    var option2={
+                        title : {
+                            text: '',
+                            x:'center',
+                            y:'bottom'
+                        },
+                        tooltip : {
+                            trigger: 'item',
+                            position: 'center',
+                            formatter: "{a}-{d}%"
+                        },
+                        legend: {
+                            orient : 'vertical',
+                            x : 'left',
+                            data:['40岁以下','40 - 49岁','50 - 59岁','60 - 69岁','70 - 79岁','80岁以上'],
+                            textStyle:{
+                                fontSize:16,
+                                fontFamily:"微软雅黑"
+                            }
+                        },
+                        toolbox: {
+                            show : false
+                        },
+                        calculable : false,
+                        color: ['#3ae1ce', '#b580d8', '#f1a24d','#8fd140','#22c8ef','#ee6f71'],
+                        series : [
+                              
+                        ]
+                    };
+                    myChart2.setOption(option2);
+                }
+                var neng_li_flag = '';
+                if(neng_li_flag=='true')
+                {
+                    /*能力等级分析
+                     * /
+                     */
+                    var myChart4 = echarts.init(document.getElementById('dengj_echart'));
+                    var option4={
+                        tooltip : {
+                            trigger: 'item',
+                            formatter: "{d}%"
+                        },
+                        legend: {
+                            orient : 'vertical',
+                            x : 0,
+                            data:['能力完好','轻度受损','中度受损','重度受损'],
+                            textStyle:{
+                                fontSize:16,
+                                fontFamily:"微软雅黑"
+                            }
+                        },
+                        toolbox: {
+                            show : false
+                        },
+                        calculable : false,
+                        color: ['#3ae1ce', '#b580d8','#f1a24d','#8fd140','#22c8ef','#ee6f71','#d9d9d9'],
+                        series : [
+                            {
+                                name:'访问来源',
+                                type:'pie',
+                                radius : ['50%', '80%'],
+                                itemStyle : {
+                                    normal : {
+                                        show : true,
+                                        length:15,
+                                        lineStyle:{
+                                            width:1,
+                                            shadowBlur:0
+                                        }
+                                    }
+                                },
+                                center:['68%','50%'],
+                                data:[]
+                            }
+                        ]
+                    };
+                    myChart4.setOption(option4);
+                }
+                var bian_geng_flag = '';
+                if(bian_geng_flag=='true')
+                {
+                    /*能力变更原因
+                     * /
+                     */
+                    var myChart3 = echarts.init(document.getElementById('biang_echart'));
+                    var option3={
+                        tooltip : {
+                            trigger: 'item',
+                            formatter: "{d}%"
+                        },
+                        legend: {
+                            orient : 'vertical',
+                            x : 'left',
+                            data:['有认知障碍/痴呆、精神疾病','跌倒、噎食、自杀、走失','处于昏迷状态','其他原因'],
+                            textStyle:{
+                                fontSize:16,
+                                fontFamily:"微软雅黑"
+                            }
+                        },
+                        toolbox: {
+                            show : false
+                        },
+                        calculable : false,
+                        color: ['#3ae1ce','#f1a24d','#8fd140','#22c8ef','#ee6f71'],
+                        series : [
+                            {
+                                name:'访问来源',
+                                type:'pie',
+                                radius : ['50%', '80%'],
+                                itemStyle : {
+                                    normal : {
+                                        show : true,
+                                        length:15,
+                                        lineStyle:{
+                                            width:1,
+                                            shadowBlur:0
+                                        }
+                                    }
+                                },
+                                center:['60%','50%'],
+                                data:[]
+                            }
+                        ]
+                    };
+                    myChart3.setOption(option3);
+                }
+            });
+        </script>
+    
+</body></html>

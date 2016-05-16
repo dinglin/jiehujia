@@ -1,0 +1,126 @@
+<extend name="Base/index"/>
+<block name="style">
+<!-- <link href="__CSS__/club.css" type="text/css" rel="stylesheet" /> -->
+<link href="__CSS__/club2.css" type="text/css" rel="stylesheet" />
+</block>
+<block name="content">
+<div class="grid-ctn" id="main">
+<include file="Club/header"/>
+<div class="profile-content clearfix">
+      <div class="grid-17">
+        <div class="panel-lv2">
+  <div class="bd">
+    <div class="profile-feed">
+      <ul error-msg="没有新的动态了" loading-class=".nf-loading" total-page="12" cur-page="0" item-selector=".profile-feed ul li" class="ext-scroll-load">
+           <volist name="actives" id="at">
+           <li>
+              <div class="clearfix">
+	              <div class="profile-feed-info">
+	                <div class="profile-feed-date">
+	                  <strong>{$at.start_time|time_format='d'}</strong><em>{$at.start_time|time_format='m'}月</em>
+	                </div>
+	              </div>
+	              <div class="profile-feed-content">
+	                  <div class="pointer"><i class="ico-activity-feed"></i></div>
+	                  <div class="feed-content">
+		                    <div class="tit">
+		                        <a target="_blank" title="{$at.title} " href="{:U('Actives/detail?id='.$at['active_id'])}">{$at.title}</a>
+		                    </div>
+		                    <div class="img-list">
+		                        <volist name="at.imgs" id="imgsrc">
+		                        <img src="{:img_size_url($imgsrc,196,176)}" width="150">
+		                        </volist>
+		                   </div>
+	                  </div>
+	                  <div class="feed">
+	                     <ul>
+	                        <li><span title="浏览" class="view"></span><em>{$at.hits}</em></li>
+	                        <!-- <li><span title="评论" class="comment">评论</span><em>(123)</em></li>
+	                        <li><span title="喜欢" class="like">喜欢</span><em>(123)</em></li> -->
+	                    </ul>
+	                    <span class="fr">活动时间：{$at.start_time|time_format}~{$at.end_time|time_format}（{$at.days}天）</span>
+	                 </div>
+	               </div>
+                </div>
+            </li>
+            </volist>
+       </ul>  
+    </div>
+    <div class="">
+        <if condition="$actives">
+	    <div class="pager">
+	        <if condition="$pages.pre_page  neq ''">
+                <a class="prev_link" href="{$pages.pre_page}">&lt;前一页</a>
+            <else />
+                <a class="prev_link firt_prev">&lt;前一页</a>
+            </if>
+            <span style="color:#666;">{$pages.now_page}/{$pages.total_page}</span>
+            <if condition="$pages.next_page neq ''">
+                <a class="next_link" href="{$pages.next_page}">后一页&gt;</a>
+            <else />
+                <a class="next_link firt_prev">后一页&gt;</a>
+            </if>
+	    </div>
+	    </if>
+    </div>
+    <div class="nf-loading">&nbsp;</div>
+    <div id="comment_club" style="margin-top:5px;"> {:hook('documentDetailAfter',$info)} </div>
+  </div>
+</div>
+      </div>
+      <div class="grid-7">
+            <div class="panel-rv2 profile-relationv2">
+    <div class="hd">
+      <h2>活动日历</h2>
+    </div>
+    <div class="bd">
+      <div id="datetimepicker"></div>
+    </div>
+  </div>
+    <div class="panel-rv2 profile-relationv2">
+    <div class="hd">
+      <h2>猜你喜欢</h2>
+    </div>
+    <div class="bd">
+      <ul class="hot-equipment clearfix">
+	      <volist name="may_like" id="like">
+	      <li><a href="{:U('Actives/detail?id='.$like['active_id'])}" target="_blank">{$like.active_name}</a></li>
+	      </volist>
+      </ul>
+    </div>
+  </div>
+<div class="panel-rv2 profile-relationv2" style="display:none;">
+  <div class="hd">
+    <h2>领队</h2>
+    <a style="cursor: default;" href="javascript:void(0);">累计访问<em>173</em></a>
+  </div>
+  <div class="bd">
+            <ul class="recent-visitors clearfix">
+            <!-- <li><a href="" target="_blank"><img width="54" height="54" title="" alt="" src=""></a></li> -->
+          </ul>
+  </div>
+</div>
+      </div>
+    </div>
+  </div>
+</block>
+
+<block name="script">
+ <!-- 用于加载js代码 -->
+     <link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+    <php>if(C('COLOR_STYLE')=='blue_color') echo '<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">';</php>
+    <link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+    <script type="text/javascript">
+    $(function(){
+        $('#datetimepicker').datetimepicker({
+            format: 'yyyy-mm-dd',
+            language:"zh-CN",
+            minView:2,
+            keyboardNavigation:false,
+        });
+    
+    });
+    </script>
+</block>

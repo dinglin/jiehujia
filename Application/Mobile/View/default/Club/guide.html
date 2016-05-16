@@ -1,0 +1,31 @@
+<extend name="Base/common"/>
+<block name="style">
+<link href="__CSS__/global.css" rel="stylesheet" />
+<link rel="stylesheet" href="__CSS__/club.css">
+
+</block>
+<block name="content">
+    <div id="content" class="login">
+        <volist name="guide" id="gu">
+        <div class="active_leader_item">
+            <div class="pic_box">
+                <a onclick="javascript:;"><img src="__ROOT__{$gu.logo|get_cover_file='savename'}" class="pic"></a>
+            </div>
+            <div class="txt"><a href="javascript:;">{$gu.nick_name}</a></div>
+        </div>
+        </volist>
+    </div><!-- /#content -->
+</block>
+<!--end content-->
+<block name="script">
+<script type="text/javascript" src="__STATIC__/jquery.lazyload.js"></script>
+<script type="text/javascript">
+$(function() {
+    var default_img="{:img_size_url("",290,260)}";
+    $("img").lazyload({
+           effect : "fadeIn",
+           placeholder : default_img,   
+    });
+});
+</script>
+</block> 

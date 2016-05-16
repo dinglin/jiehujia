@@ -1,0 +1,66 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <div class="main-title">
+        <h2>词库</h2>
+    </div>
+       <div class="form-item">
+           <div class="controls">
+               <span >基础词库：<b>{$c_base}</b></span><br/>
+               <span >旅游词库：<b>{$c_trip}</b></span><br/>
+               <span >城镇词库：<b>{$c_place}</b></span><br/>
+               <span>户外：<b>{$c_huwai}</b></span>
+           </div>
+       </div><br/>
+       <div class="form-item">
+           <label class="item-label">查看关键词是否存在<span class="check-tips" id="notice"></span></label>
+           <div class="controls">
+               <input type="text" class="text input-large" name="kw" value="">
+           </div>
+       </div><br/>
+       <div class="form-item">
+           <button class="btn submit-btn" id="check_word">查查看</button>
+           <button class="btn btn-return" style="display:none;" id="add_word">添加到词库</button>
+       </div>
+</block>
+
+<block name="script">
+    <script type="text/javascript">
+        //导航高亮
+        highlight_subnav('{:U('User/index')}');
+    </script>
+    <script type="text/javascript">
+    var word_check = "{:U('Words/check')}";
+    var word_add   = "{:U('Words/add')}";
+    $('#check_word').click(function(){
+        var kw = $('input[name="kw"]').val();
+        $.post(word_check,{'kw':kw},function(data){
+            if(data.status==1){
+                if (data.info=="has") {
+                    $("#notice").text("关键词已经存在");
+                    $("#notice").css('color',"#CC3900");
+                    $('#add_word').hide();
+                }else if(data.info=="no"){
+                    $("#notice").text("词库中没有该关键词");
+                    $("#notice").css('color',"#4cdb00");
+                    $('#add_word').show();
+                }
+            }else{
+                $("#notice").text("");
+                $('#add_word').hide();
+            }
+        });
+    });
+    $('#add_word').click(function(){
+        var kw = $('input[name="kw"]').val();
+        $.post(word_add,{'kw':kw},function(data){
+            $("#notice").text("");
+            $('#add_word').hide();
+            updateAlert("添加成功");
+            setTimeout(function(){
+                $('#top-alert').find('button').click();
+            },1500);
+        });
+    });
+    </script>
+</block>

@@ -1,0 +1,134 @@
+<extend name="Base/user"/>
+
+<block name="style">
+<link href="__STATIC__/bootstrap/css/bootstrap.css" rel="stylesheet">
+<link href="__CSS__/user.css" rel="stylesheet">
+
+<style>
+.order_goods_item_table{ width: 100%;}
+table .order_goods_item td{padding: 0 0;}
+table.order_goods_item_table th{ border: none; background-color:#f5f5f5; font-family: "microsoft Yahei"; font-weight: normal; color: #777; }
+table.order_goods_item_table td{ border: none;background-color:#f5f5f5;font-family: "microsoft Yahei";  padding: 8px; color: #999; border-top: 1px solid #dfdfdf;}
+
+
+</style>
+</block>
+
+
+<block name="content">
+    <div id="main-container" class="container">
+        
+<!-- menu -->
+	<include file="Public/user_menu"/>
+	<!-- /menu -->
+
+        
+    <div class="span9 bs-docs-example">
+        <!-- Contents
+        ================================================== -->
+        <section id="contents">
+            <div class="sidebar-widget"><h5>订单列表</h5></div>
+        </section>
+        <div >
+        <notempty name="_list">
+            <br/>
+            <table class="table table-hover">
+                <tr>
+                  <th>订单号</th>
+                  <th>金额</th>
+                  <th>状态</th>
+                  <th>操作</th>
+                </tr>
+                <volist name="_list" id="vo">
+                    <tr  class="TR_{$vo.order_sn} order_item" data_id="{$vo.order_sn}">
+                        <td>{$vo.order_sn}</td>
+                        <td>{$vo.order_amount}</td>
+                        <td>{$vo.order_status_txt}</td>
+                        <td>
+                            <a href="javascript:" onclick="O.del_order('{$vo.order_sn}')">删除</a>
+                            <if condition="($vo.order_status lt 2) and ($vo.pay_status lt 2) ">
+                                <a href="javascript:" onclick="O.pay_order('{$vo.order_sn}')">现在付款</a>
+                            </if>
+                        </td>
+                      </tr>
+                      <tr class="TRSUB_{$vo.order_sn} order_goods_item">
+                          <td colspan="4">
+                              <table class="order_goods_item_table" >
+                                  <tr>
+                                    <th>活动名称</th>
+                                    <th>人数</th>
+                                    <th>人均价</th>
+                                  </tr>
+                                  <volist name="vo.goods_list" id="go">
+                                  <tr>
+                                    <td><a href="{:U('Home/Actives/detail?id='.$go['goods_id'])}" target="_blank">{$go.goods_name}</a></td>
+                                    <td>{$go.goods_number}</td>
+                                    <td>{$go.goods_price}</td>
+                                  </tr>
+                                  </volist>
+                              </table>
+                          </td>
+                      </tr>
+                </volist>
+                
+                
+            </table>
+            <else/>
+            <div class="text-center"> aOh! 暂时还没有内容! </div>
+            </notempty>
+            </div>
+        
+   
+    </div>
+
+    </div>
+	
+	<script type="text/javascript">
+    $(function(){
+        $(window).resize(function(){
+            $("#main-container").css("min-height", $(window).height() - 343);
+        }).resize();
+   
+    })
+</script>
+<script type="text/javascript">
+(function(){
+	var ThinkPHP = window.Think = {
+		"ROOT"   : "", //当前网站地址
+		"APP"    : "/index.php?s=", //当前项目地址
+		"PUBLIC" : "/Public", //项目公共目录地址
+		"DEEP"   : "/", //PATHINFO分割符
+		"MODEL"  : ["3", "1", "html"],
+		"VAR"    : ["m", "c", "a"]
+	}
+})();
+var O={
+    del_order : function(order_sn){
+        if(confirm("确认删除吗？")){
+            $.ajax({
+                'url':'{:U('User/delOrder')}',
+                'type':'post',
+                'datatype':'json',
+                'data':{
+                    order_sn : order_sn
+                },
+                'success':function(data){
+                    //console.dir(data);
+                    if(data.status==1){
+                        var content = data.content;
+                        $('.TR_'+content.order_sn).remove();
+                        $('.TRSUB_'+content.order_sn).remove();
+                    }else{
+                       
+                    }
+                }
+            });
+        }
+    },
+    pay_order : function(order_sn){
+        location.href = 'index.php/Home/Index/pay_index/?order_sn='+order_sn;
+    }
+}
+</script>
+ <!-- 用于加载js代码 -->
+</block>

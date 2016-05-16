@@ -1,0 +1,45 @@
+<extend name="Base/index"/>
+<block name="style">
+    <link href="__CSS__/club2.css" type="text/css" rel="stylesheet" />
+</block>
+<block name="content">
+    <div class="grid-ctn" id="main">
+       <include file="Club/header"/>
+    
+    <div class="profile-content clearfix">
+      <div class="grid-24">
+        <div class="panel-lv2">
+  <div class="hd">
+    <div class="switch-body">
+      <a class="focus" href="/club/118465/relation">所有相册</a>
+          </div>
+  </div>
+  <div class="bd">
+    <div class="profile-album clearfix">
+          <volist name="imgs" id="imgsrc">
+          <div class="profile-album-item">
+            <a href="{:U('Actives/detail?id='.$imgsrc['active_id'])}" title="{$imgsrc.active_name}">
+              <img src="{:img_size_url($imgsrc['img_src'],290,260)}" alt="{$imgsrc.active_name}" width="290" height="260">
+              <p>{$imgsrc.active_name}</p>
+            </a>
+          </div>
+          </volist>
+      </div>
+  </div>
+    </div>
+    </div>
+    </div>
+    </div>
+</block>
+<block name="script">
+<script type="text/javascript" src="__STATIC__/jquery.lazyload.js"></script>
+<script type="text/javascript">
+$(function() {
+	var default_img="{:img_size_url("",290,260)}";
+	$("img").lazyload({
+		   effect : "fadeIn",
+		   placeholder : default_img,   
+	});
+});
+</script>
+</block>    

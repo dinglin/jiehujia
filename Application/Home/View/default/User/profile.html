@@ -1,0 +1,123 @@
+<extend name="Base/user"/>
+
+
+
+
+<block name="content">
+   <div id="main-container" class="container">
+        
+        <!-- menu -->
+	<include file="Public/user_menu"/>
+	<!-- /menu -->
+<div class="span9 bs-docs-example">
+    
+<section id="contents">
+    <div class="sidebar-widget"><h5>修改个人信息</h5></div>
+	<div class="span9">
+        <form class="login-form" action="/index.php?s=/home/user/profile.html" method="post" role="form">
+            <div class="control-group" id="error_show" style="display:none;">
+				<div class="alert alert-warning Validform_checktip">
+				</div>
+		   </div>
+          <div class="control-group">
+            <label class="control-label" for="nickname">昵称</label>
+            <div class="controls">
+              <input type="text" id="nickname"  class="span3" placeholder="请输昵称"  name="nickname" value="{$user.nickname}">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" >性别</label>
+            <div class="controls">
+				  <input type="radio" class="form-control"  id="inlineCheckbox1" value="1" name="sex" {$user['sex']==1?'checked':''}> 男&nbsp;&nbsp;
+				  <input type="radio" class="form-control"  id="inlineCheckbox2" value="2" name="sex" {$user['sex']==2?'checked':''}> 女&nbsp;&nbsp;
+				  <input type="radio" class="form-control"  id="inlineCheckbox3" value="0" name="sex" {$user['sex']==0?'checked':''}> 未知
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="birthday">出生日期</label>
+            <div class="controls">
+              <input type="date" id="birthday" class="span3 time" readonly placeholder="请选择出生日期" name="birthday" value="{$user.birthday}">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="phone">手机</label>
+            <div class="controls">
+              <input type="text" id="phone"  class="span3" placeholder="请输入手机号"  errormsg="11位" nullmsg="请填写手机号" datatype="*11" name="phone" value="{$user.phone}">
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="controls">
+              <button type="submit" class="btn">提 交</button>
+            </div>
+          </div>
+        </form>
+	</div>
+</section>
+</div>
+
+</div>
+
+<script type="text/javascript">
+    $(function(){
+        $(window).resize(function(){
+            $("#main-container").css("min-height", $(window).height() - 343);
+        }).resize();
+    })
+</script>
+<script type="text/javascript">
+(function(){
+	var ThinkPHP = window.Think = {
+		"ROOT"   : "", //当前网站地址
+		"APP"    : "/index.php?s=", //当前项目地址
+		"PUBLIC" : "/Public", //项目公共目录地址
+		"DEEP"   : "/", //PATHINFO分割符
+		"MODEL"  : ["3", "1", "html"],
+		"VAR"    : ["m", "c", "a"]
+	}
+})();
+</script>
+
+	<script type="text/javascript">
+
+    	$(document)
+	    	.ajaxStart(function(){
+	    		$("button:submit").addClass("log-in").attr("disabled", true);
+	    	})
+	    	.ajaxStop(function(){
+	    		$("button:submit").removeClass("log-in").attr("disabled", false);
+	    	});
+
+    	$("form").submit(function(){
+    		var self = $(this);
+    		$.post(self.attr("action"), self.serialize(), success, "json");
+    		return false;
+
+    		function success(data){
+    			if(data.status){
+    				self.find(".Validform_checktip").text("修改成功");
+    			} else {
+    				self.find(".Validform_checktip").text(data.info);
+    			}
+    			$('#error_show').show();
+    		}
+    	});
+	</script>
+ <!-- 用于加载js代码 -->
+     <link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+    <php>if(C('COLOR_STYLE')=='blue_color') echo '<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">';</php>
+    <link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+    <script type="text/javascript">
+    $(function(){
+        $('.time').datetimepicker({
+            format: 'yyyy-mm-dd',
+            language:"zh-CN",
+            minView:2,
+            autoclose:true
+        });
+    
+    });
+    </script>
+</block>
+

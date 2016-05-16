@@ -1,0 +1,116 @@
+
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <link rel="stylesheet" href="__CSS__/index/bootstrap.css">
+    <link rel="stylesheet" href="__CSS__/index/index.css">
+    <link rel="stylesheet" href="__CSS__/index/welcome.css">
+    <title>账户总览</title>
+<style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style></head>
+<body>
+    <!--遮罩层-->
+    <div class="zhy_zhezhao_pop " style="height:800px;"></div>
+    <!--遮罩层 end-->
+    <div class="zhy_popa dialog_0 " style="width: 495px;margin-left: -245px;">
+        <p class="color66">代金券充值<span class="pull-right close_icon" onclick="hideEdit()"></span></p>
+        <div class="pop_content">
+            <div class="djq_div">
+                <input id="voucherCode" class="form-control inline" type="text" style="width: 325px;height: 40px;" placeholder="请正确输入代金券编号">
+                <p class="err_p" style="display: none"><i class="icon_error_sm"></i><span class="error_txt">您输入的代金券编号有误，请重新输入。 </span></p>
+            </div>
+            <div style="height: 35px;"></div>
+            <div class="operate_btn pull-right">
+                <button type="button" class="btn cancle_yes" onclick="inchargeVoucher(this)">确认充值</button>
+                <button type="button" class="btn cancel" onclick="hideEdit()">取消</button>
+            </div>
+        </div>
+    </div>
+
+    <!--未实名-->
+    <div class="zhy_popa wsm_pop " style="width: 450px;margin-left: -225px;">
+        <p class="color66">提示<span class="pull-right close_icon" onclick="hidePop()"></span></p>
+        <div class="pop_content">
+            <p class="red_tip"><font>您是未实名企业！</font> 如果您需要充值，请先进行实名认证。</p>
+            <div class="operate_btn pull-right">
+                <button type="button" class="btn cancle_yes" onclick="window.open(&#39;/cloud-portal/auth/auditProcess&#39;)">申请实名认证</button>
+                <button type="button" class="btn cancel" onclick="hidePop()">继续试用</button>
+            </div>
+        </div>
+    </div>
+    <div class="main_content_a">
+        <div class="col-xs-12 col-sm-12 overview">
+            <div class="well">
+                <h4 class="ml150 mt10"><b class="colorshenblue">JLL</b>
+                
+                <a class="btn btn_blueg2  font14 mr0" href="javascript:void(0);" hrefs="window.open(&#39;/cloud-portal/auth/auditProcess&#39;)">去实名认证</a><span class="font12">（<font class="colorred">实名认证可以免费享受更多的应用模块，具体可以进入应用中心查看</font>）</span>
+                
+                
+                </h4>
+                <!-- <h6 class="color66">机构编号：160429175023926795</h6> -->
+                <h5>账户余额：&nbsp;&nbsp;&nbsp;
+                    <span class="colorred"><b style="font-size: 24px;">0</b><b>.00元</b></span>
+                    <a class="btn btn-link2 btn-linkr" href="javascript:void(0);" hrefs="filterLink(this,&#39;/cloud-portal/balance/inchargePage?orgzName=JLL&#39;)">立即充值</a>
+                </h5>
+                <h5>代金券余额：
+                    <span class="colorred"><b style="font-size: 24px;">0</b><b>.00元</b></span>
+                    <a class="btn btn-link2 btn-linkg" hrefs="deleteM(this,&#39;dialog_0&#39;)">代金券充值</a>
+                </h5>
+                <a class="btn btn_blueg2 " hrefs="cloud-portal/balance/listBalanceFlow">查看账户明细</a>
+            </div>
+            <ul class="site_ul">
+                <li class="on">
+                    <a href="cloud-statistics/station/displaypage/main?val=1">
+                        <div class="well">
+                            <h1 class="mt0 colorblue">1</h1><!-- window.location.href = "/cloud-statistics/station/displaypage/main?val=1"; -->
+                            <h5>服务站</h5>
+                        </div>
+                    </a>
+                </li>
+                <li class="on">
+                    <a href="cloud-member/member/get_member_list">
+                    <div class="well">
+                        <h1 class="mt0 colorred">0</h1> <!-- /cloud-member/member/get_member_list -->
+                        <h5>老人会员</h5>
+                    </div>
+                    </a>
+                </li>
+                <li class="off">
+                    <div class="well">
+                        <h1 class="mt0 color999">0</h1>
+                        <h5 class="color999">健康报告</h5>
+                        <p style="display:none">敬请期待</p>
+                    </div>
+                </li>
+                <li class="off">
+                    <div class="well">
+                        <h1 class="mt0 color999">0</h1>
+                        <h5 class="color999">护理员</h5>
+                        <p style="display:none">敬请期待</p>
+                    </div>
+                </li>
+            </ul>
+            <div class="well">
+                <ul class="site_tab_ul">
+                    <li class="on"><a class="color333" hrefs="./account_files/sub1.htm" target="mainFrame">服务站地区分布</a></li>
+                    <li><a class="color333" hrefs="cloud-statistics/account/displaypage/sub2?bizZhyCode" target="mainFrame">服务站数据</a></li>
+                    <li><a class="color333" hrefs="cloud-statistics/account/displaypage/sub3?bizZhyCode" target="mainFrame">会员地区分布</a></li>
+                    <li><a class="color333" hrefs="cloud-statistics/account/displaypage/sub4?bizZhyCode" target="mainFrame">会员数据</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="__JS__/jquery/jquery-1.8.3.min.js"></script>
+</body></html>

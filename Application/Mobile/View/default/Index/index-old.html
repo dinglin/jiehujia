@@ -1,0 +1,54 @@
+<extend name="Base/common"/>
+<block name="style">
+<link href="__CSS__/global.css" rel="stylesheet" />
+<link href="__CSS__/index.css" rel="stylesheet">
+<link href="__CSS__/idangerous.swiper.css" rel="stylesheet">
+<script src="__JS__/swiper.min.js" type="text/javascript"></script>
+</block>
+<block name="content">
+<include file="Public/search"/>
+<div class="swiper-main i-banner">
+    <div class="swiper-container swiper-banner">
+        <div class="swiper-wrapper" style="transform: translate3d(-3789px, 0px, 0px); transition-duration: 0.3s;">
+            <volist name="banners" id="ban">
+            <div class="swiper-slide" style="width: 1263px;">
+                <a href="{$ban.link}" style="height: 520px;">
+                    <span class="mask"><img src="{:img_size_url($ban['src'],400,160)}" alt="{$ban.title}"></span>
+	                <div class="t_tips">
+	                    <!-- <h2>周边游推荐</h2> -->
+	                    <h3>{$ban.title}<!-- <br><span class="pro-value"><small>¥</small>440<i>起</i></span> --></h3>
+	                </div>
+                </a>
+            </div>
+            </volist>
+        </div>
+    </div>
+    <div class="pagination"><span class="swiper-pagination-switch"></span><span class="swiper-pagination-switch"></span><span class="swiper-pagination-switch swiper-active-switch swiper-activeslide-switch"></span><span class="swiper-pagination-switch"></span><span class="swiper-pagination-switch"></span><span class="swiper-pagination-switch"></span><span class="swiper-pagination-switch"></span><span class="swiper-pagination-switch"></span></div>
+</div>
+<div class="i-top">
+    <h2>本月推荐户外活动<a class="fr" href="{:U('Actives/index')}">所有活动>></a></h2>
+    <ul>
+        <volist name="recomactives" id="at">
+        <li>
+	        <a href="{:U('Actives/detail?id='.$at['active_id'])}">
+		        <span class="t_num">NO.<i>{$i}</i></span>
+		        <span class="t_pic"><img alt="{$at.title}" src="{:img_size_url($at['list_pic'],196,176)}"></span>
+		        <span class="t_info">
+			        <div class="t_info_body">
+			            <h3>{$at.title|cnsubstr=30}</h3>
+			            <p>
+			                <span class="fl">{$at.club.club_name}</span>
+			                <span class="fr pro-value"><small>¥</small>{$at.price}</span>
+			            </p>
+			        </div>
+		        </span>
+	        </a>
+        </li>
+        </volist>
+    </ul>
+</div>
+<div class="clear"></div>
+</block>
+<!--end content-->
+<block name="script">
+</block> 

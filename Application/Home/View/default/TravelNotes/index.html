@@ -1,0 +1,83 @@
+<extend name="Base/travelnotes"/>
+<block name="style">
+<link href="__CSS__/reset.css" type="text/css" rel="stylesheet" />
+<link href="__CSS__/travel_center.css" type="text/css" rel="stylesheet" />
+<link href="__CSS__/base.css" type="text/css" rel="stylesheet" />
+<style>
+.hot-main-s .mgr0{ margin-right:0px;}
+</style>
+</block>
+
+<block name="content">
+ 
+<div class="box" style="margin-top: 34px;">
+	<div class="content clearfix">
+		<div class="content-title"><div class="content-title-right">
+				<a class="write-note" href="{:U('user/travelNotesAdd')}" target="_blank" rel="nofollow">
+					<span></span>
+					<em>发表游记</em>	
+				</a>
+				<a class="my-note" href="{:U('user/travelNotes')}" target="_blank" rel="nofollow">
+					<span></span>
+					<em>我的游记</em>
+				</a>
+			</div>
+		</div>
+		<div class="hot clearfix"><div class="hot-center clearfix">
+				<div class="hot-center-title clearfix">
+				<a href="{$pages.default}" class="hot-title-name <if condition="$tab eq 'default' ">cur</if>">默认&nbsp;&nbsp;&nbsp;<em class="cut-off">|</em></a>
+				<a href="{$pages.hot}" class="hot-title-name <if condition="$tab eq 'hot' ">cur</if>">热门&nbsp;&nbsp;&nbsp;<em class="cut-off">|</em></a>
+				<a href="{$pages.recom}" class="hot-title-name <if condition="$tab eq 'recom' ">cur</if>" >推荐&nbsp;&nbsp;&nbsp;<em class="cut-off">|</em></a>
+				<a href="{$pages.new}" class="hot-title-name <if condition="$tab eq 'new' ">cur</if>">最新&nbsp;&nbsp;&nbsp;<em class="cut-off">|</em></a>
+									
+					
+				</div>
+				<div class="hot-main-s clearfix">
+				<volist name="travel_notes" id="T" key="k">
+									<div class="hot-main-square clearfix <if condition="($k % 3) eq 0">mgr0</if>" >
+						<div class="hot-main-up">
+							<a href="{:U('TravelNotes/detail?id='.$T['id'])}" target="_blank" title="{$T.title}"><if condition="$T.pic_url neq ''"><img src="{$T.pic_url}" width="320" height="192"/><else />{$T.title}</if></a>
+													</div>
+						<div class="hot-main-middle">
+							<p class="note-title"><a href="{:U('TravelNotes/detail?id='.$T['id'])}" target="_blank">{$T.title}</a></p>
+							<p>
+								<span class="scan"></span>{$T.clicknum}&nbsp;
+								<span class="like"></span>{$T.is_like}&nbsp;
+								<span class="comment"></span>{$T.comment_num}							</p>	
+						</div>
+						<div class="hot-main-down">
+							<p>
+								<a class="author-info" href="javascript:;"><img src="__IMG__/default_head.png" width="34" height="34">&nbsp;&nbsp;<em class="author">{$T.nickname}</em></a>
+								<span class="reader-info">
+									<span>{$T.add_time}</span>
+								</span>
+							</p>
+						</div>
+					</div>
+					</volist>
+										
+						
+									</div>
+				</div>
+				<if condition="$pages.total_page gt 0 ">
+                <div class="pages">
+                <ul class="active" id="yw0"><a href="javascript:"></a>
+				
+<a href="{$pages.pre_page}">上一页</a>
+<a href="javascript:"><b>{$pages.now_page}</b></a>/
+<a href="javascript:">{$pages.total_page}</a>
+<a href="{$pages.next_page}">下一页</a>
+<a href="javascript:"></a></ul>			</div>
+</if>
+		</div>
+			
+	</div>
+</div>
+
+
+</block>
+<block name="script">
+    <script type="text/javascript">
+     
+    </script>
+</block>

@@ -1,0 +1,98 @@
+<extend name="Base/common"/>
+<block name="style">
+<link href="__CSS__/global.css" rel="stylesheet" />
+<link rel="stylesheet" href="__CSS__/list.css">
+</block>
+<block name="content">
+    <div class="lv-filtrate-bar no_crumbs">
+        <div class="tab_select">
+            <ul>
+                <li class="active">
+                    <span>活动</span><span class="ic_triangle_up"></span>
+                </li>
+                <li class="">
+                    <span>游记</span><span class="ic_triangle_up"></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="tabChange lv-project-list bg-white">
+        <notempty name="actives">
+        <input type="hidden" name="page" id="PLACEPage" value="1">
+        <ul id="PLACE_data_list">
+            <volist name="actives" id="vo" >
+                    <article href="{:U('Home/Actives/detail?id='.$vo['active_id'])}">
+                            <div style="background-image: url({:img_size_url($vo['list_pic'],196,176)})" class="pro-pic"></div>
+                            <div class="pro-info">
+                                <h3>{$vo.title}</h3>
+                                <p>
+                                    <span class="f-color-1 value fl">&yen;{$vo.price}</span>
+                                    <span class="fr"></span>
+                                </p>
+                                <p>
+                                    <span class="fl">时间：{$vo.start_time|time_format='m月d日'}~{$vo.end_time|time_format='m月d日'}（{$vo.days}天）</span>
+                                    <span class="fr f-color-1 rebate"> </span>
+                                    <span class="privilege rose">
+                                    <a href="{:U('UserFavorite/favorite_delete?active_id='.$vo['active_id'])}" class="ajax-get" style="color:#fff;">取消</a>
+                                    </span>
+                                </p>
+                                <p class="f-size-10">{$vo.destination}</p>
+                            </div>
+                    </article>
+             </volist>
+        </ul>
+        <!-- 如果不是最后一页  -->
+        <if condition="$pages.next_page ">
+        <a href="javascript:void(0);" onclick="javascript:" id="show_more" class="view_more">查看更多</a>
+        </if>
+        <else/>
+            <div class="lv-search-fail lv-min-height" style="">
+                <div class="lv-sorry-icon">
+                    <img src="__IMG__/sorry_my.png">
+                </div>
+                <p>还没有收藏任何活动</p>
+          </div>   
+        </notempty>
+    </div>
+    
+    <div class="tabChange lv-project-list bg-white">
+        <input type="hidden" name="page" id="PRODUCTPage" value="1">
+        <ul id="PRODUCT_data_list">
+		  <div class="lv-search-fail lv-min-height" style="">
+		        <div class="lv-sorry-icon">
+		            <img src="__IMG__/sorry_my.png">
+		        </div>
+		        <p> 还没有收藏任何游记</p>
+		  </div>        
+		</ul>
+    </div>
+</block>
+<!--end content-->
+<block name="script">
+<script type="text/javascript" src="__JS__/base.js"></script>
+<script type="text/javascript">
+    $(".lv-filtrate-bar").tabChange();
+</script>
+<script type="text/javascript">
+var nowpage = {$pages.now_page};
+var totalpage = {$pages.total_page};
+var thisurl = '{$pages.next_page}';
+$('#show_more').click(function(){
+    if(nowpage < totalpage){
+        nowpage = nowpage+1;
+        thisurl=thisurl.replace(/\/p\/\d\//ig,'/p/'+nowpage+'/'); 
+        $.get(thisurl, function(data){
+            $("#data_list").append(data)
+        });
+    }else{
+        $(this).hide();
+    }
+});
+</script>
+<script>
+$("article").click(function(){
+	location.href=$(this).attr("href");
+});
+</script>
+</block> 

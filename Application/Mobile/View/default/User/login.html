@@ -1,0 +1,71 @@
+<extend name="Base/common"/>
+<block name="style">
+<link href="__CSS__/global.css" rel="stylesheet" />
+<link rel="stylesheet" href="__CSS__/login.css">
+
+</block>
+<block name="content">
+    <div id="content" class="login">
+        <if condition="$LOGIN_OPEN ">
+        <form method="GET" action="" id="findPassworldForm">
+            <input type="hidden" value="" name="service" id="redirect_url">
+            <input type="hidden" value="" name="activityChannel" id="activityChannel">
+        </form>
+        <!--匿名下单成功后查看订单详情登陆显示-->
+        <div style="display:none;font-size: 14px; color: rgb(102, 102, 102); border: 1px solid rgb(231, 231, 231); background: none repeat scroll 0% 0% rgb(254, 248, 231); margin: 0px -11px; padding: 4px 0px 7px; text-align: center;" id="nimingOrderDetail">由于你未登录，请先登录后查看订单<br>（账号为<span style=" color:#EC3297">订单联系人的手机号码</span>）</div>
+        <form method="POST" action="" id="login_form">
+        <div class="lv-box lv-proinfo-list">
+            <ul>
+                <li>
+                    <label for="username" style="width:40px;">账&nbsp;&nbsp;号</label>
+                    <input type="text" placeholder="请输入邮箱/手机/用户名" value="" name="username" id="username" class="lv-text-input">
+                </li>
+                <li>
+                    <label for="password" style="width:40px;">密&nbsp;&nbsp;码</label>
+                    <input type="password" placeholder="请输入密码" value="" name="password" id="password" class="lv-text-input">
+                </li>
+                
+            </ul>
+        </div>
+        <div class="btn_bar">
+                <a class="btn_style_1 block"  href="javascript:login();">登录</a>
+                <input type="hidden" name="active_id" value="{$active_id}">
+                <!-- 
+                <a href="{:U('User/register')}" class="fl">立即注册</a>
+                <a href="#" class="fr" >忘记密码</a> -->
+                <br/>
+        </div>
+        </form>
+        <div class="mt10">
+            <a href=""></a>
+        </div>
+         </if>
+        <!-- 活动页面不需要第三方登录 -->
+            <div class="login_other">
+                <span class="login_other2">没有账号,<br/>请选用其他登录方式</span>
+                <p>
+                    <a href="{:U('Oauth/login_weibo')}"><i  class="login_sina"></i></a>
+                    <a href="{:U('Oauth/login_qq')}"><i  class="login_qq"></i></a>
+                </p>
+            </div>      
+    </div><!-- /#content -->
+</block>
+<!--end content-->
+<block name="script">
+<script>
+$(function(){
+    /*input 框变色*/
+    $("input.lv-input-01").focus(function(e) {
+        $(this).addClass("lv-input01-focus");
+    });
+    $("input.lv-input-01").blur(function(e) {
+        $(this).removeClass("lv-input01-focus");
+    }); 
+    
+});
+
+function login(){
+    $("#login_form").submit();
+}
+</script>
+</block> 

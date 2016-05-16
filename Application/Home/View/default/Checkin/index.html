@@ -1,0 +1,98 @@
+<extend name="Base/user"/>
+
+<block name="style">
+<link href="__STATIC__/bootstrap/css/bootstrap.css" rel="stylesheet">
+<link href="__CSS__/user.css" rel="stylesheet">
+
+<style>
+
+
+</style>
+</block>
+
+
+<block name="content">
+    <div id="main-container" class="container">
+        
+<!-- menu -->
+	<include file="Public/user_menu"/>
+	<!-- /menu -->
+
+        
+    <div class="span9 bs-docs-example">
+        <!-- Contents
+        ================================================== -->
+        <section id="contents">
+            <div class="sidebar-widget"><h5>床位列表</h5></div>
+        </section>
+        <div >
+        <notempty name="_list">
+            <br/>
+            <table class="table table-hover">
+                <tr>
+                  <th>编号</th>
+                  <th>名称</th>
+                  <th>操作</th>
+                </tr>
+                <volist name="_list" id="vo" key="k">
+                    <tr id="TN_{$vo.id}">
+                    <td>{$k}</td>
+                    <td><a href="{:U('Checkin/reserve?id='.$vo['id'])}" target="_blank">{$vo.name}</a></td>
+                    <td>
+                        <a href="{:U('Checkin/reserve?id='.$vo['id'])}">预定</a>
+                    </td>
+                  </tr>
+                </volist>
+            </table>
+            <else/>
+            <div class="text-center"> aOh! 暂时还没有内容! </div>
+            </notempty>
+            </div>
+    </div>
+
+    </div>
+	
+	<script type="text/javascript">
+    $(function(){
+        $(window).resize(function(){
+            $("#main-container").css("min-height", $(window).height() - 343);
+        }).resize();
+    })
+</script>
+<script type="text/javascript">
+(function(){
+	var ThinkPHP = window.Think = {
+		"ROOT"   : "", //当前网站地址
+		"APP"    : "/index.php?s=", //当前项目地址
+		"PUBLIC" : "/Public", //项目公共目录地址
+		"DEEP"   : "/", //PATHINFO分割符
+		"MODEL"  : ["3", "1", "html"],
+		"VAR"    : ["m", "c", "a"]
+	}
+})();
+var T={
+    del_travelnote : function(id){
+        if(confirm("确认删除吗？")){
+            $.ajax({
+                'url':'{:U('User/travelNotesDelete')}',
+                'type':'post',
+                'datatype':'json',
+                'data':{
+                    id : id
+                },
+                'success':function(data){
+                    //console.dir(data);
+                    if(data.status==1){
+                        var content = data.content;
+                        $('#TN_'+content.id).remove();
+                    }else{
+                       
+                    }
+                }
+            });
+        }
+    }
+}
+</script>
+ <!-- 用于加载js代码 -->
+</block>

@@ -1,0 +1,223 @@
+<!doctype html>
+<html>
+    <head>
+        <title>填写申请表-5间房预定平台</title>
+        <meta name="Description" content=""/>
+        <meta charset="UTF-8">
+        <meta content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width" name="viewport">
+        <link rel="stylesheet" href="__CSS__/../5jf/css/global.css">
+        <script type="text/javascript" src="__JS__/../5jf/js/zepto.min.js"></script>
+        <link rel="stylesheet" href="__CSS__/../5jf/css/detail.css">
+    </head>
+    <body>
+        <!-- 线路详情 -->
+        <div id="wrapper">
+
+            <div id="content">
+                <div class="lv-project-detail">
+
+                    <div class="t_info">
+                        <div class="apply_title">填写申请表</div>  
+                        <div class="apply_tip">对于您的个人信息，我们一定会保密的哦</div>
+                        <form action="">
+                        <div class="apply_table_box">
+                            <table class="apply_table">
+                                <tr>
+                                    <td class="td_label"><span class="required">*</span>昵称：</td>
+                                    <td><input type="text" value="" name="nickname" placeholder="给自己起个萌萌哒称号吧" id="nick_name" class="apply_input"  /></td>
+                                </tr>
+                                <tr>
+                                    <td class="td_label">性别：</td>
+                                    <td><input type="radio" value="m" name="gender" class="apply_input_radio"  checked/> 男 <input type="radio" value="w" name="gender" class="apply_input_radio"  /> 女</td>
+                                </tr>
+                                <tr>
+                                    <td class="td_label">喜好：</td>
+                                    <td><input type="radio" value="m" name="mylike" class="apply_input_radio"  /> 男 <input type="radio" value="w" name="mylike" checked class="apply_input_radio"  /> 女 <input type="radio" value="o" name="mylike" class="apply_input_radio"  /> 其他 </td>
+                                </tr>
+                                <tr>
+                                    <td class="td_label"><span class="required">*</span>年龄：</td>
+                                    <td><input type="number" value="" name="age" id="age"  class="number_input"  /></td>
+                                </tr>
+                                <tr>
+                                    <td class="td_label" align="top"><span class="required">*</span>申请理由：</td>
+                                    <td><textarea name="reason" cols="60" rows="5" class="apply_input"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td class="td_label"><span class="required">*</span>手机号：</td>
+                                    <td><input type="number" value="" name="mobile" id="mobile" class="number_input"  /> <input type="button" class="get_room_code" value="获取验证码"  /></td>
+                                </tr>
+                                <tr>
+                                    <td class="td_label"><span class="required">*</span>验证码：</td>
+                                    <td><input type="number" value="" name="code" id="code" class="number_input" /></td>
+                                </tr>
+                            </table>
+                        </div>
+                        </form>
+                        <div class="btn_box">
+                            <input type="button" value="马上申请" class="apply_btn" id="apply_btn"  /><br/>
+							<div class="error_msg" id="error_msg"></div>
+                        </div>
+
+                <br/><br/><br/>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class=" " id="popupDialog-screen"></div>
+        <div id="popupDialog-popup" style="color: black; width:90%;z-index: 1100;display: none;">
+            <div class="get_room_box ui-shadow">
+                <ul style="text-align:center;">
+                    <li class="get_room_title">&nbsp; <a href="javascript:" id="pop_close"><img src="__CSS__/../5jf/images/delete-black.png" style="width:14px;" /></a></li>
+                    <li style="color:#777777;">您的申请我们已经收到，等待我们的好消息吧
+                        悄悄告诉你，申请之后抢房能提高命中率哦，
+                        赶快去抢房吧！</li>
+                    <li><input type="button" value="马上去抢房" class="share_btn" onclick="P.get_room()"  /></li>
+                </ul>
+            </div>
+
+        </div>
+		<div id="popupDialog-share" style="color: black; width:167px;z-index: 1100;display: none;position:fixed;top:0;right:0;">
+           <img src="__CSS__/../5jf/images/share_panel.png" style="width:167px;" />
+        </div>
+     <script type="text/javascript">
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.call('hideToolbar');
+    });
+    </script>
+        <script>
+   
+            var P={
+                pop_close:function(){
+                    $('#popupDialog-screen').removeClass("ui-overlay-b");
+                    $('#popupDialog-screen').removeClass("in");
+                    $('#popupDialog-screen').removeClass("ui-popup-screen");
+                    $('#popupDialog-popup').hide();
+                },
+                pop_up:function(){
+                    $('#popupDialog-screen').addClass("ui-popup-screen");
+                    $('#popupDialog-screen').addClass("ui-overlay-b");
+                    $('#popupDialog-screen').addClass("in");
+                    $('#popupDialog-popup').show();
+                    $('#popupDialog-popup').center();//居中显示
+                },
+				show_error:function(msg){
+					$('#error_msg').html(msg);
+					setTimeout(function(){
+						$('#error_msg').html('');
+					},3000);
+			   },
+			   share:function() {
+				   P.pop_close();
+				   $('#popupDialog-screen').addClass("ui-popup-screen");
+				   $('#popupDialog-screen').addClass("ui-overlay-b");
+				   $('#popupDialog-screen').addClass("in");
+				   $('#popupDialog-share').show();
+				},
+				share_close:function(){
+					P.pop_close();
+					$('#popupDialog-share').hide();
+				},
+                                get_room:function(){
+                                    location.href='index.php?s=/Mobile/FiveRoom/detail.html';
+                                }
+            }
+            window.wait = 60;
+            var MyTime = function(o){
+                 if (wait == 0) {  
+                     o.removeAttr("disabled");
+                     o.removeClass("get_room_code_back");
+                     o.attr("value","获取验证码");  
+                     wait = 60; 
+                 } else {  
+                	 o.attr("disabled",true);
+                     o.addClass("get_room_code_back");
+                     o.attr("value","重新获取(" + wait + ")");  
+                     wait--;  
+                     setTimeout(function() {  
+                         MyTime(o);  
+                     },  
+                     1000) ; 
+                 } 
+            }
+            //$('#popupDialog-popup').center();
+            $(function(){
+                $('#pop_close').click(function(){
+                    P.pop_close();
+                });
+				$('#popupDialog-share').click(function(){
+				   P.share_close();
+			   });
+                $('.get_room_code').click(function(){
+                    var mobile = $("input[name='mobile']").val();
+                    if(!$.trim(mobile)){
+                        P.show_error("请填写手机号");return false;
+                    }else if(mobile.length != 11){
+                        P.show_error("请正确填写手机号");return false;
+                    }
+                    $.post("{:U('FiveRoom/sendRandomCode')}",{"mobile":mobile},function(data){
+                        if(data.status==0){
+                            P.show_error(data.info);
+                        }
+                    });
+                    MyTime($(this));
+                });
+                $('#apply_btn').click(function(){
+                    var data = new Object();
+                    var nickname = $("input[name='nickname']").val();
+                    if(!$.trim(nickname)){
+                        P.show_error("请填写用户名");return false;
+                    }
+                    data["nickname"] = nickname;
+                    
+                    data["gender"] = $("input[name='gender']:checked").val();
+                    data["mylike"] = $("input[name='mylike']:checked").val();
+                    
+                    var age = $("input[name='age']").val();
+                    age = parseInt(age);
+                    if(!age){
+                        P.show_error("请填写年龄");return false;
+                    }else if(age<16 || age>90){
+                        P.show_error("请填写正确年龄，16-90");return false;
+                    }
+                    data["age"] = age;
+                    
+                    var reason = $("textarea[name='reason']").val();
+                    if(!$.trim(reason)){
+                        P.show_error("请填写申请理由");return false;
+                    }
+                    data["reason"] = reason;
+                    
+                    var mobile = $("input[name='mobile']").val();
+                    if(!$.trim(mobile)){
+                        P.show_error("请填写手机号");return false;
+                    }else if(mobile.length != 11){
+                    	P.show_error("请正确填写手机号");return false;
+                    }
+                    data["mobile"] = mobile;
+                    
+                    var code = $("input[name='code']").val();
+                    if(!$.trim(code)){
+                        P.show_error("请填写验证码");return false;
+                    }
+                    data["code"] = code;
+                    
+                    $.post("{:U('FiveRoom/apply')}",data,function(data){
+                        if(data.status ==0){
+                            P.show_error(data.info);
+                        }else{
+                        	P.pop_up();
+                        }
+                    });
+                    
+                });
+            });
+   
+        </script>
+
+
+    </body>
+</html>

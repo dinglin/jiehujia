@@ -1,0 +1,85 @@
+<extend name="Base/user"/>
+
+
+
+<block name="content">
+    <script type="text/javascript" src="__STATIC__/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="__STATIC__/xheditor/xheditor-1.2.1.min.js"></script>
+<script type="text/javascript" src="__STATIC__/xheditor/xheditor_lang/zh-cn.js"></script>
+<link id="xheCSS_default" rel="stylesheet" type="text/css" href="__STATIC__/xheditor/xheditor_skin/default/ui.css">
+<link href="__STATIC__/uploadify/uploadify.css" rel="stylesheet">
+<div id="main-container" class="container">
+        
+<!-- menu -->
+	<include file="Public/user_menu"/>
+	<!-- /menu -->
+
+        
+    <div class="span9 bs-docs-example">
+        <!-- Contents
+        ================================================== -->
+        <section id="contents">
+            <div class="sidebar-widget"><h5>写游记</h5></div>
+            
+            <div>
+     <form action="{:U()}" method="post" class="form-horizontal">
+        <div class="form-item">
+            <label class="item-label">标题<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="title" value="{$data.title}">
+            </div>
+        </div>
+      
+        
+        <div class="form-item cf">
+            <label class="item-label">关键词<span class="check-tips">（非必填）不同关键词用空格隔开</span></label>
+            <div class="controls">
+                <label class="textarea input-large">
+                        <textarea name="keywords" style="width:600px;height: 40px;">{$data.keywords}</textarea>
+                </label>                    
+            </div>
+        </div>
+        
+        <div class="form-item cf">
+            <label class="item-label">导读<span class="check-tips">（非必填）可以输入200字</span></label>
+            <div class="controls">
+                <label class="textarea input-large">
+                    <textarea name="description" style="width:600px;height: 70px;">{$data.description}</textarea>
+                </label>                    
+            </div>
+        </div>
+        
+        <div class="form-item cf">
+            <label class="item-label">内容<span class="check-tips"></span></label>
+            <div class="controls">
+                <label class="textarea input-large">
+                    <textarea name="content" id="elem1" >{$data.content}</textarea>
+                </label>                    
+            </div>
+        </div>
+      
+        <div class="form-item">
+            <input type="hidden" name="id" value="{$data.id}"/>
+            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+        </div>
+    </form>
+            </div>
+        </section>
+     
+       
+    </div>
+        </div>
+
+<style>
+    #xhePanel label{display: inline;}
+</style>
+<script type="text/javascript">
+    $(function(){
+        $(window).resize(function(){
+            $("#main-container").css("min-height", $(window).height() - 343);
+        }).resize();
+        $('#elem1').xheditor({tools:'simple',upBtnText:'上传',upImgUrl:'__STATIC__/xheditor/upload.php',width:'700',height:'400'});
+    })
+</script>
+</block>

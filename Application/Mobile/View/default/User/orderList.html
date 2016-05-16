@@ -1,0 +1,89 @@
+<extend name="Base/common"/>
+<block name="style">
+<link href="__CSS__/global.css" rel="stylesheet" />
+<link rel="stylesheet" href="__CSS__/list.css">
+<style>
+	.club_title{ margin:0 10px; padding:10px 0;color: #333; font-size:1em; border-bottom:1px solid #efefef;}
+	.item_total{ margin:0 10px; padding:10px 0; font-size:1em; overflow:hidden;}
+	.lv-project-list article{border-bottom: 1px #efefef solid;}
+	.item_line{ background-color:#efefef; height:10px;}
+	.item_num{ font-size:14px;}
+	.item_btn a{ display:block; border:1px solid #d30775; border-radius:3px; padding:1px 5px 2px 5px;}
+	.item_btn a:hover{ background-color:pink;}
+</style>
+</block>
+<block name="content">
+    <div class="lv-project-list bg-white">
+        <ul id="PLACE_data_list">
+            <notempty name="_list">
+                <volist name="_list" id="vo">
+                    <volist name="vo.goods_list" id="go">
+                    <div class="club_title">{$vo.order_sn}【{$vo.order_status_txt}】</div>
+                    <article>
+                        <a href="{:U('Home/Actives/detail?id='.$go['goods_id'])}"  class="block">
+                            <div style="background-image: url({:img_size_url($go['active_info']['list_pic'],196,176)})" class="pro-pic"></div>
+                            <div class="pro-info">
+                                <h3>{$go.goods_name}</h3>
+                                <p>
+                                    
+                                    <span class="f-color-1 value fl">&yen;{$go.goods_price} </span>
+                                    <span class="fr item_num">x<strong>{$go.goods_number}</strong></span>
+                                </p>
+                                <p>
+                                    <span class="fl">时间：{$go.active_info.start_time|time_format='m月d日'}~{$go.active_info.end_time|time_format='m月d日'}（{$go.active_info.days}天）</span>
+                                    <span class="fr f-color-1 rebate"></span>
+                                </p>
+                                <p class="f-size-10">{$go.active_info.destination}</p>
+                            </div>
+                        </a>
+                    </article>
+                    <div class="item_total">
+	                    <span class="fl">总价：<b style="color:#d30775">&yen;{$vo.order_amount}</b></span> 
+	                    <span class="fr item_btn">
+	                        <if condition="($vo.order_status lt 2) AND ($vo.pay_status lt 2) ">
+	                           <a href="javascript:" onclick="O.pay_order('{$vo.order_sn}')">现在付款</a>
+	                        </if>
+	                    </span>
+                    </div>
+                    <div class="item_line"></div>
+                    </volist>
+                </volist>
+             <else/>
+                <div class="text-center"> aOh! 暂时还没有订单! </div>
+            </notempty>
+        </ul>
+        <a href="javascript:void(0);" onclick="javascript:" id="show_more" class="view_more" style="display:none;">查看更多</a>
+    </div>
+</block>
+<!--end content-->
+<block name="script">
+<script>
+var O={
+	    del_order : function(order_sn){
+	        if(confirm("确认删除吗？")){
+	            $.ajax({
+	                'url':'{:U('User/delOrder')}',
+	                'type':'post',
+	                'datatype':'json',
+	                'data':{
+	                    order_sn : order_sn
+	                },
+	                'success':function(data){
+	                    //console.dir(data);
+	                    if(data.status==1){
+	                        var content = data.content;
+	                        $('.TR_'+content.order_sn).remove();
+	                        $('.TRSUB_'+content.order_sn).remove();
+	                    }else{
+	                       
+	                    }
+	                }
+	            });
+	        }
+	    },
+	    pay_order : function(order_sn){
+	        location.href = 'index.php/Home/Index/pay_index/?order_sn='+order_sn;
+	    }
+	}
+</script>
+</block> 

@@ -1,0 +1,240 @@
+<extend name="Base/user"/>
+
+
+
+<block name="content">
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+<link href="__STATIC__/uploadify/uploadify.css" rel="stylesheet">
+ <div id="main-container" class="container">
+        
+<!-- menu -->
+	<include file="Public/user_menu"/>
+	<!-- /menu -->
+
+        
+    <div class="span9 bs-docs-example">
+        <!-- Contents
+        ================================================== -->
+        <section id="contents">
+            <div class="sidebar-widget"><h5>添加活动</h5></div>
+            <div>
+    <form action="{:U()}" method="post" class="form-horizontal">
+        <div class="form-item">
+            <label class="item-label">活动名<span class="check-tips">（活动名会作为默认的活动名）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="title" value="">
+            </div>
+        </div>
+        
+        <div class="form-item cf">
+            <label class="item-label">所属俱乐部<span class="check-tips"></span></label>
+            <div class="controls">
+                <select name="club_id">
+                    <volist name="club" id="vo">
+                            <option value="{$vo.club_id}">{$vo.club_name}</option>                               
+                   </volist>
+                </select>                    
+            </div>
+        </div>
+        
+        <div class="form-item cf" style="display: none;">
+            <label class="item-label">领队<span class="check-tips"></span></label>
+            <div class="controls">
+                <select name="guide_id">
+                    <volist name="guides" id="vo">
+                            <option value="0">选择领队</option>     
+                            <option value="{$vo.cuser_id}">{$vo.nick_name}</option>                               
+                   </volist>
+                </select>                    
+            </div>
+        </div>
+        
+               <div class="form-item cf">
+                    <label class="item-label">缩略图<span class="check-tips">（0-无缩略图，大于0-缩略图片ID，需要函数处理）</span></label>
+                    <div class="controls">
+                        <div class="controls">
+									<input type="file" id="upload_picture_logo">
+									<input type="hidden" name="logo" id="cover_id_logo"/>
+									<div class="upload-img-box">
+																		</div>
+								</div>
+									<script type="text/javascript">
+								//上传图片
+							    /* 初始化上传插件 */
+								$("#upload_picture_logo").uploadify({
+							        "height"          : 30,
+							        "swf"             : "__STATIC__/uploadify/uploadify.swf",
+							        "fileObjName"     : "download",
+							        "buttonText"      : "上传图片",
+							        "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+							        "width"           : 120,
+							        'removeTimeout'	  : 1,
+							        'fileTypeExts'	  : '*.jpg; *.png; *.gif;',
+							        "onUploadSuccess" : uploadPicturelogo,
+                                    'onFallback' : function() {
+                                        alert('未检测到兼容版本的Flash.');
+                                    }
+							    });
+								function uploadPicturelogo(file, data){
+							    	var data = $.parseJSON(data);
+							    	var src = '';
+							        if(data.status){
+							        	$("#cover_id_logo").val(data.id);
+							        	src = data.url || '__ROOT__' +'/Uploads/Download/'+ data.savepath+data.savename;
+							        	$("#cover_id_logo").parent().find('.upload-img-box').html(
+							        		'<div class="upload-pre-item"><img src="' + src + '"/></div>'
+							        	);
+							        } else {
+							        	updateAlert(data.info);
+							        	setTimeout(function(){
+							                $('#top-alert').find('button').click();
+							                $(that).removeClass('disabled').prop('disabled',false);
+							            },1500);
+							        }
+							    }
+								</script>                    </div>
+                </div>
+        
+        <div class="form-item cf">
+            <label class="item-label">开始时间<span class="check-tips">（0-永久有效）</span></label>
+            <div class="controls">
+                <input type="text" name="start_time" class="text input-large time" value="" placeholder="请选择时间">                    </div>
+        </div>
+        
+        <div class="form-item cf">
+            <label class="item-label">结束时间<span class="check-tips">（0-永久有效）</span></label>
+            <div class="controls">
+                <input type="text" name="end_time" class="text input-large time" value="" placeholder="请选择时间">                    </div>
+        </div>
+        
+        <div class="form-item">
+            <label class="item-label">出发地<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="departure" value="">
+            </div>
+        </div>
+        
+        <div class="form-item cf">
+            <label class="item-label">省份<span class="check-tips"></span></label>
+            <div class="controls">
+                <select name="province_id">
+                     <option value="0">选择省份</option>
+                    <volist name="provinces" id="vo">
+                            <option value="{$vo.region_id}">{$vo.region_name}</option>                               
+                   </volist>
+                </select>                    
+            </div>
+        </div>
+        
+        <div class="form-item">
+            <label class="item-label">目的地<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="destination" value="">
+            </div>
+        </div>
+        
+        <div class="form-item">
+            <label class="item-label">报名上限<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="people_limit" value="">
+            </div>
+        </div>
+        
+        <div class="form-item">
+            <label class="item-label">价格<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="price" value="">
+            </div>
+        </div>
+        
+        <div class="form-item">
+            <label class="item-label">儿童价<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="price_child" value="">
+            </div>
+        </div>
+        
+        <div class="form-item cf">
+            <label class="item-label">报名结束时间<span class="check-tips">（0-永久有效）</span></label>
+            <div class="controls">
+                <input type="text" name="end_apply" class="text input-large time" value="" placeholder="请选择时间">                    </div>
+        </div>
+        
+        <div class="form-item" style="display: none;">
+            <label class="item-label">seo关键词<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="seo_kwords" value="">
+            </div>
+        </div>
+        
+        <div class="form-item" style="display: none;">
+            <label class="item-label">来源网址<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="from_url" value="">
+            </div>
+        </div>
+        
+        <div class="form-item">
+            <label class="item-label">内容<span class="check-tips"></span></label>
+            <div class="controls">
+                <label class="textarea">
+                <textarea name="content">{$field.value}</textarea>
+                {:hook('adminArticleEdit', array('name'=>'content','value'=>$field['value']))}
+                </label>
+            </div>
+        </div>
+        
+        <div class="form-item">
+            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+        </div>
+    </form>
+            </div>
+        </section>
+     
+       
+    </div>
+        </div>
+
+
+<script type="text/javascript">
+    $(function(){
+        $(window).resize(function(){
+            $("#main-container").css("min-height", $(window).height() - 343);
+        }).resize();
+    })
+</script>
+<script type="text/javascript">
+(function(){
+	var ThinkPHP = window.Think = {
+		"ROOT"   : "", //当前网站地址
+		"APP"    : "/index.php?s=", //当前项目地址
+		"PUBLIC" : "/Public", //项目公共目录地址
+		"DEEP"   : "/", //PATHINFO分割符
+		"MODEL"  : ["3", "1", "html"],
+		"VAR"    : ["m", "c", "a"]
+	}
+})();
+
+</script>
+<link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+<php>if(C('COLOR_STYLE')=='blue_color') echo '<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">';</php>
+<link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+<script type="text/javascript">
+$(function(){
+    $('.time').datetimepicker({
+        format: 'yyyy-mm-dd hh:ii',
+        language:"zh-CN",
+        minView:2,
+        startView:1,
+        autoclose:true
+    });
+
+});
+</script>
+
+ <!-- 用于加载js代码 -->
+</block>
+

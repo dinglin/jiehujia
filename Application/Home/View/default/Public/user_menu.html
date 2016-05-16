@@ -1,0 +1,77 @@
+<!-- 左侧 nav
+================================================== -->
+    <div class="span3 bs-docs-sidebar">
+        <ul class="nav nav-list bs-docs-sidenav">
+			<li class="<if condition="$nav eq 'index'">active</if>">
+                <a href="/index.php?s=/home/user/index.html">
+					<i class="icon-chevron-right"></i>会员首页			
+				</a>
+			</li>
+			<li class="<if condition="$nav eq 'profile'">active</if>">
+                <a href="/index.php?s=/home/user/profile.html">
+                    <i class="icon-chevron-right"></i>个人信息          
+                </a>
+            </li>    
+			<li class="<if condition="$nav eq 'changepwd'">active</if>">
+                <a href="/index.php?s=/home/user/changepwd.html">
+                    <i class="icon-chevron-right"></i>修改密码          
+                </a>
+            </li>
+            <li class="<if condition="$nav eq 'checkin'">active</if>">
+                <a href="/index.php?s=/home/checkin/index.html">
+                    <i class="icon-chevron-right"></i>入住管理          
+                </a>
+            </li>
+            <li class="<if condition="$nav eq 'bed'">active</if>">
+                <a href="/index.php?s=/home/bed/index.html">
+                    <i class="icon-chevron-right"></i>床位管理          
+                </a>
+            </li>
+            <li class="<if condition="$nav eq 'older'">active</if>">
+                <a href="/index.php?s=/home/older/index.html">
+                    <i class="icon-chevron-right"></i>老人管理          
+                </a>
+            </li> 
+        </ul>
+        
+        <if condition="$group_type eq 1">
+            
+        <ul class="nav nav-list bs-docs-sidenav">
+            <li class="<if condition="$nav eq 'order_list'">active</if>">
+                <a href="/index.php?s=/home/user/orderlist.html">
+                    <i class="icon-chevron-right"></i>我的订单          
+                </a>
+            </li>     
+            <li class="<if condition="$nav eq 'favorite'">active</if>">
+                <a href="/index.php?s=/home/UserFavorite/index.html">
+                    <i class="icon-chevron-right"></i>我的收藏          
+                </a>
+            </li> 
+            <li class="<if condition="$nav eq 'travelnotes'">active</if>">
+                <a href="/index.php?s=/home/user/travelNotes.html">
+                    <i class="icon-chevron-right"></i>我的游记          
+                </a>
+            </li>
+            <li class="<if condition="$nav eq 'actives'">active</if>">
+				<a href="/index.php?s=/home/user/actives.html">
+					<i class="icon-chevron-right"></i>活动列表			
+                </a>
+			</li>       
+            <li class="<if condition="$nav eq 'clubs'">active</if>">
+                <a href="/index.php?s=/home/user/clubs.html">
+					<i class="icon-chevron-right"></i>俱乐部列表			
+                </a>
+			</li> 
+            <li class="<if condition="$nav eq 'clubusers'">active</if>">
+                <a href="/index.php?s=/home/user/clubusers.html">
+					<i class="icon-chevron-right"></i>领队列表			
+                </a>
+			</li>
+			<li class="<if condition="$nav eq 'wechat'">active</if>">
+                <a href="/index.php?s=/home/user/wechat.html">
+                    <i class="icon-chevron-right"></i>微信绑定          
+                </a>
+            </li>  
+        </ul>
+            </if>
+    </div>

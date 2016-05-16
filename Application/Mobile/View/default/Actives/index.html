@@ -1,0 +1,183 @@
+<extend name="Base/common"/>
+<block name="style">
+    <link href="__CSS__/list.css" rel="stylesheet">
+</block>
+
+<block name="content">
+
+<include file="Public/search"/>
+
+<div id="content">        
+  <div class=""><!-- <div class="lv-filtrate-bar"> -->
+        <div class="tab_select">
+            <ul>
+                <li class="">
+                    <!-- <span id="span_subProductType">综合筛选</span><i class="ic_arrow_d"></i><span class="ic_triangle_up"></span> -->
+                    <span >筛选出<b>{$pages.total_num}</b>个活动</span>
+                </li>
+               
+            </ul>
+        </div>
+        <div style="display: none; top: 39px; height: 843px;" class="lv-mask"></div>
+        <div class="lv-cascade-div">
+            <!--综合刷选数据  -->
+            <div style="display: none;" class="filtrate-wrap tabChange">
+                <div class="filtrate-list-l1">
+                        <ul>
+                                <li class="active">出发时间<span class="ic_radio_a selected"></span></li>
+                                <li class="">游玩天数<span class="ic_radio_a selected"></span></li>
+                                
+                        </ul>
+                </div>
+                <div class="filtrate-list-l2">
+                    <!-- 一级搜索个数 -->
+                    <input type="hidden" id="filterDatasSize" name="filterDatasSize" value="8">
+                            <!-- ARGNAME -->
+                            <input type="hidden" id="argName_0" name="argName_0" value="subject">
+                            <!--综合筛选二级  -->
+                             <div style="display: block;" class="tabChangeL2" data-child="f21" data-index="-1">
+                                    <div style="display: block;" class="t_list">
+                                            <div class="t_li radioOption" data-val=",0">不限<span item-index="0" class="ic_radio_a" id="second_0_0"><i></i></span></div>
+                                            
+                                            
+                                            <div class="t_li radioOption" data-val="本周末">本周末<span item-index="1" class="ic_radio_a" id="second_0_1"><i></i></span></div>
+                                          
+                                            <div class="t_li radioOption" data-val="1月">1月<span item-index="2" class="ic_radio_a" id="second_0_2"><i></i></span></div>
+                                            
+                                            <!-- 这里JS 处理二级选中 -->
+                                             <div class="t_li radioOption" data-val="2月">2月<span item-index="3" class="ic_radio_a" id="second_0_3"><i></i></span></div>
+                                            
+                                            <!-- 这里JS 处理二级选中 -->
+                                             <div class="t_li radioOption" data-val="3月">3月<span item-index="4" class="ic_radio_a" id="second_0_4"><i></i></span></div>
+                                            
+                                            <!-- 这里JS 处理二级选中 -->
+                                             <div class="t_li radioOption" data-val="4月">4月<span item-index="5" class="ic_radio_a" id="second_0_5"><i></i></span></div>
+                                            
+                                            <!-- 这里JS 处理二级选中 -->
+                                             <div class="t_li radioOption" data-val="5月">5月<span item-index="6" class="ic_radio_a" id="second_0_6"><i></i></span></div>
+                                            
+                                            <!-- 这里JS 处理二级选中 -->
+                                             <div class="t_li radioOption" data-val="6月">6月<span item-index="7" class="ic_radio_a" id="second_0_7"><i></i></span></div>
+                                            
+                                            <!-- 这里JS 处理二级选中 -->
+                                             <div class="t_li radioOption" data-val="7月">7月<span item-index="8" class="ic_radio_a" id="second_0_8"><i></i></span></div>
+                                            
+                                            <!-- 这里JS 处理二级选中 -->
+                                            <div class="t_li radioOption" data-val="8月">8月<span item-index="9" class="ic_radio_a" id="second_0_9"><i></i></span></div>
+                                            
+                                            <!-- 这里JS 处理二级选中 -->
+                                             <div class="t_li radioOption" data-val="9月">9月<span item-index="10" class="ic_radio_a" id="second_0_10"><i></i></span></div>
+                                            
+                                            <!-- 这里JS 处理二级选中 -->
+                                             <div class="t_li radioOption" data-val="10月">10月<span item-index="11" class="ic_radio_a" id="second_0_11"><i></i></span></div>
+                                            
+                                            <!-- 这里JS 处理二级选中 -->
+                                              <div class="t_li radioOption" data-val="11月">11月<span item-index="12" class="ic_radio_a" id="second_0_12"><i></i></span></div>
+                                            
+                                            <!-- 这里JS 处理二级选中 -->
+                                             <div class="t_li radioOption" data-val="12月">12月<span item-index="13" class="ic_radio_a" id="second_0_13"><i></i></span></div>
+                                            
+                                 
+             
+                                        </div>
+                            </div>
+                            <!-- ARGNAME -->
+                            <input type="hidden" id="argName_1" name="argName_1" value="playFeature">
+                            <!--综合筛选二级  -->
+                             <div style="display: none;" class="tabChangeL2" data-child="f21" data-index="-1">
+                                    <div style="display: block;" class="t_list">
+                                            <div class="t_li radioOption" data-val=",1">不限<span item-index="0" class="ic_radio_a" id="second_1_0"><i></i></span></div>
+                                            
+                                            <!-- 这里JS 处理二级选中 -->
+                                             <div class="t_li radioOption" data-val="1~3天">1~3天<span item-index="1" class="ic_radio_a" id="second_1_1"><i></i></span></div>
+                                            
+                                            <!-- 这里JS 处理二级选中 -->
+                                            <div class="t_li radioOption" data-val="4~7天">4~7天<span item-index="2" class="ic_radio_a" id="second_1_2"><i></i></span></div>
+                                            
+                                            <!-- 这里JS 处理二级选中 -->
+                                             <div class="t_li radioOption" data-val="8~15天">8~15天<span item-index="3" class="ic_radio_a" id="second_1_3"><i></i></span></div>
+                                            
+                                            <!-- 这里JS 处理二级选中 -->
+                                             <div class="t_li radioOption" data-val="15天以上">15天以上<span item-index="4" class="ic_radio_a" id="second_1_4"><i></i></span></div>
+                                            
+                               </div>
+                            </div>
+                            <!-- ARGNAME -->
+                            <input type="hidden" id="argName_2" name="argName_2" value="hotelType">
+                    
+                             </div>
+                <div class="filtrate-btn">
+                    <span class="btn_style_1" id="filtrateSubmit">确定</span>
+                </div>
+            </div>
+        
+        </div>
+    </div>
+    <div class="lv-project-list bg-white">
+        <ul id="data_list">
+            <volist name="actives" id="at">
+              <article onclick="javascript:">
+                  <a class="block" href="{:U('Actives/detail?id='.$at['active_id'])}">
+                  <div class="pro-pic" style="background-image: url({:img_size_url($at['list_pic'],196,176)})"></div>
+                  <div class="pro-info">
+                      <h2>{$at.title}</h2>
+                      <p>
+                          <span>{$at.club.club_name}</span>
+                      </p>
+                      <p>
+                          <span class="fr pro-value"><small>¥</small>{$at.price} </span>
+                          <span>时间：{$at.start_time|time_format='m月d日'}~{$at.end_time|time_format='m月d日'}（{$at.days}天）</span>
+                      </p>
+                      <p>
+                          <span>地点 ：{$at.destination} </span>
+                      </p>
+                 </div>
+                  </a>
+              </article>
+              </volist>
+        </ul>
+        <if condition="$pages.next_page ">
+            <a class="view_more" id="show_more" onclick="javascript:" href="javascript:void(0);">查看更多</a>
+        </if>
+    </div>
+</div>
+<script src="__JS__/base.js" type="text/javascript"></script>
+<script src="__JS__/filtrateTab.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function(){
+        $(".lv-filtrate-bar").filtrateTab({
+                submit : function(index){
+                    allSearch(this,index);
+                }
+            },
+            function(){},
+            function(){
+                if(this.attr("data-type")=="subProductType"){
+                    chooseSubProductType(this.attr("data-val"));
+                }else{
+                    chooseSortInlist(this.attr("data-val"));
+                }
+            }
+        ); 
+    });
+</script>
+<script type="text/javascript">
+var nowpage = {$pages.now_page};
+var totalpage = {$pages.total_page};
+var thisurl = '{$pages.next_page}';
+$('#show_more').click(function(){
+	if(nowpage < totalpage){
+		nowpage = nowpage+1;
+	    thisurl=thisurl.replace(/\/p\/\d\//ig,'/p/'+nowpage+'/'); 
+	    $.get(thisurl, function(data){
+	        $("#data_list").append(data)
+	    });
+	}else{
+		$(this).hide();
+	}
+});
+</script>
+</block>
+<block name="script">
+
+</block>

@@ -1,0 +1,188 @@
+<extend name="Public/base" />
+
+<block name="body">
+	<!-- 标题栏 -->
+	<div class="main-title">
+		<h2>活动列表</h2>
+	</div>
+	<div class="cf">
+		<div class="fl">
+            <a class="btn" href="{:U('Actives/add')}">新 增</a>
+            <button class="btn ajax-post" url="{:U('Actives/changeStatus',array('method'=>'resume'))}" target-form="ids">启 用</button>
+            <button class="btn ajax-post" url="{:U('Actives/changeStatus',array('method'=>'forbid'))}" target-form="ids">禁 用</button>
+            <button class="btn ajax-post confirm" url="{:U('Actives/changeStatus',array('method'=>'delete'))}" target-form="ids">删 除</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a class="btn" href="{:U('Actives/index?m=1')}">俱乐部活动</a>
+            <a class="btn" href="{:U('Actives/spider')}">更新列表</a>
+            <button class="btn ajax-spider-post" url="{:U('Spider/doSpider',array('method'=>'loadActives','id'=>''))}" target-form="ids" title="仅支持8264，游侠客，去野吧">读取单页</button>
+        </div>
+
+        <!-- 高级搜索 -->
+		<div class="search-form fr cf">
+			<div class="sleft">
+                            <div class="drop-down">
+					<span id="sch-sort-txt" class="sort-txt" data=""><if condition="$status eq 2"> 待审核<elseif condition="$status eq 0"/>禁用<elseif condition="$status eq 4"/>过期<else /> 正常</if></span>
+					<i class="arrow arrow-down"></i>
+					<ul id="sub-sch-menu" class="nav-list hidden">
+						<li><a href="javascript:;" value="1">正常</a></li>
+						<li><a href="javascript:;" value="0">禁用</a></li>
+						<li><a href="javascript:;" value="4">过期</a></li>
+					</ul>
+				</div>
+				<input type="text" name="title" class="search-input" value="{:I('title')}" placeholder="活动名称或活动ID">
+				<a class="sch-btn" href="javascript:;" id="search" url="{:U('index')}"><i class="btn-search"></i></a>
+			</div>
+		</div>
+    </div>
+    <!-- 数据列表 -->
+    <div class="data-table table-striped">
+	<table class="">
+    <thead>
+        <tr>
+		<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+		<th class="">ID</th>
+		<th class="">活动</th>
+		<th class="">俱乐部</th>
+		<th class="">开始时间</th>
+		<th class="">报名人数</th>
+		<th class="">点击量</th>
+		<th class="">状态</th>
+		<th class="">操作</th>
+		</tr>
+    </thead>
+    <tbody>
+		<notempty name="_list">
+		<volist name="_list" id="vo">
+		<tr>
+            <td><input class="ids" type="checkbox" name="id[]" value="{$vo.active_id}" /></td>
+			<td>{$vo.active_id} </td>
+			<td class="title"><if condition="$vo.title neq ''">{$vo.title}<else/>{$vo.from_url}</if></td>
+			<td><a href="{:U('Actives/index?cid='.$vo['club_id'])}">{$vo.club_name}</a></td>
+			<td><span>{$vo.start_time|time_format}</span></td>
+			<td>{$vo.apply_num}</td>
+			<td>{$vo.hits}</td>
+			<td>{$vo.status_text}</td>
+			<td class="option"><eq name="vo.status" value="1">
+				<a href="{:U('Actives/changeStatus?method=forbid&id='.$vo['active_id'])}" class="ajax-get">禁用</a>
+				<else/>
+				<a href="{:U('Actives/changeStatus?method=resume&id='.$vo['active_id'])}" class="ajax-get">启用</a>
+				</eq>
+				<if condition="$vo.title eq ''">
+				    <a href="{:U('Spider/doSpider?method=loadActive&id='.$vo['active_id'])}" class="ajax-spider">读取单页</a>
+				</if>
+                                                                        <a href="{:U('Actives/edit?id='.$vo['active_id'])}" class="">编辑</a>
+                                                                        <a href="{:U('Actives/copy?id='.$vo['active_id'])}" class="">复制</a>
+				<a href="{:U('Actives/changeStatus?method=delete&id='.$vo['active_id'])}" class="confirm ajax-get">删除</a>
+                </td>
+		</tr>
+		</volist>
+		<else/>
+		<td colspan="9" class="text-center"> aOh! 暂时还没有内容! </td>
+		</notempty>
+	</tbody>
+    </table>
+	</div>
+    <div class="page">
+        {$_page}
+    </div>
+</block>
+
+<block name="script">
+	<script src="__STATIC__/thinkbox/jquery.thinkbox.js"></script>
+
+	<script type="text/javascript">
+	//搜索功能
+	$("#search").click(function(){
+		var url = $(this).attr('url');
+		var status = $("#sch-sort-txt").attr("data");
+        var query  = $('.search-form').find('input').serialize();
+        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+        query = query.replace(/^&/g,'');
+		if(status != ''){
+			query += 'status=' + status + "&" + query;
+        }
+        if( url.indexOf('?')>0 ){
+            url += '&' + query;
+        }else{
+            url += '?' + query;
+        }
+		window.location.href = url;
+	});
+        /* 状态搜索子菜单 */
+	$(".search-form").find(".drop-down").hover(function(){
+		$("#sub-sch-menu").removeClass("hidden");
+	},function(){
+		$("#sub-sch-menu").addClass("hidden");
+	});
+	$("#sub-sch-menu li").find("a").each(function(){
+		$(this).click(function(){
+			var text = $(this).text();
+			$("#sch-sort-txt").text(text).attr("data",$(this).attr("value"));
+			$("#sub-sch-menu").addClass("hidden");
+		})
+	});
+	//回车搜索
+	$(".search-input").keyup(function(e){
+		if(e.keyCode === 13){
+			$("#search").click();
+			return false;
+		}
+	});
+    //导航高亮
+    highlight_subnav('{:U('Actives/index')}');
+	</script>
+	
+	<script type="text/javascript">
+	function get_view_data(target,object){
+		$(object).text("读取中...");
+		$(object).css("color","green");
+		$var = $(object).attr('doing');
+		if(!$var){
+		    $.get(target).success(function(data){
+	            if (data.status==1) {
+	                $title = $(object).parent().parent().children(".title");
+	                $title.text(data.info);
+	                $(object).hide();
+	            }else{
+	                $(object).css("color","red");
+	                $(object).text("读取单页");
+	                $(object).attr('doing',0);
+	            }
+	        });
+		}
+	}
+	$('.ajax-spider').click(function(){
+        var target;
+        var that = this;
+        if ( target = $(this).attr('href') ) {
+            get_view_data(target,that);
+        }
+        return false;
+    });
+	$('.ajax-spider-post').click(function(){
+		if($(".ids:checked").length > 0){
+			$(".ids:checked").each(function(){
+		        var id = $(this).val();
+		        var target = '/index.php?s=/Admin/Spider/doSpider/method/loadActive/id/'+id+'.html';
+		        var obj = $(this).parent().parent().children('.option').children(".ajax-spider");
+		        get_view_data(target,obj[0]);
+		    });
+		}else{
+			updateAlert("没有选择活动！");
+			setTimeout(function(){
+				$('#top-alert').find('button').click();
+            },1500);
+		}
+	});
+	$('.ajax-spider-refrash').click(function(){
+		if ( target = $(this).attr('url') ) {
+			$.get(target).success(function(data){
+				setTimeout(function(){
+                    location.reload();
+                },1500);
+            });
+        }
+	});
+	
+	</script>
+</block>

@@ -1,0 +1,100 @@
+<extend name="Public/base" />
+
+<block name="body">
+	<!-- 标题栏 -->
+	<div class="main-title">
+		<h2>绑定俱乐部负责人</h2>
+	</div>
+	<div class="cf">
+		<div class="fl">
+            <a class="btn ajax-post" href="" onclick="U.bindClub()">绑定</a>
+        </div>
+
+        <!-- 高级搜索 -->
+		<div class="search-form fr cf">
+			<div class="sleft">
+				<input type="text" id="clubid" name="clubid" class="search-input" value="{$clubid}" placeholder="请输入俱乐部名称或者ID">
+				<a class="sch-btn" href="javascript:;" id="search"><i class="btn-search"></i></a>
+			</div>
+		</div>
+    </div>
+    <!-- 数据列表 -->
+    <div class="data-table table-striped">
+	<table class="">
+    <thead>
+        <tr>
+		<th class="row-selected row-selected">&nbsp;</th>
+		<th width="10%">ID</th>
+		<th width="15%">俱乐部</th>
+		<th width="10%">负责人</th>
+		<th class="">描述</th>
+		</tr>
+    </thead>
+    <tbody>
+		<notempty name="_list">
+		<volist name="_list" id="vo">
+		<tr>
+            <td><input class="ids" type="radio" name="club_id" value="{$vo.club_id}" /></td>
+            <td>{$vo.club_id} </td>
+			<td><a target="_blank" href="{:U('Home/Club/detail?id='.$vo['club_id'])}">{$vo.club_name}</a> </td>
+			<td>{$vo.member_name} </td>
+			<td>{$vo.description} </td>
+		</tr>
+		</volist>
+		<else/>
+		<td colspan="9" class="text-center"> aOh! 暂时还没有内容，请检查搜索条件! </td>
+		</notempty>
+	</tbody>
+    </table>
+	</div>
+</block>
+
+<block name="script">
+	<script src="__STATIC__/thinkbox/jquery.thinkbox.js"></script>
+
+	<script type="text/javascript">
+	//搜索功能
+	$("#search").click(function(){
+		var url = "{:U('User/changeUserClub?uid='.$uid.'&clubid=_clubid_')}";
+        var clubid  = $('#clubid').val();
+        var reg = new RegExp("_clubid_");
+        url = url.replace(reg,clubid);
+		window.location.href = url;
+	});
+	//回车搜索
+	$(".search-input").keyup(function(e){
+		if(e.keyCode === 13){
+			$("#search").click();
+			return false;
+		}
+	});
+    //导航高亮
+    highlight_subnav('{:U('User/index')}');
+    
+    //用户对象
+    var U={
+        bindClub:function(){
+            //更改用户类型
+            var uid = "{$uid}";
+            var club_id = $("input[name='club_id']:checked").val();
+            $.ajax({
+                "url":"{:U('User/changeUserClubPost')}",
+                "type":"post",
+                "datatype":"json",
+                "data":{
+                    id : uid,
+                    clubid : club_id
+                },
+                "success" : function(data){
+                    if(data.status==1){
+                        alert(data.content);
+                        location.href="{:U('User/index')}";
+                    }else{
+                        alert(data.content);
+                    }
+                }
+            });
+        }
+    }
+	</script>
+</block>
