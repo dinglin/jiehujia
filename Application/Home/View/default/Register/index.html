@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>预定</title>
+    <link rel="stylesheet" href="__CSS__/index/index.css">
+    <style>
+        #txyzmimg {
+            border: 1px solid #dedede;
+            color: #333;
+            cursor: pointer;
+            display: block;
+            float: right;
+            font-size: 14px;
+            height: 48px;
+            line-height: 48px;
+            text-align: center;
+            text-decoration: none;
+            width: 120px;
+        }
+    </style>
+</head>
+<body style="background: #ebebeb !important;">
+<div class="header header_index">
+    <div class="wid1000">
+        <div class="logo fl"><a href="">
+            <img src="__IMG__/index/logo_2.png" draggable="false">
+            <!--<img src="img/logo_myself.png" height="24px"/>-->
+            <!--<img src="img/logo_public.png" height="24px"/>-->
+        </a></div>
+        <div class="hotline"><i></i>服务电话：400-800-0088</div>
+
+    </div>
+</div>
+<div class="klh_0112_warpper" style="height:700px;">
+    <h2>预定</h2>
+    <strong><div class="validate_msg_a" style="text-align:center;"></div></strong>
+    <form action="../reg/doReg" method="post" id="regForm">
+        <input type="hidden" id="promotionsource" name="promotionsource" value="">
+        <table border="0" cellspacing="0" cellpadding="0" class="klh_0112reg_taba">
+            <tbody>
+            <tr>
+                <td align="right">姓名：</td>
+                <td><input name="name" type="text" class="gminp_a1 subname" placeholder="真实姓名" value=""></td>
+                <td><label style="color:red;margin-right:5px;">*</label><span class=""></span></td>
+            </tr>
+            <tr>
+                <td align="right">性别：<input name="password" id="password" type="hidden" value=""></td>
+                <td>
+                    <label class="label_check c_on">
+                        <input name="sex" onclick="setupLabel()" type="checkbox" value="1"  checked="checked">男
+                    </label>
+                    <label class="label_check">
+                        <input name="sex" onclick="setupLabel()" type="checkbox" value="0" >女
+                    </label>
+                </td>
+                <td><label style="color:red;margin-right:5px;">*</label><span class=""></span></td>
+            </tr>
+            <tr>
+                <td align="right">身份证：</td>
+                <td><input name="idcode" type="text" class="gminp_a1 psd" placeholder="身份证号" value=""></td>
+                <td><label style="color:red;margin-right:5px;">*</label><span class=""></span></td>
+            </tr>
+            <tr>
+                <td width="30%" align="right">手机号码：</td>
+                <td width="39%"><input name="mobile" type="text" class="gminp_a1 mobile" placeholder="可用于登录和找回密码" value=""></td>
+                <td width="31%"><label style="color:red;margin-right:5px;">*</label><span class=""></span></td>
+            </tr>
+            <tr>
+                <td align="right">验证码：</td>
+                <td>
+                    <input name="imgValidcode" id="imgValidCode" type="text" class="gminp_a1 imgYzm" style="width:210px;" placeholder="请输入验证码" value="">
+                    <img id="txyzmimg" onclick="this.src='/index.php?s=/home/user/verify.html&_d='+new Date().getTime()" alt="点击切换" src="/index.php?s=/home/user/verify.html" style="cursor:pointer;">
+                </td>
+                <td><label style="color:red;margin-right:5px;">*</label><span class=""></span></td>
+            </tr>
+            <tr style="display: none;">
+                <td align="right">短信验证码：</td>
+                <td>
+                    <a href="javascript:void(0);" onclick="yzmGet(this)" class="yzm_a1">获取短信验证码</a>
+                    <input name="validcode" type="text" class="gminp_a1 yzm" style="width:210px;" placeholder="" value="">
+                </td>
+                <td><label style="color:red;margin-right:5px;">*</label><span class=""></span></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="tda">
+                    <label class="label_check c_on">
+                        <input name="agreeChk" onclick="setupLabel()" type="checkbox" value="" id="agreeChk" checked="checked">
+                        &nbsp;&nbsp;我已阅读并同意<a target="_blank" href="http://www.kanglaohui.com/agree/agree_person.html" class="font12 color66">《注册协议》</a>
+                    </label>
+                </td>
+                <td>
+                    <div class="validate_msg_a" id="agreeChk_value"></div>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input name="" type="button" class="gmbtn_a" value="确定"></td>
+                <td>&nbsp;</td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+</body>
+</html>

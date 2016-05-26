@@ -31,20 +31,35 @@ class MemberModel extends Model{
      * 登录指定用户
      * @param  integer $uid 用户ID
      * @return boolean      ture-登录成功，false-登录失败
+     * 用户类型，0=老人，1=子女，2=机构人员，3=系统管
      */
     public function login($uid){
+
+        $UcMem = M('Ucenter_member');
+        $mtype = $UcMem->where(array('id'=>$uid))->getField('type');
+        if($mtype==0){
+            $older = M('Nh_older');
+        }else if($mtype==1){
+
+        }else if($mtype==2){
+
+        }else if($mtype==3){
+
+        }
         /* 检测是否在当前应用注册 */
         $user = $this->field(true)->find($uid);
         if(!$user){ //未注册
             /* 在当前应用中注册用户 */
-        	$Api = new UserApi();
+        	/*$Api = new UserApi();
         	$info = $Api->info($uid);
             $user = $this->create(array('nickname' => $info[4]?$info[4]:$info[1], 'status' => 1, 'ext_login' => $info[5]));
             $user['uid'] = $uid;
             if(!$this->add($user)){
                 $this->error = '前台用户信息注册失败，请重试！';
                 return false;
-            }
+            }*/
+            $this->error = '登录失败！';
+            return false;
         } elseif(1 != $user['status']) {
             $this->error = '用户未激活或已禁用！'; //应用级别禁用
             return false;
@@ -74,7 +89,7 @@ class MemberModel extends Model{
      */
     private function autoLogin($user){
         if($user['group_id']>0){
-            $Mem = M('Member_group');     
+            $Mem = M('Ucenter_member');
             $mem_info = $Mem->where(array('id'=>$user['group_id']))->getField('type');
             $group_type = $mem_info;
         }else{
@@ -89,12 +104,6 @@ class MemberModel extends Model{
         );
         $this->save($data);
 
-        //取出所属养老院
-        $nh_admins = M('Nh_admin')->where(array('uid'=>$user['uid']))->select();
-        $session_nh_admins = array();
-        foreach($nh_admins as $_nh){
-            $session_nh_admins[$_nh['nh_id']] = $_nh;
-        }
         /* 记录登录SESSION和COOKIES */
         $auth = array(
             'uid'             => $user['uid'],
@@ -103,7 +112,6 @@ class MemberModel extends Model{
             'username'        => get_username($user['uid']),
             'last_login_time' => $user['last_login_time'],
             'group_type'        => $group_type,
-            'nh_admins'        => $session_nh_admins,
         );
 
         session('user_auth', $auth);

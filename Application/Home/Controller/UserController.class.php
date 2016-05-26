@@ -13,6 +13,7 @@ use User\Api\UserApi;
 /**
  * 用户控制器
  * 包括用户中心，用户登录及注册
+ * 用户类型，0=老人，1=子女，2=机构人员，3=系统管
  */
 class UserController extends HomeController {
     
